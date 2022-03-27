@@ -1,4 +1,6 @@
 <?php include_once "templates/title.html" ?>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/funciones.js" defer></script>
 </head>
 
 <body>

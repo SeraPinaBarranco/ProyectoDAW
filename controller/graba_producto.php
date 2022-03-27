@@ -11,7 +11,10 @@
 
     $con = connDB();
 
+    
     $resultado = guardar($con, $query);
+
+    
 
     echo $_POST['nombre'] . " -- " . $_POST['calorias'];
 

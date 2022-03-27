@@ -2,8 +2,8 @@ formulario = document.getElementById('formulario');
 
 formulario.addEventListener('submit', (e)=>{
     e.preventDefault();
-
     form = new FormData(formulario);
+
     console.log(form.get('grasas'));
     fetchText(form);
 
@@ -23,5 +23,13 @@ async function fetchText(form) {
         let data = await response.text();
         // handle data
         console.log(data);
+
+        Swal.fire(
+            'Producto guardado!',
+            '',            
+            'success'
+          )
     }
 }
+
+

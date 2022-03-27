@@ -17,4 +17,13 @@
         return $resultado;
     }
 
+    function listado($conn, $query){
+        $resultado= mysqli_query($conn,$query);
+        return $resultado;
+    }
+
+    function obtener_num_filas($resultado){
+		return mysqli_num_rows($resultado);
+	}
+
 ?>
