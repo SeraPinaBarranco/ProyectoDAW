@@ -12,7 +12,7 @@
     </div>
 
     <div class="div-lista">
-        <div class="card">
+        <!-- <div class="card">
             <h4>Producto</h4>
             <hr>
             <ul>
@@ -26,8 +26,7 @@
                 <div class="div-btn"><a href=""><img class="icon" src="assets/delete.png" alt="Eliminar" srcset=""></a></div>
             </div>
             
-        </div>
-        
+        </div> -->
     </div>
     
     <?php include_once "templates/pie.html" ?>

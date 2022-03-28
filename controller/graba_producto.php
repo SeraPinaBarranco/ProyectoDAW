@@ -11,12 +11,14 @@
 
     $con = connDB();
 
-    
+    //$num= duplicados($con,$query);
+
+
     $resultado = guardar($con, $query);
 
     
 
-    echo $_POST['nombre'] . " -- " . $_POST['calorias'];
+    echo $resultado;
 
     mysqli_close($con);
 ?>

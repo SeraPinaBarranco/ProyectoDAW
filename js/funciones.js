@@ -20,15 +20,25 @@ async function fetchText(form) {
     console.log(response.statusText); // OK
 
     if (response.status === 200) {
-        let data = await response.text();
-        // handle data
-        console.log(data);
+        let data = await response.json();
+        // handle data        
+        console.log(data.codigo);
 
-        Swal.fire(
-            'Producto guardado!',
-            '',            
-            'success'
-          )
+        if(data.codigo == -1){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Datos duplicados!'
+              })
+        }else{
+            Swal.fire(
+                'Producto guardado!',
+                '',            
+                'success'
+              )
+            document.getElementById('formulario').reset();
+        }
+
     }
 }
 

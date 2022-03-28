@@ -7,7 +7,11 @@ $query= "SELECT * FROM PRODUCTOS";
 $res =listado($conn,$query);
 
 
-mysqli_close($conn);
 
 echo json_encode($res);
+
+
+mysqli_close($conn);
+//echo json_encode($filas);
+
 ?>

@@ -14,16 +14,31 @@
 
     function guardar($conn, $query){
         $resultado= mysqli_query($conn,$query);
-        return $resultado;
+        $num= mysqli_affected_rows($conn);
+
+        if($num > 0){
+            $resultado = "Guardado Correcto";
+        }else{
+            $resultado = "Error al guadar, revisa los datos!";
+        }
+
+        return json_encode(array("resultado"=>$resultado,"codigo"=>$num));
     }
 
     function listado($conn, $query){
         $resultado= mysqli_query($conn,$query);
-        return $resultado;
+        $filas = mysqli_fetch_all($resultado,MYSQLI_ASSOC);
+        return $filas;
     }
 
     function obtener_num_filas($resultado){
 		return mysqli_num_rows($resultado);
 	}
+
+    function duplicados($conn, $query){
+        $num = mysqli_affected_rows($conn,$query);
+        return $num;
+
+    }
 
 ?>
