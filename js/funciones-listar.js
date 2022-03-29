@@ -79,8 +79,18 @@ function crearLista(lista) {
 
     div_btn_edit = document.createElement("div");
     div_btn_edit.setAttribute("class","div-btn");
+
     a_edit= document.createElement("a");
-    div_btn_edit.appendChild(a_edit)
+    a_edit.setAttribute("id","editar");
+    a_edit.setAttribute("href","#mimodal")
+    
+
+    //Evento que edita un producto
+    a_edit.addEventListener('click',()=>{
+        editaProducto(lista);
+    });
+
+    div_btn_edit.appendChild(a_edit);
     img_edit= document.createElement("img");
     img_edit.setAttribute("class","icon");
     img_edit.setAttribute("src","assets/pencil.png")
@@ -112,6 +122,12 @@ async function borrarProducto(lista) {
     if (response.status === 200) {
         let data = await response.text();
         // handle data 
+        Swal.fire({
+            icon: 'warning',
+            title: '',
+            text: 'Producto eliminado!'
+        }
+        )
         let div = document.getElementsByClassName('div-lista');
         
         div[0].innerHTML="";       
@@ -120,23 +136,11 @@ async function borrarProducto(lista) {
 }
 
 
-/*
-<div class="card">
-<h4>Producto</h4>
-            <hr>
-            <ul>
-                <li>Calorias: 0</li>
-                <li>Grasas: 0</li>
-                <li>Hidratos: 0</li>
-                <li>Proteinas: 0</li>
-            </ul>
-            <div class="botones">
-                <div class="div-btn"><a href=""></a><img class="icon" src="assets/pencil.png" alt="Editar" srcset=""></div>
-                <div class="div-btn"><a href=""><img class="icon" src="assets/delete.png" alt="Eliminar" srcset=""></a></div>
-            </div>
+function editaProducto(lista) {
+    console.log(lista);
 
-            <div class="botones">
-                <div class="div-btn"><a href=""></a><img class="icon" src="assets/pencil.png" alt="Editar" srcset=""></div>
-                <div class="div-btn"><a href=""><img class="icon" src="assets/delete.png" alt="Eliminar" srcset=""></a></div>
-            </div>
-*/
+    
+    
+}
+
+

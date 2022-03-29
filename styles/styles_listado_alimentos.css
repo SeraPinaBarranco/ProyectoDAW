@@ -48,9 +48,10 @@ ul{
     }
 }
 
-#eliminar{
+#eliminar, #editar{
     outline: none;
     background-color: transparent;
     border-color: transparent;
 }
+
 
