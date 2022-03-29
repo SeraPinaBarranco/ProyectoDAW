@@ -1,17 +1,17 @@
+
 window.onload = function(){
     fetchText();
 }
 
 
-
 async function fetchText() {
     let response = await fetch('./controller/lista_productos.php');
-    let misdatos;
+    
     console.log(response.status); // 200
     console.log(response.statusText); // OK
-
+    let data= ""
     if (response.status === 200) {
-        let data = await response.json();
+        data = await response.json();
         misdatos= data[0];//objeto json con los datos de la consulta
         // handle data
 
@@ -27,9 +27,10 @@ async function fetchText() {
 }
 
 function crearLista(lista) {
+    
     console.log(lista);
-    let div = document.getElementsByClassName('div-lista');
-        
+    let div = document.getElementsByClassName('div-lista');      
+
     let card = document.createElement("div");
     card.setAttribute('class','card');
 
@@ -61,8 +62,15 @@ function crearLista(lista) {
 
     div_btn_delete = document.createElement("div");
     div_btn_delete.setAttribute("class","div-btn");
-    a_delete= document.createElement("a");
-    a_delete.setAttribute("href","#")
+    a_delete= document.createElement("button");
+    //a_delete.setAttribute("href","#")
+    a_delete.setAttribute("id","eliminar");
+
+    //Evento que elimina el producto
+    a_delete.addEventListener('click',()=>{
+        borrarProducto(lista);
+    });
+
     div_btn_delete.appendChild(a_delete)
     img_delete= document.createElement("img");
     img_delete.setAttribute("class","icon");
@@ -85,6 +93,32 @@ function crearLista(lista) {
     card.appendChild(div_img)
 
 }
+
+
+
+//eliminar produco de la base de datos
+async function borrarProducto(lista) {
+    //let nombre = lista.nombre_p;
+    //console.log(nombre);
+    let response = await fetch('./controller/elimina_producto.php',{
+        method:'POST',
+        body: "id=" + lista.id_producto + "&nombre=" +lista.nombre_p,
+        headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+    });
+
+    console.log(response.status); // 200
+    console.log(response.statusText); // OK
+
+    if (response.status === 200) {
+        let data = await response.text();
+        // handle data 
+        let div = document.getElementsByClassName('div-lista');
+        
+        div[0].innerHTML="";       
+        fetchText();
+    }
+}
+
 
 /*
 <div class="card">

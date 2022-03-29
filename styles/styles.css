@@ -114,3 +114,8 @@ a:hover{
 }
 
 
+input[type=text]:focus{
+    background-color: rgb(208, 233, 171);
+    font-weight: bold;
+    
+}

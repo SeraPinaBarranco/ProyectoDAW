@@ -25,6 +25,20 @@
         return json_encode(array("resultado"=>$resultado,"codigo"=>$num));
     }
 
+    function borrar($conn, $query){
+        $resultado= mysqli_query($conn,$query);
+        $num= mysqli_affected_rows($conn);
+
+        if($num > 0){
+            $resultado = "eliminado Correcto";
+        }else{
+            $resultado = "Error al borrar, revisa los datos!";
+        }
+
+        return json_encode(array("resultado"=>$resultado,"codigo"=>$num));
+
+    }
+
     function listado($conn, $query){
         $resultado= mysqli_query($conn,$query);
         $filas = mysqli_fetch_all($resultado,MYSQLI_ASSOC);

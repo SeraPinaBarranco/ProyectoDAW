@@ -48,4 +48,9 @@ ul{
     }
 }
 
+#eliminar{
+    outline: none;
+    background-color: transparent;
+    border-color: transparent;
+}
 
