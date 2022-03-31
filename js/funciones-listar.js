@@ -1,5 +1,6 @@
-
+let edita;
 window.onload = function(){
+    edita= true;
     fetchText();
 }
 
@@ -33,11 +34,13 @@ function crearLista(lista) {
 
     let card = document.createElement("div");
     card.setAttribute('class','card');
+    card.setAttribute('id','card');
 
     let h4=document.createElement("h4");
     h4.innerHTML = lista.nombre_p;
     let hr=document.createElement("hr");
     let ul=document.createElement("ul");
+    ul.setAttribute('id','listado');
     let li1=document.createElement("li");
     let li2=document.createElement("li");
     let li3=document.createElement("li");
@@ -84,24 +87,24 @@ function crearLista(lista) {
     a_edit.setAttribute("id","editar");
     a_edit.setAttribute("href","#mimodal")
     
-
-    //Evento que edita un producto
-    a_edit.addEventListener('click',()=>{
-        editaProducto(lista);
-    });
-
     div_btn_edit.appendChild(a_edit);
+    //Evento que edita un producto
+    
+    
     img_edit= document.createElement("img");
     img_edit.setAttribute("class","icon");
     img_edit.setAttribute("src","assets/pencil.png")
     a_edit.appendChild(img_edit);
-
+    
     div_img.appendChild(div_btn_delete);
     div_img.appendChild(div_btn_edit);
-
-   
+    
+    
     card.appendChild(div_img)
-
+    
+    a_edit.addEventListener('click',()=>{
+        editaProducto(lista);
+    });
 }
 
 
@@ -137,10 +140,67 @@ async function borrarProducto(lista) {
 
 
 function editaProducto(lista) {
-    console.log(lista);
-
     
-    
+          
 }
 
 
+
+
+
+
+
+
+
+
+
+
+/*
+if(edita==false){
+        // divCard.innerHTML="";
+        let div = document.getElementsByClassName('div-lista');
+        
+        div[0].innerHTML="";
+        edita==true
+        fetchText();
+        return;
+    }
+    
+    let divCard= document.getElementById('card');//obteno el card
+    let h4= divCard.firstElementChild;//obtener el titulo para reemplazarlo
+    let inputNombre= document.createElement('input');//crear el input del nombre
+    inputNombre.setAttribute("class",'inputs');
+    inputNombre.setAttribute("type",'text');
+    inputNombre.setAttribute('placeholder','Nombre');
+    
+    divCard.replaceChild(inputNombre, h4);//reemplazar los nodos
+
+    ul= document.getElementById('listado');//obtengo el UL
+
+    let inputC= document.createElement('input');//crear el input
+    inputC.setAttribute("class",'inputs-valores');
+    inputC.setAttribute("type",'text');
+    inputC.setAttribute('placeholder','Calorias');
+    let inputG= document.createElement('input');//crear el input 
+    inputG.setAttribute("class",'inputs-valores');
+    inputG.setAttribute("type",'text');
+    inputG.setAttribute('placeholder','Grasas');
+    let inputH= document.createElement('input');//crear el input
+    inputH.setAttribute("class",'inputs-valores');
+    inputH.setAttribute("type",'text');
+    inputH.setAttribute('placeholder','Hidratos');
+    let inputP= document.createElement('input');//crear el input
+    inputP.setAttribute("class",'inputs-valores');
+    inputP.setAttribute("type",'text');
+    inputP.setAttribute('placeholder','Proteinas');
+
+    //sustituir los li por los inputs
+    ul.replaceChild(inputC,ul.children[0]);
+    ul.replaceChild(inputG,ul.children[1]);
+    ul.replaceChild(inputH,ul.children[2]);
+    ul.replaceChild(inputP,ul.children[3]);
+    
+    console.log(ul);
+    edita = false;
+    
+*/
