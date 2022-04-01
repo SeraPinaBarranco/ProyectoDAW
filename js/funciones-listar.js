@@ -102,8 +102,8 @@ function crearLista(lista) {
     
     card.appendChild(div_img)
     
-    a_edit.addEventListener('click',()=>{
-        editaProducto(lista);
+    a_edit.addEventListener('click',(a_edit)=>{
+        editaProducto(lista, a_edit);
     });
 }
 
@@ -139,8 +139,9 @@ async function borrarProducto(lista) {
 }
 
 
-function editaProducto(lista) {
-    
+function editaProducto(lista, elemento) {
+    let id = lista.id_producto;
+    window.location.href = `editar_producto.php?id=${id}`;
           
 }
 
