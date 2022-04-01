@@ -141,6 +141,7 @@ async function borrarProducto(lista) {
 
 function editaProducto(lista, elemento) {
     let id = lista.id_producto;
+    console.log(id);
     window.location.href = `editar_producto.php?id=${id}`;
           
 }
