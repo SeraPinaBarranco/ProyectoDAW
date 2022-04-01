@@ -39,6 +39,12 @@
 
     }
 
+    function consulta($conn, $query){
+        $resultado= mysqli_query($conn, $query);
+        $filas= mysqli_fetch_array($resultado);
+        return $filas;
+    }
+
     function listado($conn, $query){
         $resultado= mysqli_query($conn,$query);
         $filas = mysqli_fetch_all($resultado,MYSQLI_ASSOC);
