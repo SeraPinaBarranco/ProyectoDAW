@@ -1,5 +1,9 @@
 <?php include_once "templates/title.html" ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Libreria de ventana modal -->
+<link rel="stylesheet" href="tingle/tingle.min.css">
+<script type="text/javascript" src="tingle/tingle.min.js" defer></script>
+
 <script src="js/funciones-listar.js" defer></script>
 </head>
 
