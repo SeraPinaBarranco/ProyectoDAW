@@ -77,16 +77,16 @@ require_once "./model/basedatos.php";
 
         //echo($_POST["nombre"]);
         //editar registro
-        $consulta= "UPDATE FROM PRODUCTOS SET nombre_p='". $nombre . "'" ." calorias= $calorias  grasas= $grasas  hidratos= $hidratos proteinas= $proteinas  WHERE id_producto=". $id_p;
+        $consulta= "UPDATE PRODUCTOS SET nombre_p='". $nombre . "'," ." calorias= $calorias,  grasas= $grasas,  hidratos= $hidratos, proteinas= $proteinas  WHERE id_producto=". $id_p;
         echo $consulta;
-        selectBBDD($conn, $consulta);
+        selectBBDD($conn, $consulta);//obtine -1 si ha habido error o 1 si ha modificado con exito
+        $n_filas = duplicados($conn);
         
         //comprobar en la BBDD si hay mas de un registro con el nombre introducido
         $consulta= "SELECT nombre_p from productos WHERE nombre_p='". $nombre. "'";
         $res= selectBBDD($conn,$consulta);        
-        $n_filas = obtener_num_filas($res);
 
-        //echo($n_filas);
+        echo($n_filas);
 
         
         cerrarBD($conn);
