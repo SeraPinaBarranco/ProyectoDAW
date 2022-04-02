@@ -2,6 +2,8 @@
 ob_start();
 session_start();
 require_once "./model/basedatos.php";
+
+
     $id = $_GET['id'];
 
     //almacenar en la session el id que viene por GET
@@ -55,7 +57,7 @@ require_once "./model/basedatos.php";
                 <input class="form-control" type="text" placeholder="Proteinas" name="proteinas" value="<?php echo $result["proteinas"]?>">
             </div>
             <div class="div-boton">
-                <button class="btn btn-primary" id="guardar" name="modificar" value="modificar">Modificar</button>
+                <button type="submit" class="btn btn-primary" id="guardar" name="modificar" value="modificar">Modificar</button>
             </div>
         </form>
     </div>
