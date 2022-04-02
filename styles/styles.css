@@ -34,7 +34,6 @@ a:hover{
 }
 
 
-
 @media screen and (max-width: 500px) {
     .header a {
         float: none;
@@ -119,3 +118,6 @@ input[type=text]:focus{
     font-weight: bold;
     
 }
+
+
+

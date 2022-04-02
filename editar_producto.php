@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once "./model/basedatos.php";
     $id = $_GET['id'];
@@ -18,11 +19,16 @@ require_once "./model/basedatos.php";
 <title>Editar producto</title>
 <?php include_once "templates/title.html" ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- <script src="js/funciones.js" defer></script> -->
+
+
 </head>
 
 <body>
     <?php include_once "templates/cabecera.html" ?>
+
+    <div class="aListar" id="aListar"  style="margin-top: 2vh; width: 90%; text-align: right;">
+        <a class="badge bg-primary" href="listar_productos.php">Listar Productos</a>
+    </div>
 
     <div class="div-form">
         <div class="fila">
@@ -58,7 +64,7 @@ require_once "./model/basedatos.php";
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
+    
 </body>
 
 </html>
@@ -74,25 +80,36 @@ require_once "./model/basedatos.php";
         $grasas= $_POST['grasas'];
         $hidratos= $_POST['hidratos'];
         $proteinas= $_POST['proteinas'];
-
-        //echo($_POST["nombre"]);
+       
         //editar registro
         $consulta= "UPDATE PRODUCTOS SET nombre_p='". $nombre . "'," ." calorias= $calorias,  grasas= $grasas,  hidratos= $hidratos, proteinas= $proteinas  WHERE id_producto=". $id_p;
-        echo $consulta;
+        
         selectBBDD($conn, $consulta);//obtine -1 si ha habido error o 1 si ha modificado con exito
         $n_filas = duplicados($conn);
-        
-        //comprobar en la BBDD si hay mas de un registro con el nombre introducido
-        $consulta= "SELECT nombre_p from productos WHERE nombre_p='". $nombre. "'";
-        $res= selectBBDD($conn,$consulta);        
-
-        echo($n_filas);
-
-        
+        //echo $n_filas;
+        if($n_filas==1){                       
+            
+            header("Refresh: 2; url=listar_productos.php",false);
+            echo "<script>Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Registro Modificado',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })</script>";
+        }else{            
+            echo "<script>Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'No se ha actualizado el producto',
+                showConfirmButton: false,
+                timer: 1500
+                })</script>";
+        }
         cerrarBD($conn);
         
         unset($_SESSION['id_producto']);
         session_destroy();
     }
-
+    ob_end_flush();
 ?>

@@ -139,8 +139,10 @@ function editaProducto(lista, elemento) {
   console.log(id);
   window.location.href = `editar_producto.php?id=${id}`;
   
+
   
 }
+
 
 
 /*
