@@ -1,6 +1,10 @@
 <?php
+session_start();
 require_once "./model/basedatos.php";
     $id = $_GET['id'];
+
+    //almacenar en la session el id que viene por GET
+    $_SESSION['id_producto']= $id;
 
     $conn = connDB();  
     
@@ -14,7 +18,7 @@ require_once "./model/basedatos.php";
 <title>Editar producto</title>
 <?php include_once "templates/title.html" ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/funciones.js" defer></script>
+<!-- <script src="js/funciones.js" defer></script> -->
 </head>
 
 <body>
@@ -28,7 +32,7 @@ require_once "./model/basedatos.php";
 
 
     <div class="container">
-        <form method="post" action="controller/graba_producto.php" id="formulario" class="form-control">
+        <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>" id="formulario" class="form-control">
             <div class="mb-3">
                 <input class="form-control" type="text" placeholder="Nombre" name="nombre" id="nombre" value="<?php  echo $result["nombre_p"]?>">
             </div>
@@ -45,7 +49,7 @@ require_once "./model/basedatos.php";
                 <input class="form-control" type="text" placeholder="Proteinas" name="proteinas" value="<?php echo $result["proteinas"]?>">
             </div>
             <div class="div-boton">
-                <button class="btn btn-primary" id="guardar" name="guardar">Guardar</button>
+                <button class="btn btn-primary" id="guardar" name="modificar" value="modificar">Modificar</button>
             </div>
         </form>
     </div>
@@ -59,3 +63,36 @@ require_once "./model/basedatos.php";
 
 </html>
 
+<?php
+    
+    //si se pulsa en el boton de modificar
+    if(isset($_POST['modificar']) && $_POST['modificar']=='modificar'){
+        //echo($_SESSION['id_producto']);
+        $id_p = $_SESSION['id_producto'];
+        $nombre = $_POST["nombre"];
+        $calorias= $_POST['calorias'];
+        $grasas= $_POST['grasas'];
+        $hidratos= $_POST['hidratos'];
+        $proteinas= $_POST['proteinas'];
+
+        //echo($_POST["nombre"]);
+        //editar registro
+        $consulta= "UPDATE FROM PRODUCTOS SET nombre_p='". $nombre . "'" ." calorias= $calorias  grasas= $grasas  hidratos= $hidratos proteinas= $proteinas  WHERE id_producto=". $id_p;
+        echo $consulta;
+        selectBBDD($conn, $consulta);
+        
+        //comprobar en la BBDD si hay mas de un registro con el nombre introducido
+        $consulta= "SELECT nombre_p from productos WHERE nombre_p='". $nombre. "'";
+        $res= selectBBDD($conn,$consulta);        
+        $n_filas = obtener_num_filas($res);
+
+        //echo($n_filas);
+
+        
+        cerrarBD($conn);
+        
+        unset($_SESSION['id_producto']);
+        session_destroy();
+    }
+
+?>
