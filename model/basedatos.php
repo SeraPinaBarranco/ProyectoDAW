@@ -38,6 +38,17 @@
         return json_encode(array("resultado"=>$resultado,"codigo"=>$num));
 
     }
+    function selectBBDD($conn, $query)
+    {
+        $resultado= mysqli_query($conn, $query);
+        return $resultado;
+    }
+
+    function consulta($conn, $query){
+        $resultado= mysqli_query($conn, $query);
+        $filas= mysqli_fetch_array($resultado);
+        return $filas;
+    }
 
     function listado($conn, $query){
         $resultado= mysqli_query($conn,$query);
@@ -45,14 +56,19 @@
         return $filas;
     }
 
-    function obtener_num_filas($resultado){
-		return mysqli_num_rows($resultado);
+    //devuelve el número de filas afectadas en la consulta previa
+    function obtener_num_filas($query){
+        return mysqli_num_rows($query);
 	}
-
-    function duplicados($conn, $query){
-        $num = mysqli_affected_rows($conn,$query);
+    
+    function duplicados($conn){
+        $num = mysqli_affected_rows($conn);
         return $num;
 
+    }
+
+    function cerrarBD($conn){
+        mysqli_close($conn);
     }
 
 ?>
