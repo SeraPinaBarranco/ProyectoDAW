@@ -31,7 +31,7 @@
             
             <ul class="list-group">
                 <li class="list-group-item"><a href="nuevoproducto.php">Mis alimentos</a></li>
-                <li class="list-group-item"><a href="#">Mis recetas</a></li>
+                <li class="list-group-item"><a href="crear_receta.php">Mis recetas</a></li>
                 <li class="list-group-item"><a href="#">Mis estadisticas</a></li>                
             </ul>
         

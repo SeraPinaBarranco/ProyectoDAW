@@ -32,8 +32,8 @@ function crearLista(lista) {
   card.setAttribute("class", "card");
   card.setAttribute("id", "card");
 
-  let h4 = document.createElement("h4");
-  h4.innerHTML = lista.nombre_p;
+  let h5 = document.createElement("h5");
+  h5.innerHTML = lista.nombre_p;
   let hr = document.createElement("hr");
   let ul = document.createElement("ul");
   ul.setAttribute("id", "listado");
@@ -48,7 +48,7 @@ function crearLista(lista) {
   li3.innerHTML = "Proteinas: " + lista.proteinas;
 
   div[0].appendChild(card);
-  card.appendChild(h4);
+  card.appendChild(h5);
   card.appendChild(hr);
   card.appendChild(ul);
   ul.appendChild(li1);

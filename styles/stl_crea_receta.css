@@ -1,0 +1,80 @@
+.contenedor-receta{
+    
+    margin: 0 auto;
+    /* border: 1px solid red; */
+    width: 80%;
+    display: flex;
+    flex-direction: row;   
+    justify-content: space-between;
+    
+}
+.div-contenedor-receta{    
+    /* border: 1px solid red; */
+    border: 1px solid #ffab9c;
+    box-shadow: 3px 5px #888888;;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2vh 1vh;
+}
+
+.cont1{
+    width: 35%;
+    height: 10%;
+}
+.cont2{
+    width: 60%;
+   
+}
+
+.div_receta{  
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Boton guardar */
+.div_guardarNombreReceta{
+    margin-top: 2vh;
+}
+.guardarNombreReceta {
+	box-shadow:inset 0px 1px 0px 0px #c8e396;;
+	background-color:#c8e396;;
+	border-radius:6px;
+	border:1px solid #c8e396;;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	
+}
+.guardarNombreReceta:hover {
+	background-color:#c8e396;
+    color:#ffab9c;
+}
+.guardarNombreReceta:active {
+	position:relative;
+	top:1px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .contenedor-receta{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+
+    .div-contenedor-receta{
+        margin-bottom: 3vh;
+        width: 80%;
+    }
+}
+
