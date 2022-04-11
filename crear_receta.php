@@ -20,11 +20,19 @@
 
 <div class="contenedor-receta">
     <div class="div-contenedor-receta cont1">
-        <div class="div_receta">
-            <label for="receta">Nombre Receta</label>
-            <input type="text" name="receta" id="receta">
-            <div class="div_guardarNombreReceta">                
-                <button href="#" class="guardarNombreReceta">Guardar</button>
+        <div class="div_receta" >
+            <form name="formulario" action="controller/guardar_receta.php" id="frm" method="post">
+                <label for="receta">Nombre Receta</label>
+                <input type="text" name="receta" id="receta">
+                <div class="div_guardarNombreReceta">                
+                    <button  id="guardarNombreReceta" class="guardarNombreReceta">Guardar</button>
+                </div>
+            </form>
+
+            <div class="div-ingredientes">
+                <ul id="ingredientes">
+                    
+                </ul>
             </div>
         </div>
     </div>
@@ -37,6 +45,8 @@
         <thead>
             <tr>
                 <th>Producto</th>
+            
+                <th>Añadir</th>
             </tr>
         </thead>
         <tbody>

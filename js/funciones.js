@@ -1,4 +1,4 @@
-formulario = document.getElementById('formulario');
+let formulario = document.getElementById('formulario');
 
 formulario.addEventListener('submit', (e)=>{
     e.preventDefault();

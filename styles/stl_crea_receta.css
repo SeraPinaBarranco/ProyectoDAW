@@ -22,6 +22,7 @@
     padding: 2vh 1vh;
 }
 
+
 /*ESTILOS TABLA*/
 .my-table{
     text-align: center;
@@ -43,8 +44,14 @@ tbody tr td:hover{
     background-color: #ffab9c;
 }
 tfoot{
+    background-color: #c8e396;
     display: flex;
     flex-direction: row;
+    margin-top: 2vh;
+}
+td button{
+    border: 0px;
+    background-color: transparent;
 }
 
 .cont1{
@@ -57,9 +64,10 @@ tfoot{
 }
 
 .div_receta{  
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .div-buscador{
@@ -92,7 +100,7 @@ tfoot{
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
-	
+    margin-bottom: 2vh;	
 }
 .guardarNombreReceta:hover {
 	background-color:#c8e396;
@@ -101,6 +109,15 @@ tfoot{
 .guardarNombreReceta:active {
 	position:relative;
 	top:1px;
+}
+
+.div-ingredientes{
+    width: 100%;
+}
+
+#ingredientes li{
+    border-bottom: 1px solid #ffab9c;
+    margin-bottom: 1vh;
 }
 
 
