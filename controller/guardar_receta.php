@@ -1,6 +1,7 @@
 <?php 
     require_once "../model/basedatos.php";
 
+    
     $receta= $_POST['receta'];
     
     
@@ -28,6 +29,8 @@
     }else{
         echo json_encode(array("guardado" => "Receta guardada con éxito"));
     }
+    
+
     
     
 

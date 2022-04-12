@@ -34,18 +34,21 @@
                     
                 </ul>
             </div>
+            <div id="div-finalizar">
+                <button class="guardarNombreReceta" id="finalizar" hidden="true">Finalizar</button>
+            </div>
         </div>
     </div>
     <div class="div-contenedor-receta cont2">
         <div class="div_receta ">
             <div class="div-buscador">
-                <input class="btn-buscador" id="btn-buscador" type="text" value="" placeholder=" Escribe ingrediente a buscar">
+                <input disabled="true" class="btn-buscador" id="btn-buscador" type="text" value="" placeholder=" Escribe ingrediente a buscar">
             </div>
         <table id="tabla" class="my-table" >
         <thead>
             <tr>
                 <th>Producto</th>
-            
+                <th>Cantidad (gramos)</th>
                 <th>Añadir</th>
             </tr>
         </thead>

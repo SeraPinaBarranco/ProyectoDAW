@@ -35,6 +35,7 @@ th{
 }
 
 tbody tr td{
+    width: 10%;
     padding: 1vh 0vh;
     border: 1px solid gray;
 }
@@ -53,7 +54,9 @@ td button{
     border: 0px;
     background-color: transparent;
 }
-
+td input{
+    width: 45%;
+}
 .cont1{
     width: 35%;
     height: 10%;
@@ -133,5 +136,10 @@ td button{
         margin-bottom: 3vh;
         width: 80%;
     }
+
+    #cant{
+        width: 45%;
+    }
+    
 }
 
