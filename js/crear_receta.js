@@ -195,7 +195,7 @@ function finalizarReceta(){
         .then( res => res.json())
         .then(datos => {         
             d = datos;
-            console.log(d);//en d.id_recetas está la id            
+            //console.log(d);//en d.id_recetas está la id            
         });
 
     //Array del listado de productos + cantidades
@@ -203,19 +203,19 @@ function finalizarReceta(){
     url= "./controller/graba_receta_producto.php"; 
     for (let i = 0; i < arrayProductos.length; i++) {
         //for (let j = 0; j < arrayProductos[i].length; j++)
-        
+        console.log(d);
         //Grabar datos en la tabla recetas_productos
-        configFetch={
-            method:'POST',
-            body:`&id_receta=${d.id_recetas}&id_p=${arrayProductos[i][0]}
-                  &cantidad=${arrayProductos[i][2]}`,       
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'}
-        };
-        fetch(url,configFetch)
-            .then( res => res.json())
-            .then(datos => {         
-                console.log(datos);            
-        });
+        // configFetch={
+        //     method:'POST',
+        //     body:`&id_receta=${d.id_recetas}&id_p=${arrayProductos[i][0]}
+        //           &cantidad=${arrayProductos[i][2]}`,       
+        //     headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+        // };
+        // fetch(url,configFetch)
+        //     .then( res => res.json())
+        //     .then(datos => {         
+        //         //console.log(datos);            
+        // });
 
         //console.log(arrayProductos[i][0] + "-" + arrayProductos[i][1] + "-" + arrayProductos[i][2]);
         
