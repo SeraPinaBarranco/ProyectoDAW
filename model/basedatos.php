@@ -4,7 +4,7 @@
     {
         $server= "localhost";
         $user="root";
-        $pass="usbw";
+        $pass="";
         $db="schemadaw_m12";
 
         $mysqli = mysqli_connect($server,$user,$pass,$db)or die("Failed to connect to MySQL: ") ;
@@ -22,7 +22,7 @@
             $resultado = "Error al guadar, revisa los datos!";
         }
 
-        return json_encode(array("resultado"=>$resultado,"codigo"=>$num));
+        return json_encode(array("resultado"=>$resultado, "codigo"=>$num));
     }
 
     function borrar($conn, $query){

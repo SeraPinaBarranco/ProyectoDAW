@@ -98,7 +98,7 @@ function addFila(img){
     let producto= img.target.parentNode.previousSibling.previousSibling.textContent;
     //capturar la fila hermana, que contiene la cantidad del producto
     let cantidad= img.target.parentNode.previousSibling.lastChild.value;
-    console.log(cantidad);
+    //console.log(cantidad);
     let p = new Array(id_producto,producto,cantidad);
     //Agregar la fila al listado de recetas en un array
     arrayProductos.push(p);
@@ -119,7 +119,7 @@ function agregaIngrediente(p){
 }
 
 
-
+//GUARDA LA RECETA (FALTA PONER EL ID USUARIO)
 let formulario = document.getElementById('frm');
 let form;
 let myReceta="";
@@ -146,7 +146,7 @@ formulario.addEventListener('submit', (e)=>{
         .then(datos => {         
             let d = datos;
             //llenarTabla(d)     
-            console.log(d.error); 
+            //console.log(d.error); 
             mostarMensaje(d)          
      });
 })
@@ -190,34 +190,42 @@ function finalizarReceta(){
         headers:{'Content-Type': 'application/x-www-form-urlencoded'}
     };
     //mandar la peticion
-    let d;
+    var d;
     fetch(url,configFetch)
         .then( res => res.json())
         .then(datos => {         
             d = datos;
-            //console.log(d);//en d.id_recetas está la id            
+            //en d[0].id_recetas está la id  
+            //guardadoFinalizarReceta(d[0].id_recetas)
+            document.cookie= "rece=" + d[0].id_recetas;
         });
 
+        //recuperar valor de la cookie
+        let cook= document.cookie.split('=');
+        console.log(cook[1]);
+    
     //Array del listado de productos + cantidades
-
+    console.log(arrayProductos);
+    
     url= "./controller/graba_receta_producto.php"; 
     for (let i = 0; i < arrayProductos.length; i++) {
         //for (let j = 0; j < arrayProductos[i].length; j++)
-        console.log(d);
-        //Grabar datos en la tabla recetas_productos
-        // configFetch={
-        //     method:'POST',
-        //     body:`&id_receta=${d.id_recetas}&id_p=${arrayProductos[i][0]}
-        //           &cantidad=${arrayProductos[i][2]}`,       
-        //     headers:{'Content-Type': 'application/x-www-form-urlencoded'}
-        // };
-        // fetch(url,configFetch)
-        //     .then( res => res.json())
-        //     .then(datos => {         
-        //         //console.log(datos);            
-        // });
+    // //     console.log(d);
+    // //     //Grabar datos en la tabla recetas_productos
+        configFetch={
+            method:'POST',
+            body:`receta=${cook[1]}&id_p=${arrayProductos[i][0]}&cantidad=${arrayProductos[i][2]}`,       
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+        };
+        fetch(url,configFetch)
+            .then( res => res.json())
+            .then(datos => {         
+                console.log(datos);            
+        });
 
-        //console.log(arrayProductos[i][0] + "-" + arrayProductos[i][1] + "-" + arrayProductos[i][2]);
+    // //     //console.log(arrayProductos[i][0] + "-" + arrayProductos[i][1] + "-" + arrayProductos[i][2]);
         
     }
 }
+
+

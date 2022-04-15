@@ -5,7 +5,7 @@
     
 
     
-    $receta= $_POST['id_receta'];
+    $receta= $_POST['receta'];
     $id_p=$_POST['id_p'];
     $cantidad= $_POST['cantidad'];
 
@@ -13,10 +13,10 @@
     $query = "INSERT INTO recetas_productos
         (id_p,
          id_r,
-         cantidad,
+         cantidad
         )
         VALUES
-             ($receta,$id_p,$cantidad);";
+             ($id_p,$receta,$cantidad);";
 
     $con = connDB();
 
