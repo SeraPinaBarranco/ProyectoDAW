@@ -1,0 +1,11 @@
+td img{
+    width: 28px;
+    height: 28px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+td button{
+    background-color: transparent;
+    border: 0px;
+}
