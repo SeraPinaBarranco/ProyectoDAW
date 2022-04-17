@@ -1,0 +1,68 @@
+*{
+    box-sizing: border-box;
+}
+
+.titulo{grid-area: titulo;}
+.c_nombre{grid-area: receta;}
+.c_ingredientes{grid-area: ingredientes;}
+
+.contenedor_grid{
+    border: 1px solid rgb(179, 220, 188);
+    margin-top: 2vh;
+    /* height: 85vh; */
+    background-color: aquamarine;
+    display: grid;
+    grid-template: 
+        'titulo titulo titulo titulo titulo'
+        'receta receta receta receta receta'
+        'ingredientes ingredientes ingredientes ingredientes ingredientes';
+    grid-gap: 5px;
+}
+
+.titulo{
+    text-align: center;
+}
+
+.c_nombre{
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+.edt_nombre1{
+    padding: 3vh 0;
+    border: 1px solid rgb(0, 94, 255);
+    grid-column: 2 / span 2;
+}
+.edt_nombre2{
+    padding: 3vh 0;
+    border: 1px solid rgb(0, 94, 255);
+    
+}
+
+.c_nombre, .c_ingredientes{
+    border: 1px solid red;
+}
+
+
+/* .edt_ingrediente1{}
+.edt_ingrediente2{}
+.edt_ingrediente3{} */
+.c_ingredientes{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    align-items: center;
+}
+
+.edt_ingrediente1{
+    grid-column: 4 / span 3;
+}
+
+button{
+    background-color: transparent;
+    border: 0px;
+}
+button img{
+    width: 32px;
+    height: 32px;
+}

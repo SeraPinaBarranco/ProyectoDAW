@@ -1,12 +1,19 @@
 <?php 
 require_once "model/basedatos.php";
+$eliminado = false;
 //Borrar la receta
 if(isset($_POST['id_recetas'])){
     $conn = connDB();
     $id = $_POST['id_recetas'];
     $query = "DELETE FROM recetas WHERE id_recetas = $id";
-    echo $id;
-    borrar($conn,$query);
+    
+    $r = selectBBDD($conn,$query);
+
+    if($r == 1){
+        $eliminado = true;
+    }
+    
+   
 
     cerrarBD($conn);
 }
@@ -55,7 +62,7 @@ if(isset($_GET['p'])){
                             while ($fila= mysqli_fetch_assoc($resultado) ){
                                 echo "<tr>";
                                 echo "<td>" . $fila['nombre_receta'] . "</td>";
-                                echo "<td><img src='assets/pencil.png' alt=''> <button type='submit' name='id_recetas' value='". $fila['id_recetas'] ."'><img src='assets/delete.png' alt=''></button></td>";
+                                echo "<td><a href='editar_receta.php?id_receta=" . $fila['id_recetas'] . "'><img src='assets/pencil.png' alt=''></a> <button type='submit' name='id_recetas' value='". $fila['id_recetas'] ."'><img src='assets/delete.png' alt=''></button></td>";
                                 echo "</tr>";
                             }
                         ?>
@@ -64,14 +71,22 @@ if(isset($_GET['p'])){
                     </tbody>
                     </table>
                 </div>
+
+                <div class="row">
+                    <?php
+                        if($eliminado){
+                            echo "<h4 class='badge bg-danger'>eliminado</h4>";
+                            $eliminado = false;
+                        }else{
+                            echo "";
+                        }
+                    ?>
+                    
+                </div>
             </form>
     </div>
 
-    <div>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="get">
-            <button type="submit" name="p">gggg</button>
-        </form>
-    </div>
+   
 
     <?php include_once "templates/pie.html" ?>
 

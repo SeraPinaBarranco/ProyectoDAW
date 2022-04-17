@@ -191,24 +191,19 @@ function finalizarReceta(){
         .then( res => res.json())
         .then(datos => {         
             d = datos;
-           
-            document.cookie= "rece=" + d[0].id_recetas +"; Secure; SameSite=None";
+            addIngredientesReceta(d[0].id_recetas);
         });
 
-        //recuperar valor de la cookie
-        let cook= document.cookie.split('=');
-        console.log(cook[1]);
-    
-    //Array del listado de productos + cantidades
-    console.log(arrayProductos);
-    
+}
+
+function addIngredientesReceta(cook){
     url= "./controller/graba_receta_producto.php"; 
     let codigo=0;
     for (let i = 0; i < arrayProductos.length; i++) {
     
         configFetch={
             method:'POST',
-            body:`receta=${cook[1]}&id_p=${arrayProductos[i][0]}&cantidad=${arrayProductos[i][2]}`,       
+            body:`receta=${cook}&id_p=${arrayProductos[i][0]}&cantidad=${arrayProductos[i][2]}`,       
             headers:{'Content-Type': 'application/x-www-form-urlencoded'}
         };
         fetch(url,configFetch)
@@ -234,7 +229,5 @@ function finalizarReceta(){
                     llenarTabla();
                 }                
         });
-    }    
+    }
 }
-
-
