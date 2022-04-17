@@ -14,9 +14,11 @@
 
         $query= "select * from recetas_productos rp, recetas r, productos p 
                     where rp.id_r = r.id_recetas and
-                    rp.id_r = p.id_producto 
+                    rp.id_p = p.id_producto 
                     and r.id_recetas= $id_receta";
         $ing = selectBBDD($conn, $query);
+
+        
 
         // while($f = mysqli_fetch_assoc($ing)){
         //     echo $f['nombre_receta'] . "<br>";
@@ -68,16 +70,16 @@
                         while($f = mysqli_fetch_assoc($ing)){
                             
                             echo "<tr>";
-                            echo "<td>" . $f['nombre_receta'] . "</td>";
-                            echo "<td>Mark</td>";
-                            echo "<td>Otto</td>";
+                            echo "<td>" . $f['nombre_p'] . "</td>";
+                            echo "<td><a href='editar_producto_receta.php?id_p=" . $f['id_producto'] . "&id_r=" . $f['id_r'] . "&nombre_p=" . $f['nombre_p'] . " '> <img src='assets/pencil.png' alt=''></a></td>";
+                            echo "<td><a href=''> <img src='assets/delete.png' alt=''></a></td>";
                             echo "</tr>";
                         }
                         ?>
                     </tbody>
                     </thead>
                 </table>
-
+                        
             </div>
             
         </div>

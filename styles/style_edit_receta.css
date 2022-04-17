@@ -7,10 +7,10 @@
 .c_ingredientes{grid-area: ingredientes;}
 
 .contenedor_grid{
-    border: 1px solid rgb(179, 220, 188);
+    border: 1px solid rgb(93, 102, 95);
     margin-top: 2vh;
     /* height: 85vh; */
-    background-color: aquamarine;
+  
     display: grid;
     grid-template: 
         'titulo titulo titulo titulo titulo'
@@ -31,23 +31,14 @@
 
 .edt_nombre1{
     padding: 3vh 0;
-    border: 1px solid rgb(0, 94, 255);
+   
     grid-column: 2 / span 2;
 }
 .edt_nombre2{
+    text-align: left;
     padding: 3vh 0;
-    border: 1px solid rgb(0, 94, 255);
-    
 }
 
-.c_nombre, .c_ingredientes{
-    border: 1px solid red;
-}
-
-
-/* .edt_ingrediente1{}
-.edt_ingrediente2{}
-.edt_ingrediente3{} */
 .c_ingredientes{
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto;
@@ -62,7 +53,7 @@ button{
     background-color: transparent;
     border: 0px;
 }
-button img{
+button img, td img{
     width: 32px;
     height: 32px;
 }
