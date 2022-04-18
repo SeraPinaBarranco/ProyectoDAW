@@ -11,6 +11,7 @@
         $id_r = $_GET['id_r'];
         $nombre = $_GET['nombre_p'];
         
+        echo $id_producto . " - " . $id_r . " - " . $nombre;
         
         //     echo $_SESSION['id_receta'];
         $query="select * from recetas_productos rp, recetas r, productos p 
@@ -36,7 +37,7 @@
             $query = "UPDATE recetas_productos
                         SET
                         cantidad =" .  $_GET['cantidad'] .
-                        " WHERE id_p = 1 and id_r =" . $_SESSION['id_r'] ;
+                        " WHERE id_p =" .  $_SESSION['id_p'] . " and id_r =" . $_SESSION['id_r'] ;
 
             echo $query;
  
