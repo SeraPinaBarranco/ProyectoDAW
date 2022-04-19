@@ -1,9 +1,5 @@
 <?php 
     require_once "../model/basedatos.php";
-
-
-    
-
     
     $receta= $_POST['receta'];
     $id_p=$_POST['id_p'];
@@ -20,8 +16,15 @@
 
     $con = connDB();
 
+
+    
+    
+    
+    
     $resultado = guardar($con, $query);
-   
+    
+    //ejecutar procedimiento almacenado
+    $sql = mysqli_query($con, "CALL totalesProductos( $receta, $id_p );") ;
     echo ($resultado);
 
     mysqli_close($con);

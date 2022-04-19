@@ -20,18 +20,18 @@
     $resultado = guardar($con, $query);
     $num= duplicados($con);
 
-    mysqli_close($con);
-
-
+    
+    
     if($num == -1){
         echo json_encode(array("error" => "Receta duplicada"));
-
+        
     }else{
         echo json_encode(array("guardado" => "Receta guardada con éxito"));
     }
     
-
     
+    
+    mysqli_close($con);
     
 
 

@@ -31,7 +31,8 @@
 <?php include_once "templates/title.html"; ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="styles/style_edit_receta.css">  
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="plugins/jquery.js"></script>
 <title>Editar Receta</title>
 </head>
 <body>
@@ -75,7 +76,7 @@
                             echo "<td><center>" . $f['nombre_p'] . "</center></td>";
                             echo "<td><center>" . $f['cantidad'] . "</center></td>";
                             echo "<td><a href='editar_producto_receta.php?id_p=" . $f['id_producto'] . "&id_r=" . $f['id_r'] . "&nombre_p=" . $f['nombre_p'] . " '> <img src='assets/pencil.png' alt=''></a></td>";
-                            echo "<td><center><a id='borrar'onClick='borrar(" . $f['id_producto'] .")' href='#' value=''> <img src='assets/delete.png' alt=''></a></center></td>";
+                            echo "<td class='borrar' value=". $f['id_producto'] ."><a id='borrar'onClick='borrar(" . $f['id_producto'] .")' href='#' value=''> <img src='assets/delete.png' alt=''></a></td>";
                             echo "</tr>";
                         }
                         ?>

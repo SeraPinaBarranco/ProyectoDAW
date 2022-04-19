@@ -192,6 +192,13 @@ function finalizarReceta(){
         .then(datos => {         
             d = datos;
             addIngredientesReceta(d[0].id_recetas);
+            myReceta = "";
+            addIngredientesReceta= [];
+            //ir al listado de recetas
+            setTimeout(() => {
+                window.location.replace("./listar_recetas.php");                
+            }, 2000);
+
         });
 
 }

@@ -74,7 +74,13 @@ if(isset($_GET['p'])){
 
                 <div class="row">
                     <?php
+                        
                         if($eliminado){
+                            echo "<script>setTimeout(() => {
+                                window.location.replace('./listar_recetas.php');                
+                                }, 2000);</script>";
+
+                            //header("Refresh: 2; url=" . "index.php");
                             echo "<h4 class='badge bg-danger'>eliminado</h4>";
                             $eliminado = false;
                         }else{
