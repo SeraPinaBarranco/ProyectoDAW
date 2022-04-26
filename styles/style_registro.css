@@ -1,0 +1,27 @@
+
+.contenedor {
+  background: rgb(214, 245, 179);
+  
+  height: 100vh;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3{
+    text-align: center;
+}
+.campos {
+  background: #ffab9cff;
+  border-radius: 5px;
+  box-shadow: 8px 8px 8px;
+  width:60vw;
+}
+
+.formulario{
+    padding: 2vh 2vw;
+}
+
+.div-registrar{
+    text-align: center;
+}

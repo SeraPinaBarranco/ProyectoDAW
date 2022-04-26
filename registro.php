@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/style_login.css">
+    <link rel="stylesheet" href="styles/style_registro.css">
+    <script src="js/registro.js" defer></script>
     <title>Registro</title>
 </head>
+
 <body>
-    
+
     <div class="contenedor">
-        <div class="row div_titulo">
-            <div>
-                <h3>Registro</h3>
-            </div>
-        </div>
-        <div class="row div_usuario col-6">
-            <form method="post">
-                <div class="row form-floating mb-3">
-                    <!-- <label class="form-control" for="user">Nombre de usuario</label> -->
-                    <input class="form-control" type="text" name="user" id="user" name="user" placeholder="Usuario" style="font-size: 18pt" autocomplete="off">
-                    <label for="user">Nombre de usuario</label>
+        <div class="campos">
+            <h3>Registro de usuario</h3>
+            <form action="" class="row formulario">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Introduce tu nombre">
                 </div>
-                <div class="row form-floating mb-3">
-                    <input class="form-control" type="password" name="pass" id="pass" name="pass" placeholder="Contraseña">
-                    <label class="pass" for="user">Contraseña</label>
+                <div class="mb-3">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Introduce tus apellidos">
                 </div>
-                <div class="position-relative mt-5">
-                    <div class="position-absolute top-50 start-50 translate-middle">
-                        <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
-                    </div>
+                <div class="mb-3">
+                    <label for="nick" class="form-label">Nick</label>
+                    <input type="text" class="form-control" name="nick" id="nick" placeholder="Introduce tu usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Introduce tu e-mail">
+                </div>
+                <div class="mb-3">
+                    <label for="pass" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="pass" id="pass" placeholder="Introduce tu contraseña">
+                </div>
+                <div class="mb-3">
+                    <label for="rpass" class="form-label">Repite la contraseña</label>
+                    <input type="password" class="form-control" name="rpass" id="rpass" placeholder="Repite la contraseña">
+                </div>
+                <div class="div-registrar">
+                    <button type="submit" name="registrar" id="registrar" class="btn btn-primary">Registrar</button>
                 </div>
             </form>
-
         </div>
-        <div class="row div_contrasena">c</div>
+
 
     </div>
+
+    <div class="padre">
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    
-</body>
-</html>
 
+</body>
+
+</html>
