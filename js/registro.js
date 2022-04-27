@@ -1,11 +1,26 @@
 const registrar = document.querySelector('#registrar');
+const f = document.getElementById('formularioRegistro');
 
-let form = document.forms[0];
 
-registrar.addEventListener('click',  registrarUsuario);
+f.addEventListener('submit',function(event){
+   let formData = new FormData(f);
+   event.preventDefault();
 
-function registrarUsuario(){
-   let formData = new FormData(form);
+   //datos del formulario
+   const n = formData.get('nombre');
+   const ape= formData.get('apellidos');
+   const nick = formData.get('nick');
+   const email= formData.get('email');
 
-   console.log(formData.get('nombre'));
-}
+   //comprobar que sean iguales
+   const p = formData.get('pass');
+   const rp= formData.get('rpass');
+
+   if(p !== rp){
+      console.log("No iguales");
+   }
+
+} );
+
+
+
