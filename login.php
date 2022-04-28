@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/style_login.css">
+    <script src="js/login.js" defer></script>
     <title>Login</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
             </div>
         </div>
         <div class="row div_usuario col-6">
-            <form method="post">
+            <form method="post" id="frm_login">
                 <div class="row form-floating mb-3">
                     <!-- <label class="form-control" for="user">Nombre de usuario</label> -->
                     <input class="form-control" type="text" name="user" id="user" name="user" placeholder="Usuario" style="font-size: 18pt" autocomplete="off">
@@ -29,7 +30,7 @@
                 </div>
                 <div class="position-relative mt-5">
                     <div class="position-absolute top-50 start-50 translate-middle">
-                        <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+                        <button type="submit" class="btn btn-primary btn-lg" id="btn_login">Ingresar</button>
                     </div>
                 </div>
             </form>

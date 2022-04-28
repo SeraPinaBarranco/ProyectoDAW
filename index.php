@@ -1,5 +1,8 @@
 <?php
-    header("Location: login.php");
+session_start();
+
+echo $_SESSION['id_usuario'];
+    
 ?>
 
 

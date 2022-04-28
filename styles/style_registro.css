@@ -25,3 +25,9 @@ h3{
 .div-registrar{
     text-align: center;
 }
+
+#errorpass{
+  background-color: rgb(247, 0, 0);
+  color: white;
+  font-weight: bold;
+}

@@ -60,7 +60,7 @@
     function obtener_num_filas($query){
         return mysqli_num_rows($query);
 	}
-    
+   
     function duplicados($conn){
         $num = mysqli_affected_rows($conn);
         return $num;
