@@ -116,7 +116,7 @@ function agregaIngrediente(p){
 }
 
 
-//GUARDA LA RECETA (FALTA PONER EL ID USUARIO)
+//GUARDA LA RECETA (AÑADIDO EL ID USUARIO)
 let formulario = document.getElementById('frm');
 let form;
 let myReceta="";
@@ -124,27 +124,28 @@ formulario.addEventListener('submit', (e)=>{
     e.preventDefault();
     form = new FormData(formulario);
     myReceta= form.get('receta');
-   
+    if(myReceta == "")return;
+
     //URL de la peticion
     let url= "./controller/guardar_receta.php";
      
     //configurar la peticion. AQUI CONFIGURO LA PETICION
     let configFetch={
         method:'POST',
-        body:`receta=${form.get('receta')}`,       
+        body:`receta=${form.get('receta')}&id_usuario=${form.get('usuario')}`,       
         headers:{'Content-Type': 'application/x-www-form-urlencoded'}
     };
-
+    
     //mandar la peticion
     let promesa = fetch(url,configFetch);
 
     //Ejecutar la promesa que devuelve la peticion
     promesa.then( res => res.json())
         .then(datos => {         
-            let d = datos;
-           
-            mostarMensaje(d)          
-     });
+           let d = datos;
+           //console.log(d);
+           mostarMensaje(d)          
+    });
 })
 
 

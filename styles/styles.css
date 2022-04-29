@@ -1,4 +1,8 @@
-* {box-sizing: border-box;    
+* {
+    box-sizing: border-box;   
+    margin: 0px;
+    padding: 0px; 
+    /* border: 1px solid red; */
 }
 
 body { 
@@ -13,6 +17,10 @@ body {
 
 #usuario{
     color: rgb(131, 185, 51);
+}
+
+.logout{
+    margin-left: 50vw;
 }
 
 a{
@@ -108,6 +116,10 @@ a:hover{
     .list-group-item{
         width: 100%;
     }
+
+    .logout{
+        margin-left: 40vw;
+    }
     
     .div-boton{
         width: 100%;
@@ -115,6 +127,17 @@ a:hover{
     }
 }
 
+@media (max-width: 600px){
+    .logout{
+        margin-left: 30vw;
+    }
+}
+
+@media (max-width: 470px){
+    .logout{
+        margin-left: 10vw;
+    }
+}
 
 input[type=text]:focus{
     background-color: rgb(208, 233, 171);

@@ -40,7 +40,7 @@
             </li>
 
             <li class="nav-item me-6 ">
-              <a class="nav-link disabled position-absolute end-0  fs-6 m-3" href="" id='usuario' href="#" tabindex="-1" aria-disabled="true">
+              <a class="nav-link disabled position-absolute end-0  fs-6 " href="" id='usuario' href="#" tabindex="-1" aria-disabled="true">
                 <?php 
                 if(isset($_SESSION['id_usuario']) && isset($_SESSION['id_usuario'])){
                   echo "<img class='rrss' id='usuario' src='assets/user_login.png' alt='Icono del usuario'>";
@@ -49,8 +49,10 @@
                   header('Location: login.php');
                 }
                 ?>
-              </a>             
-              <a class="nav-link disabled position-relative end-0  fs-6 m-1"  href="logout.php">Salir</a>
+              </a>  
+              <li class="nav-item logout">
+                <a class="nav-link position-relative end-0  fs-6 m-1"  href="logout.php">Salir</a>
+              </li>           
               
               <!-- <img class="rrss"  src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur.png" alt=""> -->
             </li>

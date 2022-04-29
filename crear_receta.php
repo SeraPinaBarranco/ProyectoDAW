@@ -1,3 +1,4 @@
+<?php session_start();?>
 <?php include_once "templates/title.html" ?>
 <title>Editar producto</title>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -24,11 +25,12 @@
             <form name="formulario" action="controller/guardar_receta.php" id="frm" method="post">
                 <label for="receta">Nombre Receta</label>
                 <input type="text" name="receta" id="receta">
+                <input type="text" hidden id="usuario" name="usuario" value="<?php echo $_SESSION['id_usuario'] ?>">
                 <div class="div_guardarNombreReceta">                
                     <button  id="guardarNombreReceta" class="guardarNombreReceta">Guardar</button>
                 </div>
             </form>
-
+            
             <div class="div-ingredientes">
                 <ul id="ingredientes">
                     
