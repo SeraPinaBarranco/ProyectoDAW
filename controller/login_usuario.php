@@ -24,6 +24,7 @@
             $resultado = consulta($conn, $query);
             $resultado["codigo"]=1;
             $_SESSION['id_usuario'] = $resultado['id_usuarios'];
+            $_SESSION['nombre'] = $resultado['nombre'];
             echo (json_encode($resultado));
         }else{
             

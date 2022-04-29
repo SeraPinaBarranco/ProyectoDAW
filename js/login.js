@@ -25,10 +25,21 @@ frm.addEventListener('submit', (e)=>{
         promesa
         .then((res) => res.json())
         .then((datos) => {
-            let d = datos;
+            // let d = datos;
             console.log( datos); 
             if(datos.codigo == "1"){
-                window.location.href = "./index.php";
+                const msj = document.getElementById('msj');
+                let msjError= document.createElement('p');
+                msjError.style.backgroundColor = "green";
+                msjError.style.color = "white";
+                msjError.innerHTML = "Login Correcto!!";
+                msj.appendChild(msjError);
+               
+               
+                setInterval(() => {
+                    window.location.href = "./index.php";                    
+                }, 2000);
+                
             }    
 
         });
