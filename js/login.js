@@ -27,9 +27,9 @@ frm.addEventListener('submit', (e)=>{
         .then((datos) => {
             // let d = datos;
             console.log( datos); 
+            const msj = document.getElementById('msj');
+            let msjError= document.createElement('p');
             if(datos.codigo == "1"){
-                const msj = document.getElementById('msj');
-                let msjError= document.createElement('p');
                 msjError.style.backgroundColor = "green";
                 msjError.style.color = "white";
                 msjError.innerHTML = "Login Correcto!!";
@@ -40,6 +40,15 @@ frm.addEventListener('submit', (e)=>{
                     window.location.href = "./index.php";                    
                 }, 2000);
                 
+            }else{
+                msjError.style.backgroundColor = "red";
+                msjError.style.color = "white";
+                msjError.innerHTML = "Login Incorrecto!!";
+                msj.appendChild(msjError);
+                setInterval(() => {
+                    msjError.style.backgroundColor = "";
+                    msjError.innerHTML = "";                    
+                }, 2000);
             }    
 
         });

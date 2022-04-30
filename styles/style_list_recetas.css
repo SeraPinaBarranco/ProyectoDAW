@@ -9,3 +9,9 @@ td button{
     background-color: transparent;
     border: 0px;
 }
+
+@media only screen and (max-width: 460px)  {
+    .container{
+        width: 90%;
+    }
+}

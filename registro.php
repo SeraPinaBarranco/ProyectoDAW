@@ -50,6 +50,9 @@
                 </div>
 
             </form>
+            <div class="row">
+                <p>Si ya tienes cuenta <a href="login.php">inicia sesión</a> </p>
+            </div>
         </div>
 
 

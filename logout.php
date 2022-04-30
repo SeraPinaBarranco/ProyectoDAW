@@ -7,9 +7,15 @@
     // }
 ?>
 <?php 
-    if(!empty($_POST['si'])){
+    if(isset($_POST['si']) && !empty($_POST['si'])){
         unset($_SESSION);
         session_destroy();
+    }elseif(isset($_POST['no']) && !empty($_POST['no'])){
+        //header('Location:' . getenv('HTTP_REFERER')); 
+               
+        
+        echo ("<script>window.location.replace('https://localhost/ProyectoDAW/index.php')</script>");
+
     }
 ?>
 

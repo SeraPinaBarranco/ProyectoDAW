@@ -1,0 +1,38 @@
+.col1{
+    position:absolute;
+    left: 0px;
+    margin: 2vh 0vh 2vh 2vh;
+    display: inline-block;
+    text-align: center;
+    background-color: aquamarine;
+    width: 48%;
+}
+
+.col2{
+    position:absolute;
+    right: 0px;
+    margin: 2vh 2vh 2vh 0vh; 
+    display: inline-block;
+    text-align: center;
+    background-color: aquamarine;
+    width: 48%;
+}
+
+@media only screen and (max-width: 900px) {
+    .col1, .col2{
+        
+        position: relative;
+        margin-left: 0px;
+        margin-bottom: 2vh;
+        width: 100vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .col1, .col2{
+        position: relative;
+        margin-left: 0px;
+        margin-bottom: 2vh;
+        width: 100vw;
+    }
+  }

@@ -37,7 +37,8 @@
             </form>
             
         </div>
-        <div class="row" id="msj">
+        <div class="row mt-2" id="msj">
+            <p>Si aún no tienes cuenta, registrate <a href="registro.php">aquí</a> </p>
         </div>        
 
     </div>
