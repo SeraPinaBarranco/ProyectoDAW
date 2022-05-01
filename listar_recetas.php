@@ -34,6 +34,8 @@ if(isset($_GET['p'])){
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <title>Listado de recetas</title>
 <link rel="stylesheet" href="styles/style_list_recetas.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="js/listar_recetas_otros.js" defer></script>
 </head>
 <body>
     <?php include_once "templates/cabecera.html"?>
@@ -100,7 +102,7 @@ if(isset($_GET['p'])){
             </form>
     </div>
 
-    <!-- Si vienen datos por GET muestra las recetas de OTROS usuarios -->
+    <!--  Si vienen datos por GET muestra las recetas de OTROS usuarios -->
     <?php }
     elseif(isset($_GET['otros'])){?>
         <div class="container">
@@ -110,21 +112,24 @@ if(isset($_GET['p'])){
         </div>
     </div>
 
-    <!-- LISTADO DE RECETAS -->    
+    <!-- LISTADO DE RECETAS --> 
+    <!-- Le he quitado el form para que no envie nada y tratarlo todo en JS -->
     <div class="container col-6 mt-3">
         <div class="row">
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                <!-- Aqui se mostraran el detalle de la receta seleccionada -->
+                <div class='ver_receta' id='ver_receta'><ul id='lista_ver'></ul>
+            <!-- <form method="POST" id="form" action="">  --> 
                 <table class="table">
                     <thead>
                         <tr>                
                         <th scope="col">Receta</th>
                         <th scope="col">Usuario</th>
-                        <th scope="col">Acciones</th>                                
+                        <th style="text-align: center;" scope="col">Acciones</th>                                
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
-                            //Mostrar la recetas por el usuario logado
+                            //Mostrar la recetas menos las del usuario logado
                             require_once("model/basedatos.php");
                             $con = connDB();
                             $query = "SELECT * FROM recetas r, usuarios u 
@@ -143,7 +148,8 @@ if(isset($_GET['p'])){
                                 echo "<tr>";
                                 echo "<td>" . $fila['nombre_receta'] . "</td>";
                                 echo "<td>" . $fila['nombre'] . "</td>";
-                                echo "<td><a href=''><img src='assets/pencil.png' alt=''></a> </td>";
+                                echo "<td style='text-align: center;' ><a href='#' onclick='ver_receta(" .  $fila['id_recetas'] . ", this)' ><img src='assets/ver.png' alt='Ver receta'></a> 
+                                            <a href=''><img src='assets/anadir.png' alt='añadir a favoritas'></a> </td>";                                
                                 echo "</tr>";
                             }
                         ?>
@@ -170,7 +176,7 @@ if(isset($_GET['p'])){
                     ?>
                     
                 </div>
-            </form>
+            <!-- </form>  -->
     </div>
     <?php } ?>
 
@@ -178,9 +184,8 @@ if(isset($_GET['p'])){
    
 
     <?php include_once "templates/pie.html" ?>
-
+</body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-</body>
+    
 </html>

@@ -1,24 +1,22 @@
-.col1{
-    position:absolute;
-    left: 0px;
-    margin: 2vh 0vh 2vh 2vh;
-    display: inline-block;
-    text-align: center;
-    background-color: aquamarine;
-    width: 48%;
+body{
+    background-color: #d6f5b3;
+}
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #d6f5b3;
 }
 
-.col2{
-    position:absolute;
-    right: 0px;
-    margin: 2vh 2vh 2vh 0vh; 
-    display: inline-block;
+.col1, .col2{
+    flex: 1 1 350px;
     text-align: center;
-    background-color: aquamarine;
-    width: 48%;
+    background-color: #ffab9c;
+    margin: 1vh;
+
 }
 
-@media only screen and (max-width: 900px) {
+
+/* @media only screen and (max-width: 900px) {
     .col1, .col2{
         
         position: relative;
@@ -35,4 +33,4 @@
         margin-bottom: 2vh;
         width: 100vw;
     }
-  }
+  } */

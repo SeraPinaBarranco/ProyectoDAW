@@ -10,6 +10,10 @@ td button{
     border: 0px;
 }
 
+.ver_receta{
+    display: none;
+}
+
 @media only screen and (max-width: 460px)  {
     .container{
         width: 90%;

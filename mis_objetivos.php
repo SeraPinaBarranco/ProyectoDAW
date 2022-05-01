@@ -14,29 +14,33 @@ session_start();
 
 <body>
     <?php include_once "templates/cabecera.html" ?>
-    <div class="col1">
-        <div>
-            <input type="date" name="fecha" id="fecha">
+
+    <div class="contenedor">
+        <div class="col1">
+            <div>
+                <input type="date" name="fecha" id="fecha">
+            </div>
+            <div>
+                Añadir receta
+            </div>
+            <div>
+                Datos
+            </div>
         </div>
-        <div>
-            Añadir receta
-        </div>
-        <div>
-            Datos
+    
+        <div class="col2">
+            <div>
+                <h3>Elegir recetas</h3>
+            </div>
+            <div>
+                Tabla con recetas
+            </div>
+            <div>
+                Datos
+            </div>
         </div>
     </div>
 
-    <div class="col2">
-        <div>
-            <h3>Elegir recetas</h3>
-        </div>
-        <div>
-            Tabla con recetas
-        </div>
-        <div>
-            Datos
-        </div>
-    </div>
 
     <?php include_once "templates/pie.html" ?>
 </body>
