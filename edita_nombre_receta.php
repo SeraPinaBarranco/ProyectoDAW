@@ -34,7 +34,10 @@
         cerrarBD($conn);
         
         unset($_SESSION['id_receta']);
-        session_destroy();
+
+        unset($_GET['modificar']);
+        unset($_SESSION['id_receta']);
+        //session_destroy();
         header("Refresh: 3; url=" . "listar_recetas.php");
         //extract($resultado);
     }

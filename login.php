@@ -26,7 +26,7 @@
                     <label for="user">Nombre de usuario</label>
                 </div>
                 <div class="row form-floating mb-3">
-                    <input class="form-control" type="password" name="pass" id="pass" name="pass" placeholder="Contraseña">
+                    <input class="form-control light" type="password" name="pass" id="pass" name="pass" placeholder="Contraseña">
                     <label class="pass" for="user">Contraseña</label>
                 </div>
                 <div class="position-relative mt-5">

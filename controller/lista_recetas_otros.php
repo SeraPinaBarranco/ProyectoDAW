@@ -1,4 +1,5 @@
-<?php  
+<?php
+    session_start();
     require_once "../model/basedatos.php";
 
     //Trae la receta con el id

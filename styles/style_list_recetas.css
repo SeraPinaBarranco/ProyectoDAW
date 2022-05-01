@@ -14,6 +14,20 @@ td button{
     display: none;
 }
 
+.li_detalle{
+    margin-bottom: 2vh;
+}
+.span_detalle{
+    /* background-color: #ffab9c; */
+    color: #ffab9c ;
+    padding: 2px;
+    border-radius: 5px;
+    font-weight:bold;
+}
+.sub_li_detalle{
+    padding-left: 2vw;
+}
+
 @media only screen and (max-width: 460px)  {
     .container{
         width: 90%;

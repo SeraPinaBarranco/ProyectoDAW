@@ -8,6 +8,7 @@ body{
 }
 
 .col1, .col2{
+    padding-top: 1vh;
     flex: 1 1 350px;
     text-align: center;
     background-color: #ffab9c;

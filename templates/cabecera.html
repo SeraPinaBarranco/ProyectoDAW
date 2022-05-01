@@ -31,7 +31,7 @@
                   <hr class="dropdown-divider">
                 </li>
                 <li><a class="dropdown-item" href="#">Cuenta</a></li>
-                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -45,15 +45,14 @@
                 <?php 
                 if(isset($_SESSION['id_usuario']) && isset($_SESSION['id_usuario'])){
                   echo "<img class='rrss' id='usuario' src='assets/user_login.png' alt='Icono del usuario'>";
-                  echo $_SESSION['nombre']; 
+                  echo "<span>" . $_SESSION['nombre'] . "</span>";
+                  echo "<span id='id_usu' hidden>" . $_SESSION['id_usuario'] . "</span>";
                 }else{
                   header('Location: login.php');
                 }
                 ?>
               </a>  
-              <li class="nav-item logout">
-                <a class="nav-link position-relative end-0  fs-6 m-1"  href="logout.php">Salir</a>
-              </li>           
+                     
               
               <!-- <img class="rrss"  src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur.png" alt=""> -->
             </li>
