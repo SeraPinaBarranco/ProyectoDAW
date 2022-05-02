@@ -1,17 +1,17 @@
 <?php
-    require_once "../model/basedatos.php";
+    // require_once "../model/basedatos.php";
 
-    //Listado de recetas que no son del usuario logado
+    // //Listado de recetas que no son del usuario logado
             
-    $id =$_POST['id_usuario'];
+    // $id =$_POST['id_usuario'];
     
-    $query = "SELECT  r.id_recetas, r.id_usuario, r.nombre_receta FROM recetas r
-                WHERE r.id_usuario = $id";
+    // $query = "SELECT  r.id_recetas, r.id_usuario, r.nombre_receta FROM recetas r
+    //             WHERE r.id_usuario = 23";
 
-    $conn= connDB();
+    // $conn= connDB();
 
-    $res =listado($conn,$query);
+    // $res =listado($conn,$query);
 
-    echo (json_encode($res));
-    mysqli_close($conn);
+    // echo (json_encode($res));
+    // mysqli_close($conn);
 ?>

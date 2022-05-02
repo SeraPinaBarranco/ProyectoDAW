@@ -1,3 +1,6 @@
+/* {
+    border: 1px solid red;
+} */
 body{
     background-color: #d6f5b3;
 }
@@ -7,16 +10,36 @@ body{
     background-color: #d6f5b3;
 }
 
+.objetivo{
+    width: 12vw;
+}
+
+.div-fecha{
+    margin-bottom: 3vh;
+}
+
+.ul-cantidades-objetivo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.ul-cantidades-objetivo li{
+    width: 15vw;
+}
+
 .col2, .col3{
     display: none;
-}
-.col1, .col2, .col3{
-    padding-top: 1vh;
-    flex: 1 1 350px;
+    flex: 1 1 150px;
     text-align: center;
     background-color: #ffab9c;
     margin: 1vh;
-
+}
+.col1{
+    padding-top: 1vh;
+    flex: 1 1 450px;
+    text-align: center;
+    background-color: #ffab9c;
+    margin: 1vh;
 }
 
 .tabla{
@@ -32,23 +55,50 @@ body{
 .tabla tbody tr:nth-child(2n+0){
     background-color: #eaede7;
 }
+td{
+    padding: 0.5vh;
+}
+td>button{
+    background-color: transparent;
+    border: none;
+}
 
-
-/* @media only screen and (max-width: 900px) {
-    .col1, .col2{
+@media only screen and (max-width: 900px) {
+    /* .col1, .col2{
         
         position: relative;
         margin-left: 0px;
         margin-bottom: 2vh;
         width: 100vw;
+    } */
+    .ul-cantidades-objetivo{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;       
+        justify-content:space-between;
+    }
+    .ul-cantidades-objetivo li{
+        width: 23vw;
+    }
+    .ul-cantidades-objetivo li label input{
+        width: 45%;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .col1, .col2{
+    /* .col1, .col2{
         position: relative;
         margin-left: 0px;
         margin-bottom: 2vh;
         width: 100vw;
+    } */
+    .ul-cantidades-objetivo{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:space-around;
     }
-  } */
+    .ul-cantidades-objetivo li{
+        width: 35vw;
+    }
+
+  } 
