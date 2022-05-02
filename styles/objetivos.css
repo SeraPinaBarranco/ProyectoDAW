@@ -7,13 +7,30 @@ body{
     background-color: #d6f5b3;
 }
 
-.col1, .col2{
+.col2, .col3{
+    display: none;
+}
+.col1, .col2, .col3{
     padding-top: 1vh;
     flex: 1 1 350px;
     text-align: center;
     background-color: #ffab9c;
     margin: 1vh;
 
+}
+
+.tabla{
+    margin: 1vh;
+    background-color: white;
+    width: 96%;
+}
+
+.tabla thead tr{
+    background-color: #d6f5b3;
+}
+
+.tabla tbody tr:nth-child(2n+0){
+    background-color: #eaede7;
 }
 
 

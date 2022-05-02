@@ -22,8 +22,9 @@ session_start();
             <div>
                 <input type="date" name="fecha" id="fecha">
             </div>
-            <div>
-                Añadir receta
+            <div class="mt-3">
+               <button class="btn-mis btn btn-primary">De mis recetas</button>
+               <button class="btn-fav btn btn-primary">De favoritos</button>
             </div>
             <div>
                 Datos
@@ -35,25 +36,52 @@ session_start();
                 <h3>Elegir recetas</h3>
             </div>
             <div class="tabla-recetas">
-                Tabla con recetas
-                <table id="table_id" class="display">
-                    <thead>
-                        <tr>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Row 1 Data 1</td>
-                            <td>Row 1 Data 2</td>
-                        </tr>
-                        <tr>
-                            <td>Row 2 Data 1</td>
-                            <td>Row 2 Data 2</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h4>Mis favoritas</h4>
+                <div class="div-tabla">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th hidden>id</th>
+                                <th hidden>id</th>
+                                <th hidden>id</th>
+                                <th hidden>id</th>
+                                <th>Receta</th>
+                                <th>Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div>
+                Datos
+            </div>
+        </div>
+
+        <div class="col3">
+            <div>
+                <h3>Elegir recetas</h3>
+            </div>
+            <div class="tabla-recetas">
+                <h4>Mis favoritas</h4>
+                <div class="div-tabla">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th hidden>id</th>
+                                <th>Receta</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
             <div>
                 Datos

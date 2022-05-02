@@ -117,7 +117,7 @@ async function borrarProducto(lista) {
   if (response.status === 200) {
     let data = await response.text();
     // handle data
-    Swal.fire({
+    Swal.fire({                                      
       icon: "warning",
       title: "",
       text: "Producto eliminado!",
