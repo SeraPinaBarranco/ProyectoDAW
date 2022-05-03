@@ -1,3 +1,4 @@
+var inputsObjetivos=""
 window.addEventListener("load", function () {
   let fecha = document.querySelector("#fecha");
   const d = new Date();
@@ -18,7 +19,9 @@ window.addEventListener("load", function () {
   fecha.value = fecha_actual;
   console.log(mes);
   console.log(fecha_actual);
-  
+
+  inputsObjetivos = document.getElementsByClassName('objetivo');
+  objetivos()
 });
 
 fecha.addEventListener("change", (evt) => {
@@ -57,8 +60,21 @@ $(document).ready(function () {
       */
       cargarDatos(aux)
     })
-    
+      
+
 });
+
+function objetivos(){
+  let aux= 0
+  for(let i= 0; inputsObjetivos.length; i++){
+    if(inputsObjetivos[i].value == ""){
+      aux++
+    }
+  }
+  if(aux > 0 ){
+    document.getElementById("objetivo").removeAttribute('hidden')
+  }
+}
 
 function cargarDatos(receta){
   let id_r = receta[0]
@@ -70,6 +86,8 @@ function cargarDatos(receta){
   //TODO consulta a la base de datos
 
 }
+
+
 
 function ejecutar(e){
   console.log("e")

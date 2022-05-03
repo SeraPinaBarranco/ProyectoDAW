@@ -45,12 +45,13 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
             <h5>Establecer objetivos</h5>
             <div class="div-fecha">
                 <input type="date" name="fecha" id="fecha">
+                <button class="btn btn-success" hidden>Guardar</button>
             </div>
             <div class="cantidades-objetivo mb-4">
                 <ul class="ul-cantidades-objetivo">
                     <li>
                         <label for="objCal">Calorias
-                            <input class="objetivo" type="number" name="objCal" id="objCal" require>
+                            <input id="objetivo" class="objetivo" type="number" name="objCal" id="objCal" require>
                         </label>
                     </li>
                     <li>
