@@ -1,4 +1,5 @@
-var inputsObjetivos=""
+
+
 window.addEventListener("load", function () {
   let fecha = document.querySelector("#fecha");
   const d = new Date();
@@ -17,11 +18,16 @@ window.addEventListener("load", function () {
   let fecha_actual = `${d.getFullYear()}-${mes}-${dia}`;
 
   fecha.value = fecha_actual;
-  console.log(mes);
-  console.log(fecha_actual);
+    
+  let form = document.querySelector('#form');
 
-  inputsObjetivos = document.getElementsByClassName('objetivo');
-  objetivos()
+  form.addEventListener('submit',(evt)=>{
+    evt.preventDefault();
+    let objetivo = document.getElementsByClassName('objetivo')
+    let cont = 0;
+
+  })  
+  
 });
 
 fecha.addEventListener("change", (evt) => {
@@ -41,7 +47,7 @@ $(document).ready(function () {
     // ^ Cuando se pulse en + añadir al array para guardar los datos
     // ^ de la receta
     let arrayFila= []
-    $('td>button').click(function(e){
+    $('td>a').click(function(e){
       let tr = e.target.parentNode.parentNode.parentNode //fila de la tabla
       
       let aux=[]
@@ -59,35 +65,106 @@ $(document).ready(function () {
       TODO de la base de datos y los ponga en la lista
       */
       cargarDatos(aux)
-    })
-      
-
+    })      
+    
 });
 
-function objetivos(){
-  let aux= 0
-  for(let i= 0; inputsObjetivos.length; i++){
-    if(inputsObjetivos[i].value == ""){
-      aux++
-    }
-  }
-  if(aux > 0 ){
-    document.getElementById("objetivo").removeAttribute('hidden')
-  }
-}
 
 function cargarDatos(receta){
   let id_r = receta[0]
   let id_u = receta[1]
   let nom_r = receta[2]
 
+  //TODO consulta a la base de datos
+  //URL de la peticion
+  let url = "./controller/listado_propias.php";
+  //let d;
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `id_r=${id_r}&id_u=${id_u}&nom_r=${nom_r}`,
+
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
+
+  //Ejecutar la promesa que devuelve la peticion
+   promesa
+      .then((res) => res.json())
+      .then((datos) => {
+         let d = datos;
+         //console.log(d)
+         let i = 0
+         datos.forEach(cantidades => {
+           listarCantidades(cantidades, i)
+           //console.log(cantidades.nombre_receta) 
+           i++          
+         });
+         
+
+   });
+
   console.log(id_r + " - " + id_u + " - " + nom_r)
 
-  //TODO consulta a la base de datos
+  
 
 }
 
+let arrayTotales= [];
+//Añadir una fila mas al listado
+function listarCantidades(cantidades, i){
+  arrayTotales.push(cantidades)
+  let col = document.getElementById('col4');
+  let frm = document.querySelector('#frm-totales');
+  let div = document.createElement('div')
+  div.setAttribute('id','conte-form')
+  
+  let tabla = document.createElement('table')
+  // ^Crear estructura HTML y meterla a la col4
+  //Total Calorias<input type="text" name="tcalorias" id="tcalorias">
+ 
+  let h5 = document.createElement('h5');
+  h5.innerHTML = cantidades.nombre_receta
+  frm.appendChild(h5);
 
+  let nr = document.createElement('input');
+  let l=document.createElement('label')
+  l.innerHTML = "T.Calorias"
+  nr.value = cantidades.tcalorias
+  frm.appendChild(l);
+  frm.appendChild(nr);
+
+  nr = document.createElement('input');
+  l=document.createElement('label')
+  l.innerHTML = "T.Grasas"
+  nr.value = cantidades.tgrasas
+  frm.appendChild(l);
+  frm.appendChild(nr);
+
+  nr = document.createElement('input');
+  l=document.createElement('label')
+  l.innerHTML = "T.Hidratos"
+  nr.value = cantidades.thidratos
+  frm.appendChild(l);
+  frm.appendChild(nr);
+
+  nr = document.createElement('input');
+  l=document.createElement('label')
+  l.innerHTML = "T.Proteinas"
+  nr.value = cantidades.tproteinas
+  frm.appendChild(l);
+  frm.appendChild(nr);
+
+  //document.getElementById('treceta').innerHTML = cantidades.nombre_receta
+  //document.getElementById('tcalorias').value = 
+  //datos.forEach(cantidades => {
+    //listarCantidades(cantidades)
+  //  console.log(cantidades)           
+  //});
+  
+}
 
 function ejecutar(e){
   console.log("e")

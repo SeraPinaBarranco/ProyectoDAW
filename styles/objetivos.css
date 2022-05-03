@@ -41,6 +41,24 @@ body{
     background-color: #ffab9c;
     margin: 1vh;
 }
+.col4{
+    display: flex;
+}
+.col4{
+    padding-top: 1vh;
+    flex: 4 1 450px;
+    text-align: center;
+    background-color: #ffab9c;
+    margin: 1vh;
+}
+
+#conte-form{   
+    flex-direction: row;
+    justify-content: flex-start;
+}
+#conte-form h5{
+    margin-top: 3vh;
+}
 
 .tabla{
     margin: 1vh;
@@ -63,6 +81,9 @@ td>button{
     border: none;
 }
 
+/* .boton{
+    display: none;
+} */
 @media only screen and (max-width: 900px) {
     /* .col1, .col2{
         

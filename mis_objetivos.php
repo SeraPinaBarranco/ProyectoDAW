@@ -43,42 +43,45 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
     <div class="contenedor">
         <div class="col1">
             <h5>Establecer objetivos</h5>
-            <div class="div-fecha">
-                <input type="date" name="fecha" id="fecha">
-                <button class="btn btn-success" hidden>Guardar</button>
-            </div>
-            <div class="cantidades-objetivo mb-4">
-                <ul class="ul-cantidades-objetivo">
-                    <li>
-                        <label for="objCal">Calorias
-                            <input id="objetivo" class="objetivo" type="number" name="objCal" id="objCal" require>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="objGra">Grasas
-                            <input class="objetivo" type="number" name="objGra" id="objGra" require>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="objHid">Hidratos
-                            <input class="objetivo" type="number" name="objHid" id="objHid" require>
-                        </label>
-                    </li>
-                    <li>
-                        <label for="objPro">Proteinas
-                            <input class="objetivo" type="number" name="objPro" id="objPro" require>
-                        </label>
-                    </li>
-                </ul>
 
-            </div>
+            <form id="form">
+                <div class="div-fecha">
+                    <input type="date" name="fecha" id="fecha">
+                    <button id="guardar" class="btn btn-success">Guardar</button>
+                    <a href="#" id="cancelar" class="btn btn-danger" hidden>Cancelar</a>
+                </div>
+                <div class="cantidades-objetivo mb-4">
+                    <ul class="ul-cantidades-objetivo">
+                        <li>
+                            <label for="objCal">Calorias
+                                <input id="objetivo" class="objetivo" value="" type="number" name="objCal" id="objCal" required>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="objGra">Grasas
+                                <input class="objetivo" type="number" name="objGra" id="objGra" required>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="objHid">Hidratos
+                                <input class="objetivo" type="number" name="objHid" id="objHid" required>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="objPro">Proteinas
+                                <input class="objetivo" type="number" name="objPro" id="objPro" required>
+                            </label>
+                        </li>
+                    </ul>
+    
+                </div>                
+            </form>
+
             <div class="botones mt-3">
-               <button class="btn-mis btn btn-primary">De mis recetas</button>
-               <button class="btn-fav btn btn-primary">De favoritos</button>
+               <button class="boton btn-mis btn btn-primary" id="mis">De mis recetas</button>
+               <button class="boton btn-fav btn btn-primary" id="fav">De favoritos</button>
             </div>
-            <div>
-                Datos
-            </div>
+            
         </div>
 
         <div class="col2">
@@ -106,7 +109,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                                     echo "<td class='id_rec' hidden>" . $fila['id_rec'] ."</td>";
                                     echo "<td class='id_usuarios' hidden>" . $fila['id_usuarios'] ."</td>";
                                     echo "<td>" . $fila['nombre_receta'] ."</td>";
-                                    echo "<td><button><img src='assets/plus.png'></button></td>";
+                                    echo "<td><a href='#'><img src='assets/plus.png'></a></td>";
                                     echo "</tr>";
                                  }
                             ?>
@@ -115,9 +118,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
 
                 </div>
             </div>
-            <div>
-                Datos
-            </div>
+            
         </div>
 
         <div class="col3">
@@ -142,7 +143,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                                     echo "<td class='id_receta' hidden>" . $fila['id_recetas'] ."</td>";
                                     echo "<td class='id_usuario' hidden>" . $fila['id_usuario'] ."</td>";
                                     echo "<td>" . $fila['nombre_receta'] ."</td>";
-                                    echo "<td><button><img src='assets/plus.png'></button></td>";
+                                    echo "<td><a href='#'><img src='assets/plus.png'></a></td>";
                                     echo "</tr>";
                                  }
                             ?>
@@ -152,17 +153,21 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
 
                 </div>
             </div>
-            <div>
-                Datos
-            </div>
+            
+        </div>
+
+        <div id="col4" class="col4">
+            <form action="#" id="frm-totales">
+                              
+            </form>
         </div>
     </div>
 
 
     <?php include_once "templates/pie.html" ?>
 </body>
+<!-- <script src="js/configuracion.js" defer></script> -->
 <script src="js/objetivos.js" defer></script>
-<script src="js/configuracion.js" defer></script>
 <script src="js/data-tables.js"></script>
 
 </html>
