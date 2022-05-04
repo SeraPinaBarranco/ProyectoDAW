@@ -4,7 +4,7 @@
     {
         $server= "localhost";
         $user="root";
-        $pass="usbw";
+        $pass="";
         $db="schemadaw_m12";
 
         $mysqli = mysqli_connect($server,$user,$pass,$db)or die("Failed to connect to MySQL: ") ;
@@ -23,6 +23,20 @@
         }
 
         return json_encode(array("resultado"=>$resultado, "codigo"=>$num));
+    }
+
+    
+    function guardar2($conn, $query){
+        $resultado= mysqli_query($conn,$query);
+        $num= mysqli_affected_rows($conn);
+
+        if($num > 0){
+            $resultado = "Guardado Correcto";
+        }else{
+            $resultado = "Error al guadar, revisa los datos!";
+        }
+
+        return array("resultado"=>$resultado, "codigo"=>$num);
     }
 
     function borrar($conn, $query){

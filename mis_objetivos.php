@@ -54,7 +54,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                     <ul class="ul-cantidades-objetivo">
                         <li>
                             <label for="objCal">Calorias
-                                <input id="objetivo" class="objetivo" value="" type="number" name="objCal" id="objCal" required>
+                                <input class="objetivo" value="" type="number" name="objCal" id="objCal" required>
                             </label>
                         </li>
                         <li>
@@ -78,8 +78,8 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
             </form>
 
             <div class="botones mt-3">
-               <button class="boton btn-mis btn btn-primary" id="mis">De mis recetas</button>
-               <button class="boton btn-fav btn btn-primary" id="fav">De favoritos</button>
+               <a class="boton btn-mis btn btn-primary" id="mis">De mis recetas</a>
+               <a class="boton btn-fav btn btn-primary" id="fav">De favoritos</a>
             </div>
             
         </div>
@@ -157,16 +157,21 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
         </div>
 
         <div id="col4" class="col4" style="display: none;">
-            <!-- <form action="#" id="frm-totales"> -->
-                       
+            <!-- <form action="#" id="frm-totales"> -->            
+            <ul class="ulDetalle" id="ulDetalle">
+
+            </ul>
             <!-- </form> -->
         </div>
     </div>
-
+                                
 
     <?php include_once "templates/pie.html" ?>
 </body>
 <!-- <script src="js/configuracion.js" defer></script> -->
+    <?php 
+        echo  "<script>const id_usu =" . $_SESSION['id_usuario'] ." </script>"
+    ?> 
 <script src="js/objetivos.js" defer></script>
 <script src="js/data-tables.js"></script>
 

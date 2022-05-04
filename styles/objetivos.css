@@ -52,7 +52,7 @@ body{
     margin: 1vh;
 }
 .col4 ul{
-    display: flex;
+    display: flex;    
     flex-direction: row;  
     align-items: baseline; 
 }
@@ -94,9 +94,16 @@ td>button{
     border: none;
 }
 
-/* .boton{
+.div-guarda-Totales{
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    width: 80vw;
+}
+
+.boton{
     display: none;
-} */
+}
 @media only screen and (max-width: 900px) {
     /* .col1, .col2{
         

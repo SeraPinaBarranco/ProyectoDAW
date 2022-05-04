@@ -1,4 +1,16 @@
+let btnGuardar = document.getElementById('guardar')
+btnGuardar.addEventListener('click',guardarObjetivos)
 
+let inputC = document.getElementById('objCal')
+inputC.addEventListener('blur',mostrarBotones)
+let inputG = document.getElementById('objGra')
+inputG.addEventListener('blur',mostrarBotones)
+let inputH = document.getElementById('objHid')
+inputH.addEventListener('blur',mostrarBotones)
+let inputP = document.getElementById('objPro')
+inputP.addEventListener('blur',mostrarBotones)
+
+let form = document.querySelector('#form');
 
 window.addEventListener("load", function () {
   let fecha = document.querySelector("#fecha");
@@ -19,17 +31,14 @@ window.addEventListener("load", function () {
 
   fecha.value = fecha_actual;
     
-  let form = document.querySelector('#form');
-
   form.addEventListener('submit',(evt)=>{
     evt.preventDefault();
-    let objetivo = document.getElementsByClassName('objetivo')
-    let cont = 0;
-
   })  
   
 });
 
+//^ Cuando cambie la fecha refrescar el array de los datos
+//^ y el listado html 
 fecha.addEventListener("change", (evt) => {
   console.log(evt.target.value);
 });
@@ -95,90 +104,123 @@ function cargarDatos(receta){
    promesa
       .then((res) => res.json())
       .then((datos) => {
-         let d = datos;
-        
+         let d = datos;        
          datos.forEach(cantidades => {
-           listarCantidades(cantidades, ni)
-           arrayTotales.push(cantidades)//*Aqui estan las recetas que se han añadido
-            
-         });
-         
-
+           listarCantidades(cantidades)
+           arrayTotales.push(cantidades)//*Aqui estan las recetas que se han añadido            
+         });        
    });
 
   console.log(id_r + " - " + id_u + " - " + nom_r)
-
-  
-
 }
 
 let arrayTotales= [];
 //Añadir una fila mas al listado
-function listarCantidades(cantidades, indice){
+let col4 = document.querySelector('#col4')
+
+// ^Carga el listado con las filas de la base de datos
+function listarCantidades(cantidades){
   //arrayTotales.push(cantidades)//Aqui estan las recetas que se han añadido
 
-  let col4 = document.querySelector('#col4')
-  let ul = document.createElement('ul')
-  ul.setAttribute('class','ulDetalle')
+  let ul = document.querySelector('#ulDetalle')
+  //let ul = document.createElement('ul')
+  //ul.setAttribute('class','ulDetalle')
   let a = document.createElement('a')
   a.setAttribute('href','#')
   a.setAttribute('onclick','borrarItem(this)')
   a.setAttribute('class','btn btn-primary')
   a.innerHTML = "X"
 
-  ul.setAttribute('id',ni)
+  //ul.setAttribute('id',ni)
   let li = document.createElement('li')
   li.innerHTML = `${cantidades.nombre_receta}: C-${cantidades.tcalorias}, G-${cantidades.tgrasas}, H-${cantidades.thidratos}, P-${cantidades.tproteinas} `  
 
+  li.appendChild(a)
+  //ul.appendChild(a)
   ul.appendChild(li)
-  ul.appendChild(a)
   col4.appendChild(ul)
 
   col4.setAttribute("style", "display:flex;");
 
-  ni ++
-
- // console.log(arrayTotales)
-  
+  console.log(arrayTotales)  
 }
 
-function borrarItem(prueba){
-  let idFila =  prueba.parentNode.id //Valor del id de la fila
-  let ulDetalle = document.getElementsByClassName('ulDetalle')
+//^Borrar un LI y actualiza el array
+function borrarItem(removeA){  
+  let ulDetalle = document.getElementById('ulDetalle')// * obtengo el UL
+ 
+  let padre = removeA.parentNode.parentNode
+  let liObjetivo = removeA.parentNode
 
-  for (let i = 0; i < ulDetalle.length; i++) {
-    console.log(ulDetalle[i])  
-    ulDetalle[i].remove() 
+  let nHijo = 0
+  for (let i = 0; i < padre.children.length; i++) {    
+    if(padre.children[i] == removeA.parentNode){
+      nHijo = i;//* Aqui obtengo el indice para eliminar el array
+      break;}    
   }
-  
 
-  let fila = document.getElementById(idFila)
-
-  //fila.remove()
+  liObjetivo.remove()
+     
+  arrayTotales.splice(nHijo, 1)// *Aqui esta el array filtrado
   
-  
-  arrayTotales.splice(idFila, 1)// *Aqui esta el array filtrado
-  
-  let ul = document.querySelector('#col4 ul')
-  //ul.remove() // * Elimina el listado para volver a llenarlo
-  // if(ni > 0){
-  //   ni=0
-  // }
-  //* recorrer array para llenar el listado con el array
-  // arrayTotales.forEach(element => {
-  //     listarCantidades(element)
-  //     //console.log(element)
-  // });
-
   console.log(arrayTotales)
   
+  if(arrayTotales.length == 0){
+    col4.setAttribute("style", "display:none;");
+  }
 
+}
 
-  //console.log(idFila)
+function mostrarBotones(){
+  let inputs = document.getElementsByClassName('objetivo')
+
+  for (let i = 0; i < inputs.length; i++) {
+    if(inputs[i].value == ""){
+      document.getElementById('mis').setAttribute("style", "display:none;");
+      document.getElementById('fav').setAttribute("style", "display:none;");
+      break
+    }else{
+      document.getElementById('mis').setAttribute("style", "display:block;");
+      document.getElementById('fav').setAttribute("style", "display:block;");
+    }
+    
+  }
+}
+
+//^Funcion que guarda los objetivos y la fecha
+function guardarObjetivos(){
+  //* En la variable id_usu esta el id de usuario de forma
+  let f = document.getElementById('fecha').value 
+  
+  
+
+  //TODO consulta a la base de datos
+  //URL de la peticion
+  let url = "./controller/guardar_objetivos.php";
+  //let d;
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `id_u=${id_usu}&fecha=${f}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}`,
+
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+  
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
+
+  //Ejecutar la promesa que devuelve la peticion
+  
+  promesa
+     .then((res) => res.json())
+     .then((datos) => {
+        let d = datos;   
+        console.log(datos) 
+  });
 }
 
 function ejecutar(e){
-  console.log("e")
+  console.log(e)
 }
 
 

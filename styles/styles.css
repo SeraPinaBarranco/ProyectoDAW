@@ -63,9 +63,10 @@ a:hover{
 
 /*Footer*/
 .footer {
-    position: fixed;
+    margin-top: 40%;
+    flex: 0 0 auto;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
     width: 100%;
     background-color: #ffab9cff;
     color: white;
