@@ -57,7 +57,7 @@ $(document).ready(function () {
           aux.push(tr.cells[i].innerHTML)          
         }
       }
-      //arrayFila.push(aux)
+      arrayFila.push(aux)
       //console.log(arrayFila)
       //});
       /*
@@ -69,7 +69,7 @@ $(document).ready(function () {
     
 });
 
-
+ let ni = 0
 function cargarDatos(receta){
   let id_r = receta[0]
   let id_u = receta[1]
@@ -91,16 +91,16 @@ function cargarDatos(receta){
   let promesa = fetch(url, configFetch);
 
   //Ejecutar la promesa que devuelve la peticion
+  
    promesa
       .then((res) => res.json())
       .then((datos) => {
          let d = datos;
-         //console.log(d)
-         let i = 0
+        
          datos.forEach(cantidades => {
-           listarCantidades(cantidades, i)
-           //console.log(cantidades.nombre_receta) 
-           i++          
+           listarCantidades(cantidades, ni)
+           arrayTotales.push(cantidades)//*Aqui estan las recetas que se han añadido
+            
          });
          
 
@@ -114,56 +114,67 @@ function cargarDatos(receta){
 
 let arrayTotales= [];
 //Añadir una fila mas al listado
-function listarCantidades(cantidades, i){
-  arrayTotales.push(cantidades)
-  let col = document.getElementById('col4');
-  let frm = document.querySelector('#frm-totales');
-  let div = document.createElement('div')
-  div.setAttribute('id','conte-form')
+function listarCantidades(cantidades, indice){
+  //arrayTotales.push(cantidades)//Aqui estan las recetas que se han añadido
+
+  let col4 = document.querySelector('#col4')
+  let ul = document.createElement('ul')
+  ul.setAttribute('class','ulDetalle')
+  let a = document.createElement('a')
+  a.setAttribute('href','#')
+  a.setAttribute('onclick','borrarItem(this)')
+  a.setAttribute('class','btn btn-primary')
+  a.innerHTML = "X"
+
+  ul.setAttribute('id',ni)
+  let li = document.createElement('li')
+  li.innerHTML = `${cantidades.nombre_receta}: C-${cantidades.tcalorias}, G-${cantidades.tgrasas}, H-${cantidades.thidratos}, P-${cantidades.tproteinas} `  
+
+  ul.appendChild(li)
+  ul.appendChild(a)
+  col4.appendChild(ul)
+
+  col4.setAttribute("style", "display:flex;");
+
+  ni ++
+
+ // console.log(arrayTotales)
   
-  let tabla = document.createElement('table')
-  // ^Crear estructura HTML y meterla a la col4
-  //Total Calorias<input type="text" name="tcalorias" id="tcalorias">
- 
-  let h5 = document.createElement('h5');
-  h5.innerHTML = cantidades.nombre_receta
-  frm.appendChild(h5);
+}
 
-  let nr = document.createElement('input');
-  let l=document.createElement('label')
-  l.innerHTML = "T.Calorias"
-  nr.value = cantidades.tcalorias
-  frm.appendChild(l);
-  frm.appendChild(nr);
+function borrarItem(prueba){
+  let idFila =  prueba.parentNode.id //Valor del id de la fila
+  let ulDetalle = document.getElementsByClassName('ulDetalle')
 
-  nr = document.createElement('input');
-  l=document.createElement('label')
-  l.innerHTML = "T.Grasas"
-  nr.value = cantidades.tgrasas
-  frm.appendChild(l);
-  frm.appendChild(nr);
-
-  nr = document.createElement('input');
-  l=document.createElement('label')
-  l.innerHTML = "T.Hidratos"
-  nr.value = cantidades.thidratos
-  frm.appendChild(l);
-  frm.appendChild(nr);
-
-  nr = document.createElement('input');
-  l=document.createElement('label')
-  l.innerHTML = "T.Proteinas"
-  nr.value = cantidades.tproteinas
-  frm.appendChild(l);
-  frm.appendChild(nr);
-
-  //document.getElementById('treceta').innerHTML = cantidades.nombre_receta
-  //document.getElementById('tcalorias').value = 
-  //datos.forEach(cantidades => {
-    //listarCantidades(cantidades)
-  //  console.log(cantidades)           
-  //});
+  for (let i = 0; i < ulDetalle.length; i++) {
+    console.log(ulDetalle[i])  
+    ulDetalle[i].remove() 
+  }
   
+
+  let fila = document.getElementById(idFila)
+
+  //fila.remove()
+  
+  
+  arrayTotales.splice(idFila, 1)// *Aqui esta el array filtrado
+  
+  let ul = document.querySelector('#col4 ul')
+  //ul.remove() // * Elimina el listado para volver a llenarlo
+  // if(ni > 0){
+  //   ni=0
+  // }
+  //* recorrer array para llenar el listado con el array
+  // arrayTotales.forEach(element => {
+  //     listarCantidades(element)
+  //     //console.log(element)
+  // });
+
+  console.log(arrayTotales)
+  
+
+
+  //console.log(idFila)
 }
 
 function ejecutar(e){
@@ -174,7 +185,7 @@ function ejecutar(e){
 
 
 
-// ! ELiminaar esto
+// ! ELiminar esto
 
 // function llenarTablaFavoritos(){
 //   let id_usu = $("#id_usu").text();

@@ -51,7 +51,20 @@ body{
     background-color: #ffab9c;
     margin: 1vh;
 }
+.col4 ul{
+    display: flex;
+    flex-direction: row;  
+    align-items: baseline; 
+}
+.col4 ul li{
+    font-weight: bold;
+}
 
+.col4 a{
+    color: white;
+    height: 30px;
+    
+}
 #conte-form{   
     flex-direction: row;
     justify-content: flex-start;

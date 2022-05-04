@@ -156,10 +156,10 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
             
         </div>
 
-        <div id="col4" class="col4">
-            <form action="#" id="frm-totales">
-                              
-            </form>
+        <div id="col4" class="col4" style="display: none;">
+            <!-- <form action="#" id="frm-totales"> -->
+                       
+            <!-- </form> -->
         </div>
     </div>
 
