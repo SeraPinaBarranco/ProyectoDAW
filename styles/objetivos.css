@@ -57,7 +57,12 @@ body{
     align-items: baseline; 
 }
 .col4 ul li{
+    margin-top: 2vh;
     font-weight: bold;
+}
+
+.col4 ul li button{
+    padding: 2px;
 }
 
 .col4 a{
@@ -89,10 +94,6 @@ body{
 td{
     padding: 0.5vh;
 }
-td>button{
-    background-color: transparent;
-    border: none;
-}
 
 .div-guarda-Totales{
     border: 1px solid red;
@@ -104,6 +105,8 @@ td>button{
 .boton{
     display: none;
 }
+
+
 @media only screen and (max-width: 900px) {
     /* .col1, .col2{
         

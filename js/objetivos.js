@@ -12,11 +12,15 @@ inputH.addEventListener('blur',mostrarBotones)
 let inputP = document.getElementById('objPro')
 inputP.addEventListener('blur',mostrarBotones)
 
+let btnAgregarDia = document.getElementById('btnAgregarDia')
+btnAgregarDia.addEventListener('click',agregarRecetasObjetivos)
+
+
+
 //Pone a "guardar" el boton
+//^Cada vez que cambie la fecha hay que consultar a la base de datos
 let fecha = document.querySelector("#fecha");
-fecha.addEventListener('change', function(){
-  btnGuardar.innerHTML = "Guardar"
-})
+fecha.addEventListener('change', traerIdOjetivo)
 
 window.addEventListener("load", function () {
   
@@ -40,13 +44,13 @@ window.addEventListener("load", function () {
   form.addEventListener('submit',(evt)=>{
     evt.preventDefault();
   })  
-  
+  traerIdOjetivo()
 });
 
 //^ Cuando cambie la fecha refrescar el array de los datos
 //^ y el listado html 
 fecha.addEventListener("change", (evt) => {
-  console.log(evt.target.value);
+  console.log(evt.target.value);  
 });
 
 $(document).ready(function () {
@@ -98,7 +102,6 @@ function cargarDatos(receta){
   let configFetch = {
     method: "POST",
     body: `id_r=${id_r}&id_u=${id_u}&nom_r=${nom_r}`,
-
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };
 
@@ -113,7 +116,8 @@ function cargarDatos(receta){
          let d = datos;        
          datos.forEach(cantidades => {
            listarCantidades(cantidades)
-           arrayTotales.push(cantidades)//*Aqui estan las recetas que se han añadido            
+           cantidades.idr= id_r            
+           arrayTotales.push(cantidades)//*Aqui estan las recetas que se han añadido
          });        
    });
 
@@ -131,23 +135,24 @@ function listarCantidades(cantidades){
   let ul = document.querySelector('#ulDetalle')
   //let ul = document.createElement('ul')
   //ul.setAttribute('class','ulDetalle')
-  let a = document.createElement('a')
-  a.setAttribute('href','#')
-  a.setAttribute('onclick','borrarItem(this)')
-  a.setAttribute('class','btn btn-primary')
-  a.innerHTML = "X"
+  let btn = document.createElement('button')
+  //a.setAttribute('href','#')
+  btn.setAttribute('onclick','borrarItem(this)')
+  btn.setAttribute('class','btn')
+  btn.setAttribute('class','btn-danger')
+  btn.innerHTML = "X"
 
   //ul.setAttribute('id',ni)
   let li = document.createElement('li')
   li.innerHTML = `${cantidades.nombre_receta}: C-${cantidades.tcalorias}, G-${cantidades.tgrasas}, H-${cantidades.thidratos}, P-${cantidades.tproteinas} `  
 
-  li.appendChild(a)
+  li.appendChild(btn)
   //ul.appendChild(a)
   ul.appendChild(li)
-  col4.appendChild(ul)
+  //col4.appendChild(ul)
 
   col4.setAttribute("style", "display:flex;");
-
+  document.getElementById('agregarDia').setAttribute("style", "display:block;")
   console.log(arrayTotales)  
 }
 
@@ -173,6 +178,7 @@ function borrarItem(removeA){
   
   if(arrayTotales.length == 0){
     col4.setAttribute("style", "display:none;");
+    document.getElementById('agregarDia').setAttribute("style", "display:none;")
   }
 
 }
@@ -253,133 +259,69 @@ function ejecutar(e){
 }
 
 
+let id_obj = ""
+//* Tiene guarda el id del objetivo
+function traerIdOjetivo(){
+  btnGuardar.innerHTML = "Guardar"
+  //URL de la peticion
+  let url = "./controller/obtener_objetivo.php";
+  //let d;
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `id_u=${id_usu}&fecha=${fecha.value}`,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
 
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
 
+  //Ejecutar la promesa que devuelve la peticion  
+   promesa
+      .then((res) => res.json())
+      .then((datos) => {
+         let d = datos;        
+         console.log(datos)  
+         id_obj = datos.id_objetivo    
+   });   
+}
 
-// ! ELiminar esto
-
-// function llenarTablaFavoritos(){
-//   let id_usu = $("#id_usu").text();
+//*Añade el listado de recetas a la tabla suma objetivos
+//* id_obj esta el id del objetivo
+function agregarRecetasObjetivos(){
   
-//   // * URL de la peticion
-//   let url = "./controller/listado_favoritas.php";
+  //Si el arrayTotales no esta vacio, guarda los datos
+  if(arrayTotales.length > 0){ 
+
+    //*Recorrer el array para guardar en la BBDD fila a fila
+    arrayTotales.forEach(fila => {
+      //console.log(fila);    
+      const cuerpo = `id_obj=${id_obj}&id_u=${id_usu}&id_r=${fila.idr}&tcalorias=${fila.tcalorias}&tgrasas=${fila.tgrasas}&thidratos=${fila.thidratos}&tproteinas=${fila.tproteinas}`
+      //URL de la peticion
+      let url = "./controller/graba_totales_obj.php";
+      //let d;
+      //configurar la peticion. AQUI CONFIGURO LA PETICION
+      let configFetch = {
+        method: "POST",
+        body: cuerpo,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      };
+
+      //mandar la peticion
+      let promesa = fetch(url, configFetch);
+      //Ejecutar la promesa que devuelve la peticion      
+      promesa
+          .then((res) => res.json())
+          .then((datos) => {
+            let d = datos;        
+            console.log(datos)     
+      });          
+    });
+    
+
+
+
+  }
   
-//   //* configurar la peticion. AQUI CONFIGURO LA PETICION
-//   let configFetch = {
-//     method: "POST",
-//     body: `id_usuario=${id_usu}`,
-//     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//   };
+}
 
-//   // * mandar la peticion
-//   let promesa = fetch(url, configFetch);
-
-//   // * Ejecutar la promesa que devuelve la peticion
-//   promesa
-//     .then((res) => res.json())
-//     .then((datos) => {
-//       let d = [];
-     
-//       // TODO llenar las recetas
-//       let tbody = document.getElementsByTagName('tbody')[0]
-      
-//       for (let i = 0; i < datos.length; i++) {
-//         let tr = document.createElement('tr')
-//         tr.setAttribute('class','fila')
-
-//         let td = document.createElement('td');        
-//         td.style.display = "none"
-//         td.innerHTML = datos[i].id_favorita
-//         tr.appendChild(td)
-        
-//         td = document.createElement('td');
-//         td.style.display = "none"
-//         td.innerHTML = datos[i].id_rec
-//         tr.appendChild(td)
-
-//         td = document.createElement('td');
-//         td.style.display = "none"
-//         td.innerHTML = datos[i].id_usuarios
-//         tr.appendChild(td)
-
-//         td = document.createElement('td');
-//         td.style.display = "none"
-//         td.innerHTML = datos[i].id_usuario
-//         tr.appendChild(td)
-
-//         td = document.createElement('td');      
-//         td.innerHTML = datos[i].nombre_receta
-//         tr.appendChild(td)
-
-//         td = document.createElement('td');
-//         let btn = document.createElement('button')
-//         btn.setAttribute('id','verBoton')
-//         btn.addEventListener('click',ejecutar(e))
-//         btn.innerHTML="VER"
-//         td.appendChild(btn)
-//         //td.innerHTML = datos[i].nick
-//         tr.appendChild(td)
-
-//         tr.appendChild(td)
-//         tbody.appendChild(tr)
-//       }
-
-      
-
-//     });
-// }
-
-// function llenarTablaMisRecetas(){
-//   let id_usu = $("#id_usu").text();
-
-//   // * URL de la peticion
-//   let url = "./controller/listado_propias.php";
-
-//   //* configurar la peticion. AQUI CONFIGURO LA PETICION
-//   let configFetch = {
-//     method: "POST",
-//     body: `id_usuario=${id_usu}`,
-//     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//   };
-
-//   // * mandar la peticion
-//   let promesa = fetch(url, configFetch);
-
-//   // * Ejecutar la promesa que devuelve la peticion
-//   promesa
-//     .then((res) => res.json())
-//     .then((datos) => {
-//       let d = [];
-//       //d.push((datos));
-
-//       console.log(datos);
-
-//       // TODO llenar las recetas
-//       let tbody = document.getElementsByTagName('tbody')[1]
-      
-//       for (let i = 0; i < datos.length; i++) {
-//         let tr = document.createElement('tr')
-
-//         let td = document.createElement('td');
-//         td.style.display = "none"
-//         td.innerHTML = datos[i].id_recetas
-//         tr.appendChild(td)
-        
-//         td = document.createElement('td');
-//         td.style.display = "none"
-//         td.innerHTML = datos[i].id_usuario
-//         tr.appendChild(td)    
-
-//         td = document.createElement('td');
-//         td.innerHTML = datos[i].nombre_receta
-//         tr.appendChild(td)
-
-//         // console.log(datos[i])
-//         tr.appendChild(td)
-//         tbody.appendChild(tr)
-//       }
-
-      
-
-//     });
-// }

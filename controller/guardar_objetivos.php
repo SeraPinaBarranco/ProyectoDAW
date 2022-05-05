@@ -13,6 +13,9 @@
     $con = connDB();
     $consulta= selectBBDD($con,$query);
     $num= obtener_num_filas($consulta); // * Obtengo si la consulta devuelve resultados 1*-SI, 0-NO
+
+  
+
     mysqli_close($con);
     
     // * Si el boton pulsado es guardar
@@ -33,9 +36,10 @@
                      
             echo json_encode($resultado);
             
-           
+            mysqli_close($db);
         }else{
             echo( json_encode(array("filas"=>$num))) ;
+            //mysqli_close($db);
         }
     }elseif($boton == "Editar"){
         // * Editar
@@ -46,7 +50,7 @@
         $filas['codigo'] = mysqli_affected_rows($db);
 
         echo json_encode($filas);
+        mysqli_close($db);
     }    
 
-    mysqli_close($con);
 ?>

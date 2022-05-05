@@ -158,12 +158,15 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
         </div>
 
         <div id="col4" class="col4" style="display: none;">
-            <!-- <form action="#" id="frm-totales"> -->            
+            <!-- <form action="#" id="frm-totales"> -->                        
             <ul class="ulDetalle" id="ulDetalle">
 
             </ul>
             <!-- </form> -->
         </div>
+    </div>
+    <div class="agregarDia col-3" style="text-align: right; margin-left:2vw; display:none" id="agregarDia">
+        <button class="btn btn-primary" id="btnAgregarDia">Añadir recetas al día</button>
     </div>
                                 
 
@@ -174,6 +177,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
         echo  "<script>const id_usu =" . $_SESSION['id_usuario'] ." </script>"
     ?> 
 <script src="js/objetivos.js" defer></script>
+<script src="js/objetivos2.js" defer></script>
 <script src="js/data-tables.js"></script>
 
 </html>
