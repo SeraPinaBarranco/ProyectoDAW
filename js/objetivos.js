@@ -1,3 +1,5 @@
+let form = document.querySelector('#form');
+
 let btnGuardar = document.getElementById('guardar')
 btnGuardar.addEventListener('click',guardarObjetivos)
 
@@ -10,10 +12,14 @@ inputH.addEventListener('blur',mostrarBotones)
 let inputP = document.getElementById('objPro')
 inputP.addEventListener('blur',mostrarBotones)
 
-let form = document.querySelector('#form');
+//Pone a "guardar" el boton
+let fecha = document.querySelector("#fecha");
+fecha.addEventListener('change', function(){
+  btnGuardar.innerHTML = "Guardar"
+})
 
 window.addEventListener("load", function () {
-  let fecha = document.querySelector("#fecha");
+  
   const d = new Date();
   let mes = d.getMonth();
   let dia = d.getDate();
@@ -191,32 +197,55 @@ function mostrarBotones(){
 function guardarObjetivos(){
   //* En la variable id_usu esta el id de usuario de forma
   let f = document.getElementById('fecha').value 
-  
-  
 
   //TODO consulta a la base de datos
   //URL de la peticion
   let url = "./controller/guardar_objetivos.php";
-  //let d;
-  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  // // //let d;
+  // // //configurar la peticion. AQUI CONFIGURO LA PETICION
   let configFetch = {
     method: "POST",
-    body: `id_u=${id_usu}&fecha=${f}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}`,
-
+    body: `id_u=${id_usu}&fecha=${f}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${this.innerHTML}`,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };
-  
-  //mandar la peticion
+  console.log(configFetch.body)
+  // //mandar la peticion
   let promesa = fetch(url, configFetch);
 
-  //Ejecutar la promesa que devuelve la peticion
+  // // //Ejecutar la promesa que devuelve la peticion
   
   promesa
      .then((res) => res.json())
      .then((datos) => {
         let d = datos;   
         console.log(datos) 
+        
+        //Si hay error o exito al guardar el objetivo
+        if(d.codigo == 1){
+          Swal.fire({                                      
+            icon: "success",
+            title: "",
+            text: "Objetivo Guardado!",
+          });
+        }else{
+          Swal.fire({                                      
+            icon: "error",
+            title: "",
+            text: "Error al guardar, ¿Datos duplicados? Puedes Editar",
+          });
+        }        
   });
+
+   //*Si el boton tiene el texto guardar
+  
+    if(this.innerHTML == "Guardar" && (inputC.value !== "" && inputG.value !== "" && inputH.value !== "" && inputP.value !== "")){
+      this.innerHTML = "Editar"
+    }else{
+      this.innerHTML = "Guardar"
+    }
+
+ 
+
 }
 
 function ejecutar(e){
