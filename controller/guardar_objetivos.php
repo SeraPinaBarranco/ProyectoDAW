@@ -1,9 +1,5 @@
 <?php
-
-use function PHPSTORM_META\type;
-
     require_once "../model/basedatos.php";
-
     
     $boton = $_POST['boton'];
     $id_u= $_POST['id_u'];
@@ -50,9 +46,7 @@ use function PHPSTORM_META\type;
         $filas['codigo'] = mysqli_affected_rows($db);
 
         echo json_encode($filas);
-    }
-
-    
+    }    
 
     mysqli_close($con);
 ?>
