@@ -18,7 +18,8 @@ btnAgregarDia.addEventListener('click',agregarRecetasObjetivos)
 
 
 //Pone a "guardar" el boton
-//^Cada vez que cambie la fecha hay que consultar a la base de datos
+// ^ Cada vez que cambie la fecha hay que consultar a la base de datos
+// ^ y traer el id del objetivo y los datos para mostrarlos
 let fecha = document.querySelector("#fecha");
 fecha.addEventListener('change', traerIdOjetivo)
 
@@ -89,6 +90,8 @@ $(document).ready(function () {
 });
 
  let ni = 0
+
+//*Funcion que carga los datos de la receta
 function cargarDatos(receta){
   let id_r = receta[0]
   let id_u = receta[1]
@@ -122,6 +125,17 @@ function cargarDatos(receta){
    });
 
   console.log(id_r + " - " + id_u + " - " + nom_r)
+}
+
+//!Funcion que llena el arrayTotales
+function llenaArrayTotales(totales){
+  arrayTotales = []
+  totales.forEach(cantidades => {
+    //listarCantidades(cantidades)
+    //cantidades.idr= id_r            
+    arrayTotales.push(cantidades)//*Aqui estan las recetas que se han añadido    
+  }); 
+  console.log(arrayTotales)
 }
 
 let arrayTotales= [];
@@ -281,9 +295,36 @@ function traerIdOjetivo(){
       .then((res) => res.json())
       .then((datos) => {
          let d = datos;        
-         console.log(datos)  
+         //console.log(datos)  
          id_obj = datos.id_objetivo    
-   });   
+   }).finally(()=>{
+     traer_recetas_objetivo(id_obj)
+   }); 
+   
+   
+}
+
+function traer_recetas_objetivo(objetivo){
+  console.log(objetivo)
+  // * Traer los datos de las recetas añadidas al objetivo
+  let d;
+  let url = "./controller/traer_recetas_objetivo.php";
+  let configFetch = {
+    method: "POST",
+    body: `id_objetivo=${objetivo}`,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+  let promesa = fetch(url, configFetch);
+  promesa
+    .then((res) => res.json())
+    .then((datos) => {
+       d = datos;        
+       //console.log(datos)  
+       //id_obj = datos.id_objetivo    
+ }).finally(()=>{
+    llenaArrayTotales(d)
+ });
+ 
 }
 
 //*Añade el listado de recetas a la tabla suma objetivos

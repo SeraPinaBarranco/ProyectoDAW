@@ -4,7 +4,7 @@
     {
         $server= "localhost";
         $user="root";
-        $pass="";
+        $pass="usbw";
         $db="schemadaw_m12";
 
         $mysqli = mysqli_connect($server,$user,$pass,$db)or die("Failed to connect to MySQL: ") ;
@@ -61,6 +61,12 @@
     function consulta($conn, $query){
         $resultado= mysqli_query($conn, $query);
         $filas= mysqli_fetch_array($resultado);
+        return $filas;
+    }
+
+    function consultaAssoc($conn, $query){
+        $resultado= mysqli_query($conn, $query);
+        $filas= mysqli_fetch_assoc($resultado);
         return $filas;
     }
 
