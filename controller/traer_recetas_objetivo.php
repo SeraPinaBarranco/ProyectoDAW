@@ -3,7 +3,7 @@
 
     $obj = $_POST['id_objetivo'];
 
-    $query = "SELECT r.id_recetas as idr, r.nombre_receta as nombre_receta, so.sumaCal as tcalorias,
+    $query = "SELECT r.id_recetas, r.nombre_receta as nombre_receta, so.sumaCal as tcalorias,
 	                so.sumaGra as tgrasas, so.sumaHid as thidratos, so.sumaPro as tproteinas FROM objetivos o, sumaobjetivos so, usuarios u, recetas r
                 WHERE o.id_objetivo = so.ib_obj
                 AND o.id_usu = u.id_usuarios
@@ -16,5 +16,5 @@
 
     echo json_encode($result);
     
-
+    mysqli_close($con);
 ?>
