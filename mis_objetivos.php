@@ -42,7 +42,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
     <?php include_once "templates/cabecera.html" ?>
 
     <div class="contenedor">
-        <div class="col1">
+        <div class="col1" id="col1">
             <h5>Establecer objetivos</h5>
 
             <form id="form">
@@ -92,7 +92,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
             <div class="tabla-recetas">
                 <h4>Mis favoritas</h4>
                 <div class="div-tabla">
-                    <table class="tabla">
+                    <table class="tabla" id="tabla">
                         <thead>
                             <tr>
                                 <th hidden>id</th>
@@ -110,7 +110,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                                     echo "<td class='id_rec' hidden>" . $fila['id_rec'] ."</td>";
                                     echo "<td class='id_usuarios' hidden>" . $fila['id_usuarios'] ."</td>";
                                     echo "<td>" . $fila['nombre_receta'] ."</td>";
-                                    echo "<td><a href='#'><img src='assets/plus.png'></a></td>";
+                                    echo "<td class='masverde'><a href='#'><img src='assets/plus.png'></a></td>";
                                     echo "</tr>";
                                  }
                             ?>
@@ -159,7 +159,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
 
         <div id="col4" class="col4" style="display: none;">
             <!-- <form action="#" id="frm-totales"> -->                        
-            <!-- <ul class="ulDetalle" id="ulDetalle"> -->
+            <!-- <ul class="ulDetalle" id="ulDetalle">
 
             </ul>
             <table class="table table-stripped" id="tablaADD">
@@ -177,13 +177,14 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
 
                 </tbody>
             </table>
-            <!-- </form> -->
+             </form> -->
         </div>
     </div>
     <div class="agregarDia col-3" style="text-align: right; margin-left:2vw; display:none" id="agregarDia">
         <button class="btn btn-primary" id="btnAgregarDia">Añadir recetas al día</button>
     </div>
-                                
+    
+    <span id="o" hidden></span>
 
     <?php include_once "templates/pie.html" ?>
 </body>
@@ -191,8 +192,10 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
     <?php 
         echo  "<script>const id_usu =" . $_SESSION['id_usuario'] ." </script>"
     ?> 
-<script src="js/objetivos.js" defer></script>
-<script src="js/objetivos2.js" defer></script>
+
+<script src="js/funciones_del_objetivo.js" defer></script>
+<!-- <script src="js/objetivos.js" defer></script>
+<script src="js/objetivos2.js" defer></script> -->
 <script src="js/data-tables.js"></script>
 
 </html>

@@ -15,6 +15,8 @@ inputP.addEventListener("blur", mostrarBotones);
 let btnAgregarDia = document.getElementById("btnAgregarDia");
 btnAgregarDia.addEventListener("click", agregarRecetasObjetivos);
 
+
+
 //Pone a "guardar" el boton
 // ^ Cada vez que cambie la fecha hay que consultar a la base de datos
 // ^ y traer el id del objetivo y los datos para mostrarlos
