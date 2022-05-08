@@ -159,9 +159,24 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
 
         <div id="col4" class="col4" style="display: none;">
             <!-- <form action="#" id="frm-totales"> -->                        
-            <ul class="ulDetalle" id="ulDetalle">
+            <!-- <ul class="ulDetalle" id="ulDetalle"> -->
 
             </ul>
+            <table class="table table-stripped" id="tablaADD">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Calorias</th>
+                        <th>Grasas</th>
+                        <th>Hidratos</th>
+                        <th>Proteinas</th>
+                        <th>Acciones</th>
+                    </tr>            
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
             <!-- </form> -->
         </div>
     </div>

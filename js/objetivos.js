@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
   const d = new Date();
   let mes = d.getMonth();
   let dia = d.getDate();
-
+  arrayTotales= []
   if (mes.toString().length == 1) {
     // * Devuelve el mes actual condos digitos
     mes = "0" + (mes + 1);
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
   // ^ Cuando se pulse en + añadir al array para guardar los datos
   // ^ de la receta
-  let arrayFila = [];
+  //let arrayFila = [];
   $("td>a").click(function (e) {
     let tr = e.target.parentNode.parentNode.parentNode; //fila de la tabla
 
@@ -76,19 +76,15 @@ $(document).ready(function () {
         aux.push(tr.cells[i].innerHTML);
       }
     }
-    arrayFila.push(aux);
-    //console.log(arrayFila)
-    //});
-    /*
-      TODO llamar a funcion que traiga los datos
-      TODO de la base de datos y los ponga en la lista
-      */
-    cargarDatos(aux);
+   
+    console.log("Mas verde tabla" + aux)   
+   
+    cargarDatos(aux);//*Llama a la funcion que carga los datos de la receta
   });
 });
 
 let ni = 0;
-
+//*Se ejecuta al dar al MAS de las recetas PROPIAS O FAVORITAS1
 //*Funcion que carga los datos de la receta
 function cargarDatos(receta) {
   let id_r = receta[0];
@@ -108,21 +104,26 @@ function cargarDatos(receta) {
 
   //mandar la peticion
   let promesa = fetch(url, configFetch);
-
+  let d=""
   //Ejecutar la promesa que devuelve la peticion
-
   promesa
     .then((res) => res.json())
     .then((datos) => {
       let d = datos;
+      arrayTotales =[]
+      //llenaArrayTotales(datos)
       datos.forEach((cantidades) => {
-        listarCantidades(cantidades);
+        //listarCantidades(cantidades);
         cantidades.idr = id_r;
         arrayTotales.push(cantidades); //*Aqui estan las recetas que se han añadido
+        //* a crear la tabla
+        crearTablaEditable(arrayTotales)
+        //console.log(arrayTotales)
       });
     });
-
-  console.log(id_r + " - " + id_u + " - " + nom_r);
+    /*console.log("cargar datos: ")
+    console.log( arrayTotales)*/
+    
 }
 
 //!Funcion que llena el arrayTotales
@@ -133,7 +134,8 @@ function llenaArrayTotales(totales) {
     //cantidades.idr= id_r
     arrayTotales.push(cantidades); //*Aqui estan las recetas que se han añadido
   });
-  //console.log(arrayTotales)
+  console.log("llenaArrayTotales")
+  console.log(arrayTotales)
 }
 
 let arrayTotales = [];
@@ -143,6 +145,9 @@ let ul = document.querySelector("#ulDetalle");
 
 // ^Carga el listado con las filas de la base de datos
 function listarCantidades(cantidades) {
+  //! PRUEBA. Crear tabla para listarla
+  crearTablaEditable(cantidades)
+/*
   //arrayTotales.push(cantidades)//Aqui estan las recetas que se han añadido
 
   //let ul = document.createElement('ul')
@@ -166,7 +171,7 @@ function listarCantidades(cantidades) {
 
   col4.setAttribute("style", "display:flex;");
   document.getElementById("agregarDia").setAttribute("style", "display:block;");
-  console.log(arrayTotales);
+  //console.log(arrayTotales);*/
 }
 
 //^Borrar un LI y actualiza el array
@@ -354,6 +359,7 @@ function traerIdOjetivo() {
                 console.log(datos)                
                 //*Una vez realizada la consulta llena ArrayTotales
                 //*y cargar el listado
+                
                 llenaArrayTotales(datos)
                 arrayTotales.forEach(cantidades => {
                   listarCantidades(cantidades)
@@ -380,17 +386,18 @@ function traerIdOjetivo() {
     if(col4.contains(t)){//*Si existe la tabla la elimina
       col4.removeChild(t);      
     }
-    document.createElement("ul");
-    ul.setAttribute("class", "ulDetalle");
-    ul.setAttribute("id", "ulDetalle");
-    col4.appendChild(ul);
-    inputObjetivosSiNo(
-      "display:block;",
-      "Calorias",
-      "Grasas",
-      "Hidratos",
-      "Grasas"
-    );
+    //!Creo la lista que cree para añadir recetas al dia
+    // document.createElement("ul");
+    // ul.setAttribute("class", "ulDetalle");
+    // ul.setAttribute("id", "ulDetalle");
+    // col4.appendChild(ul);
+    // inputObjetivosSiNo(
+    //   "display:block;",
+    //   "Calorias",
+    //   "Grasas",
+    //   "Hidratos",
+    //   "Grasas"
+    //);
   }
 }
 
