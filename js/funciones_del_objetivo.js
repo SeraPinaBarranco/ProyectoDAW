@@ -7,12 +7,16 @@ fecha.addEventListener('change',comprobarId_Guarda_Edita)
 let btnGuardarObjetivo= document.getElementById('guardar')
 btnGuardarObjetivo.addEventListener('click',guardarObjetivoTraerIdObjetivo)
 let inputC = document.getElementById("objCal");
+inputC.addEventListener("keyup", sumarTablaADD); 
 //inputC.addEventListener("blur", mostrarBotones);
 let inputG = document.getElementById("objGra");
+inputG.addEventListener("keyup", sumarTablaADD);
 //inputG.addEventListener("blur", mostrarBotones);
 let inputH = document.getElementById("objHid");
+inputH.addEventListener("keyup", sumarTablaADD);
 //inputH.addEventListener("blur", mostrarBotones);
 let inputP = document.getElementById("objPro");
+inputP.addEventListener("keyup", sumarTablaADD);
 //inputP.addEventListener("blur", mostrarBotones);
 let id_obj = ""
 let mis = document.getElementById("mis")
@@ -21,6 +25,8 @@ let fav = document.getElementById("fav")
 
 let tabla = document.getElementById('tabla')
 //tabla.addEventListener('click', addRecetaListado)
+let tablaADD = document.querySelector('#tablaADD')
+tablaADD.addEventListener('change', sumarTablaADD)
 
 
 window.addEventListener("load", function () {
@@ -279,34 +285,112 @@ $(document).ready(function () {
                 tbody.innerHTML += datos 
                 col4.setAttribute('style','display:flex')
                 //TODO realizar los cálculos de los objetivos
-                operacionesTablaCol4()
+                sumarTablaADD()
             }) 
         });
 });
 
 //* Operaciones de sumatorios con la tabla
-var total_col1 = 0;
-var total_col2 = 0;
-var total_col3 = 0;
-var total_col4 = 0;
-var total_col5 = 0;
 
 let arraySumas= []
-function operacionesTablaCol4(){
-    let t = document.getElementById('tablaADD')
-    let bdy = t.getElementsByTagName('tbody')
-    let tr = bdy[0].getElementsByTagName('tr')
-    
-    let cells= tr[0].cells //celdas de la fila
+let arrayTD=[]
 
-    total_col1 = parseFloat(cells[2].innerHTML);
-    total_col2 = parseFloat(cells[3].innerHTML);
-    total_col3 = parseFloat(cells[4].innerHTML);
-    total_col4 = parseFloat(cells[5].innerHTML);
-    total_col5 = parseFloat(cells[6].innerHTML);
-    arraySumas.push(total_col1, total_col2 , total_col3, total_col4 , total_col5 )
+function sumarTablaADD(){
+    var total_col1 = 0;
+    var total_col2 = 0;
+    var total_col3 = 0;
+    var total_col4 = 0;
     
-    console.log(arraySumas)
+    let t = document.getElementById('tablaADD')
+    /*let bdy = t.getElementsByTagName('tbody')*/
+    let td = t.querySelectorAll('tbody tr')
+
+    //* Añade las sumas de cada fila
+    for (let i = 0; i < td.length; i++) {
+        const element = td[0].querySelector('td + td + td');
+        total_col1 += parseFloat(td[i].querySelector('td + td + td').innerHTML)
+        total_col2 += parseFloat(td[i].querySelector('td + td + td + td').innerHTML)
+        total_col3 += parseFloat(td[i].querySelector('td + td + td + td + td ').innerHTML)
+        total_col4 += parseFloat(td[i].querySelector('td + td + td + td + td + td ').innerHTML)        
+    }
+
+    let tdC=""
+    if(parseFloat(inputC.value) < total_col1){
+        tdC = document.createElement('td')
+        tdC.setAttribute('style','background-color:red')
+        tdC.innerHTML = total_col1        
+    }else if(parseFloat(inputC.value) > total_col1){
+        let tdC = document.createElement('td')
+        tdC.setAttribute('style','background-color:green')
+        tdC.innerHTML = total_col1   
+    }else{
+        let tdC = document.createElement('td')
+        tdC.setAttribute('style','background-color:yellow')
+        tdC.innerHTML = total_col1
+    }
+
+    let tdG=""
+    if(parseFloat(inputG.value) < total_col2){
+        tdG = document.createElement('td')
+        tdG.setAttribute('style','background-color:red')
+        tdG.innerHTML = total_col2        
+    }else if(parseFloat(inputG.value) > total_col2){
+        let tdG = document.createElement('td')
+        tdG.setAttribute('style','background-color:green')
+        tdG.innerHTML = total_col2   
+    }else{
+        let tdG = document.createElement('td')
+        tdG.setAttribute('style','background-color:yellow')
+        tdG.innerHTML = total_col2
+    }
+
+    let tdH=""
+    if(parseFloat(inputH.value) < total_col3){
+        tdH = document.createElement('td')
+        tdH.setAttribute('style','background-color:red')
+        tdH.innerHTML = total_col3        
+    }else if(parseFloat(inputH.value) > total_col3){
+        let tdH = document.createElement('td')
+        tdH.setAttribute('style','background-color:green')
+        tdH.innerHTML = total_col3   
+    }else{
+        let tdH = document.createElement('td')
+        tdH.setAttribute('style','background-color:yellow')
+        tdH.innerHTML = total_col3
+    }
+
+    let tdP=""
+    if(parseFloat(inputP.value) < total_col4){
+        tdP = document.createElement('td')
+        tdP.setAttribute('style','background-color:red')
+        tdP.innerHTML = total_col4        
+    }else if(parseFloat(inputP.value) > total_col4){
+        let tdP = document.createElement('td')
+        tdP.setAttribute('style','background-color:green')
+        tdP.innerHTML = total_col4   
+    }else{
+        let tdP = document.createElement('td')
+        tdP.setAttribute('style','background-color:yellow')
+        tdP.innerHTML = total_col4
+    }
+
+    let tdVacia = document.createElement('td')
+    let tr = document.createElement('tr');
+    let th = document.createElement('th');
+   
+    tr.appendChild(tdVacia)
+   
+    tr.appendChild(tdC)
+    tr.appendChild(tdG)
+    tr.appendChild(tdH)
+    tr.appendChild(tdP)
+
+    //* Añade las sumas a la tabla
+    //let filaTotal = "<tr><td>Total</td>" + filaC  + filaG + filaH + filaP + "<td></td> </tr>"
+    //console.log( total_col1 + "-" + total_col2 + "-" + total_col3 + "-" + total_col4)
+    let tfoot = document.querySelector('#myBody')
+    tfoot.appendChild(tr)
+   
 }
    
 
