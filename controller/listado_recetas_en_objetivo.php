@@ -41,7 +41,7 @@
             <td>$c</td>
             <td>$g</td>
             <td>$h</td>
-            <td>$g</td>
+            <td>$p</td>
             <td>borrar</td> </tr>
     ";
     

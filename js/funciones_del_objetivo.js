@@ -7,18 +7,19 @@ fecha.addEventListener('change',comprobarId_Guarda_Edita)
 let btnGuardarObjetivo= document.getElementById('guardar')
 btnGuardarObjetivo.addEventListener('click',guardarObjetivoTraerIdObjetivo)
 let inputC = document.getElementById("objCal");
-inputC.addEventListener("keyup", sumarTablaADD); 
+inputC.addEventListener("change", sumarTablaADD); 
 //inputC.addEventListener("blur", mostrarBotones);
 let inputG = document.getElementById("objGra");
-inputG.addEventListener("keyup", sumarTablaADD);
+inputG.addEventListener("change", sumarTablaADD);
 //inputG.addEventListener("blur", mostrarBotones);
 let inputH = document.getElementById("objHid");
-inputH.addEventListener("keyup", sumarTablaADD);
+inputH.addEventListener("change", sumarTablaADD);
 //inputH.addEventListener("blur", mostrarBotones);
 let inputP = document.getElementById("objPro");
-inputP.addEventListener("keyup", sumarTablaADD);
+inputP.addEventListener("change", sumarTablaADD);
 //inputP.addEventListener("blur", mostrarBotones);
 let id_obj = ""
+let id_obj_oculto = document.querySelector('#id_obj_oculto')//guardo el id del objetivo
 let mis = document.getElementById("mis")
 //mis.addEventListener('click', addRecetaListado)
 let fav = document.getElementById("fav")
@@ -28,9 +29,12 @@ let tabla = document.getElementById('tabla')
 let tablaADD = document.querySelector('#tablaADD')
 tablaADD.addEventListener('change', sumarTablaADD)
 
+let aGrabaAlDia = document.querySelector('#guardaRecetasAlDia')//boton que graba recetas al dia
+
 
 window.addEventListener("load", function () {
     establecerFechaActual()
+    comprobarId_Guarda_Edita()    
 })
 
 //*Establecer fecha actual cuando se carga la pagina
@@ -118,11 +122,15 @@ function comprobarId_Guarda_Edita(){
         .then((res) => res.json())
         .then((datos) => {
         d = datos;
-        //console.log(datos);
         id_obj = datos.id_objetivo//^Cada vez que cambia la fecha tengo el id del objetivo
+        id_obj_oculto.innerHTML = datos.id_objetivo
+        id_obj = parseInt(id_obj_oculto.innerHTML)
+        
         cambiaTextoBotonGuardaEdita()
         mostrarBotonesTablas() // ^22 
+        listarInputObjetivoDia()
     })   
+    
 }
 
 function cambiaTextoBotonGuardaEdita(){
@@ -143,6 +151,7 @@ function listarInputObjetivoDia(){
     let url = "./controller/listar_objetivo_dia.php";
     // // //let d;
     // // //configurar la peticion. AQUI CONFIGURO LA PETICION
+    console.log(id_obj)
     let configFetch = {
         method: "POST",
         body: `id_obj=${id_obj}`,
@@ -157,21 +166,48 @@ function listarInputObjetivoDia(){
         .then((res) => res.json())
         .then((datos) => {
         d = datos;
-        //console.log(datos);
-        //Si la fecha del input es menos a la actual
+        console.log(datos);
+        //Si la fecha del input es menor a la actual
         if(Date.parse(fecha.value) < Date.parse(fecha_actual)){
             llenarInhabilitarInputs(datos)
-        }
-        if(Date.parse(fecha.value) > Date.parse(fecha_actual)){
-            btnGuardarObjetivo.setAttribute("style", "display:inline-block");
+        }//Si la fecha del input es mayor a la actual
+        else if(Date.parse(fecha.value) > Date.parse(fecha_actual)){
+            btnGuardarObjetivo.setAttribute("style", "display:inline-block"); 
+            console.log(datos)//! Viene NULL COMPROBAR ESTO           
             llenarHabilitarInputs(datos)
+        }
+        else{//Si la fecha del input es igual a la actual
+            
+            //si hay objetivos ese dia carga la tabla totales
+            if(id_obj > 0){
+                
+            }                            
+            if(parseInt(id_obj_oculto.innerHTML) == -1){//si no hay objetivos borra inputs, oculta, col4, y los botones mis y fav
+                console.log(id_obj)
+                vaciarHabilitarInputs()
+
+            }
         }
 
     })  
 }
+//*Pone en blanco inputs y los habilita
+function vaciarInputsInhabilitarBotonesRecetas(obj){     
+    btnGuardarObjetivo.setAttribute("style", "display:inline-block");
+    inputC.value = "";
+    inputG.value = "";
+    inputH.value = "";
+    inputP.value = "";     
+    inputC.removeAttribute('disabled')  
+    inputG.removeAttribute('disabled')   
+    inputH.removeAttribute('disabled')  
+    inputP.removeAttribute('disabled')
+}
 
 //*Pone en blanco inputs y los habilita
 function vaciarHabilitarInputs(obj){     
+    mis.setAttribute("style", "display:none;");
+    fav.setAttribute("style", "display:none;");
     btnGuardarObjetivo.setAttribute("style", "display:inline-block");
     inputC.value = "";
     inputG.value = "";
@@ -193,6 +229,9 @@ function llenarInhabilitarInputs(obj){
     inputH.setAttribute('disabled','true')
     inputP.value = obj.objPro;  
     inputP.setAttribute('disabled','true') 
+
+    //TODO carga la tabla de los totales
+    creaTablaTotalesSiHayDatos()
 }
 //*Carga datos en los inputs y los habilita
 function llenarHabilitarInputs(obj){
@@ -216,7 +255,7 @@ function mostrarBotonesTablas(){
         return
     }
     
-    if(Date.parse(fecha.value) > Date.parse(fecha_actual)){
+    else if(Date.parse(fecha.value) > Date.parse(fecha_actual)){
         if (parseInt(id_obj) > 0) {
             console.log("ww: " + id_obj)
             mis.setAttribute("style", "display:block;");
@@ -229,10 +268,11 @@ function mostrarBotonesTablas(){
         } 
     }
     
-    // else {
-    //     document.getElementById("mis").setAttribute("style", "display:block;");
-    //     document.getElementById("fav").setAttribute("style", "display:block;");
-    //   }
+        /*else {
+            //document.getElementById("mis").setAttribute("style", "display:block;");
+            //document.getElementById("fav").setAttribute("style", "display:block;");
+            console.log(id_obj_oculto.innerHTML)
+          }*/
 }
 
 form.addEventListener('submit', function(evt){
@@ -292,8 +332,13 @@ $(document).ready(function () {
 
 //* Operaciones de sumatorios con la tabla
 
-let arraySumas= []
-let arrayTD=[]
+//*Crea la tabla totales si hay datos guardados
+function creaTablaTotalesSiHayDatos(){
+    console.log(id_r)
+}
+
+//*Crea la tabla totales con los datos que estan en las tablas
+//*si no hay datos ya
 
 function sumarTablaADD(){
     var total_col1 = 0;
@@ -301,99 +346,122 @@ function sumarTablaADD(){
     var total_col3 = 0;
     var total_col4 = 0;
     
+    //Selecionar la tabla y el tfood  
     let t = document.getElementById('tablaADD')
-    /*let bdy = t.getElementsByTagName('tbody')*/
+    let tbody= document.querySelector('#myBody')
+    let foot = document.querySelector('tfoot')
     let td = t.querySelectorAll('tbody tr')
 
-    //* Añade las sumas de cada fila
+    //* Añade las sumas de cada fila y almacena todos los valores para añadirlos al array para guardar los daos
+
     for (let i = 0; i < td.length; i++) {
-        const element = td[0].querySelector('td + td + td');
+        id_recetas = td[i].querySelector('td').innerHTML
+        nombre_receta = td[i].querySelector('td + td').innerHTML
         total_col1 += parseFloat(td[i].querySelector('td + td + td').innerHTML)
         total_col2 += parseFloat(td[i].querySelector('td + td + td + td').innerHTML)
         total_col3 += parseFloat(td[i].querySelector('td + td + td + td + td ').innerHTML)
-        total_col4 += parseFloat(td[i].querySelector('td + td + td + td + td + td ').innerHTML)        
+        total_col4 += parseFloat(td[i].querySelector('td + td + td + td + td + td ').innerHTML)              
     }
 
-    let tdC=""
-    if(parseFloat(inputC.value) < total_col1){
-        tdC = document.createElement('td')
-        tdC.setAttribute('style','background-color:red')
-        tdC.innerHTML = total_col1        
-    }else if(parseFloat(inputC.value) > total_col1){
-        let tdC = document.createElement('td')
-        tdC.setAttribute('style','background-color:green')
-        tdC.innerHTML = total_col1   
-    }else{
-        let tdC = document.createElement('td')
-        tdC.setAttribute('style','background-color:yellow')
-        tdC.innerHTML = total_col1
+    //* compara el valor de los inputs con el de las tablas
+    let tdC=""   
+    if(parseFloat(inputC.value) < total_col1){       
+        tdC = `<span class='badge bg-danger'>${total_col1}</span>`
+    }else if(parseFloat(inputC.value) > total_col1){       
+        tdC = `<span class='badge bg-success'>${total_col1}</span>`
+    }else{       
+        tdC = `<span class='badge bg-warning'>${total_col1}</span>`   
     }
 
-    let tdG=""
-    if(parseFloat(inputG.value) < total_col2){
-        tdG = document.createElement('td')
-        tdG.setAttribute('style','background-color:red')
-        tdG.innerHTML = total_col2        
-    }else if(parseFloat(inputG.value) > total_col2){
-        let tdG = document.createElement('td')
-        tdG.setAttribute('style','background-color:green')
-        tdG.innerHTML = total_col2   
-    }else{
-        let tdG = document.createElement('td')
-        tdG.setAttribute('style','background-color:yellow')
-        tdG.innerHTML = total_col2
+    let tdG=""    
+    if(parseFloat(inputG.value) < total_col2){       
+        tdG = `<span class='badge bg-danger'>${total_col2}</span>`
+    }else if(parseFloat(inputG.value) > total_col2){       
+        tdG = `<span class='badge bg-success'>${total_col2}</span>`
+    }else{       
+        tdG = `<span class='badge bg-warning'>${total_col2}</span>`
     }
 
-    let tdH=""
-    if(parseFloat(inputH.value) < total_col3){
-        tdH = document.createElement('td')
-        tdH.setAttribute('style','background-color:red')
-        tdH.innerHTML = total_col3        
-    }else if(parseFloat(inputH.value) > total_col3){
-        let tdH = document.createElement('td')
-        tdH.setAttribute('style','background-color:green')
-        tdH.innerHTML = total_col3   
-    }else{
-        let tdH = document.createElement('td')
-        tdH.setAttribute('style','background-color:yellow')
-        tdH.innerHTML = total_col3
+    let tdH=""   
+    if(parseFloat(inputH.value) < total_col3){       
+        tdH = `<span class='badge bg-danger'>${total_col3}</span>`
+    }else if(parseFloat(inputG.value) > total_col3){       
+        tdH = `<span class='badge bg-success'>${total_col3}</span>`
+    }else{        
+        tdH =  `<span class='badge bg-warning'>${total_col3}</span>`
+    }
+    
+    let tdP=""   
+    if(parseFloat(inputP.value) < total_col4){       
+        tdP = `<span class='badge bg-danger'>${total_col4}</span>`
+    }else if(parseFloat(inputP.value) > total_col4){       
+        tdP = `<span class='badge bg-success'>${total_col4}</span>`
+    }else{      
+        tdP = `<span class='badge bg-warning'>${total_col4}</span>`
     }
 
-    let tdP=""
-    if(parseFloat(inputP.value) < total_col4){
-        tdP = document.createElement('td')
-        tdP.setAttribute('style','background-color:red')
-        tdP.innerHTML = total_col4        
-    }else if(parseFloat(inputP.value) > total_col4){
-        let tdP = document.createElement('td')
-        tdP.setAttribute('style','background-color:green')
-        tdP.innerHTML = total_col4   
-    }else{
-        let tdP = document.createElement('td')
-        tdP.setAttribute('style','background-color:yellow')
-        tdP.innerHTML = total_col4
-    }
+    //*Crea la tabla con las operaciones anteriores
+    let h = `<tr>   
+                <th></th>
+                <th>Tot.Hidratos</th>
+                <th>Tot.Proteinas</th>
+                <th>Tot.Hidratos</th>
+                <th>Tot.Proteinas</th>
+                <th></th>
+            </tr>
 
-    let tdVacia = document.createElement('td')
-    let tr = document.createElement('tr');
-    let th = document.createElement('th');
-   
-    tr.appendChild(tdVacia)
-   
-    tr.appendChild(tdC)
-    tr.appendChild(tdG)
-    tr.appendChild(tdH)
-    tr.appendChild(tdP)
-
-    //* Añade las sumas a la tabla
-    //let filaTotal = "<tr><td>Total</td>" + filaC  + filaG + filaH + filaP + "<td></td> </tr>"
-    //console.log( total_col1 + "-" + total_col2 + "-" + total_col3 + "-" + total_col4)
-    let tfoot = document.querySelector('#myBody')
-    tfoot.appendChild(tr)
-   
+            `
+    let d = `<tr>
+                <td>Total</td><td>${tdC}</td><td>${tdG}</td><td>${tdH}</td><td>${tdP}</td><td></td>    
+            </tr>`
+    foot.innerHTML = h + d
+        
+    
 }
-   
+
+//TODO una vez creada la tabla totales, almacenar en la base de datos
+function guarda_RecetasAlDia(){
+    //Selecionar la tabla y el tfood  
+    let t = document.getElementById('tablaADD')
+    let tbody= document.querySelector('#myBody')
+    let foot = document.querySelector('tfoot')
+    let td = t.querySelectorAll('#myBody tr')
+
+    let totales = []
+    td.forEach(element => {        
+        fetch_guarda_RecetasAlDia(element.cells[0].innerHTML, element.cells[0].innerHTML,element.cells[0].innerHTML,element.cells[0].innerHTML
+            ,element.cells[0].innerHTML,element.cells[0].innerHTML)
+    });
+}
+
+//* Ejecuta la consulta que guarda los datos de la tabla de totales
+function fetch_guarda_RecetasAlDia(id, n, c, g, h, p){
+    let url = "./controller/graba_totales_obj.php";
+    // // //let d;
+    // // //configurar la peticion. AQUI CONFIGURO LA PETICION
+    let configFetch = {
+        method: "POST",
+        body: `id_obj=${id_obj}&id_u=${id_usu}&id_r=${id}&tcalorias=${c}&tgrasas=${g}&thidratos=${h}&tproteinas=${p}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    console.log(id_obj + "-" + id_usu + "-" + id)
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion
+    let d = "";
+    promesa
+        .then((res) => res.json())
+        .then((datos) => {
+        d = datos;
+        console.log(datos);
+    })  
+}
 
 
 let col1 = document.getElementById('col1')
 col1.addEventListener('click',()=> document.getElementById('o').innerHTML =id_obj)
+
+
+
+
+

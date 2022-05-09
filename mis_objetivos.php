@@ -162,7 +162,8 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
              <ul class="ulDetalle" id="ulDetalle">
 
             </ul>--> 
-            <table class="table table-stripped" id="tablaADD">
+            <table class="table  table-stripped" id="tablaADD">
+                <caption><a href="#" class="btn btn-primary" id="guardaRecetasAlDia" onclick="guarda_RecetasAlDia()">Guardar Recetas al día</a></caption>
                 <thead>
                     <tr>
                         <th hidden>id</th>
@@ -189,6 +190,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
     </div>
     
     <span id="o" hidden></span>
+    <span id="id_obj_oculto" hidden></span>
 
     <?php include_once "templates/pie.html" ?>
 </body>
