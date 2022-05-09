@@ -256,15 +256,60 @@ $(document).ready(function () {
         for (let i = 0; i < tr.cells.length - 1 ; i++) {            
                 aux.push(tr.cells[i].innerHTML); // * array para guardar los datos de la receta que trae de la tabla          
         }    
-        console.log("Mas verde tabla" + aux)   
+        //console.log("Mas verde tabla: " + aux)   
     
         // TODO Llama a la funcion que carga los datos de la receta
-        // TODO en el div col4
-    });
+        // TODO en el div col4        
+        let url = "./controller/listado_recetas_en_objetivo.php";
+        let configFetch = {
+            method: "POST",
+            body: `id_r=${aux[0]}&id_u=${aux[1]}`,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        };
+        
+        //mandar la peticion
+        let promesa = fetch(url, configFetch);
+        //Ejecutar la promesa que devuelve la peticion    
+        promesa
+            .then((res) => res.text())
+            .then((datos) => {
+                //console.log(datos)
+                //^ meter la respuesta en el html
+                let tbody = document.getElementById('myBody')
+                tbody.innerHTML += datos 
+                col4.setAttribute('style','display:flex')
+                //TODO realizar los cálculos de los objetivos
+                operacionesTablaCol4()
+            }) 
+        });
 });
 
+//* Operaciones de sumatorios con la tabla
+var total_col1 = 0;
+var total_col2 = 0;
+var total_col3 = 0;
+var total_col4 = 0;
+var total_col5 = 0;
 
-   
+let arraySumas= []
+function operacionesTablaCol4(){
+    let t = document.getElementById('tablaADD')
+    let bdy = t.getElementsByTagName('tbody')
+    let tr = bdy[0].getElementsByTagName('tr')
     
+    let cells= tr[0].cells //celdas de la fila
+
+    total_col1 = parseFloat(cells[2].innerHTML);
+    total_col2 = parseFloat(cells[3].innerHTML);
+    total_col3 = parseFloat(cells[4].innerHTML);
+    total_col4 = parseFloat(cells[5].innerHTML);
+    total_col5 = parseFloat(cells[6].innerHTML);
+    arraySumas.push(total_col1, total_col2 , total_col3, total_col4 , total_col5 )
+    
+    console.log(arraySumas)
+}
+   
+
+
 let col1 = document.getElementById('col1')
 col1.addEventListener('click',()=> document.getElementById('o').innerHTML =id_obj)

@@ -158,13 +158,14 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
         </div>
 
         <div id="col4" class="col4" style="display: none;">
-            <!-- <form action="#" id="frm-totales"> -->                        
-            <!-- <ul class="ulDetalle" id="ulDetalle">
+            <!-- <form action="#" id="frm-totales">                        
+             <ul class="ulDetalle" id="ulDetalle">
 
-            </ul>
+            </ul>--> 
             <table class="table table-stripped" id="tablaADD">
                 <thead>
                     <tr>
+                        <th hidden>id</th>
                         <th>Nombre</th>
                         <th>Calorias</th>
                         <th>Grasas</th>
@@ -173,11 +174,14 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                         <th>Acciones</th>
                     </tr>            
                 </thead>
-                <tbody>
+                <tbody id="myBody">
 
                 </tbody>
+                <tfoot id="pieTabla">
+
+                </tfoot >
             </table>
-             </form> -->
+            <!-- </form> -->
         </div>
     </div>
     <div class="agregarDia col-3" style="text-align: right; margin-left:2vw; display:none" id="agregarDia">
