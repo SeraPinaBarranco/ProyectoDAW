@@ -198,8 +198,9 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
     <?php 
         echo  "<script>const id_usu =" . $_SESSION['id_usuario'] ." </script>"
     ?> 
-
-<script src="js/funciones_del_objetivo.js" defer></script>
+<script src="js/misObjetivos_general.js" defer></script>
+<script src="js/obj_funciones2.js" defer></script>
+<!-- <script src="js/funciones_del_objetivo.js" defer></script> -->
 <!-- <script src="js/objetivos.js" defer></script>
 <script src="js/objetivos2.js" defer></script> -->
 <script src="js/data-tables.js"></script>

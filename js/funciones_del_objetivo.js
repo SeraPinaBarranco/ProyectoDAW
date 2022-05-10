@@ -108,7 +108,7 @@ function comprobarId_Guarda_Edita(){
     let url = "./controller/obtener_objetivo.php";
     // // //let d;
     // // //configurar la peticion. AQUI CONFIGURO LA PETICION
-    let configFetch = {
+    let configFetch = { 
         method: "POST",
         body: `id_u=${id_usu}&fecha=${fecha.value}`,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
