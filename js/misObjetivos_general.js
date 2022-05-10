@@ -31,6 +31,8 @@ let tabla = document.getElementById('tabla')
 let tablaADD = document.querySelector('#tablaADD')
 //tablaADD.addEventListener('change', sumarTablaADD)
 
+let col4 = document.querySelector('#col4')
+let myBody = document.querySelector('#myBody')
 let aGrabaAlDia = document.querySelector('#guardaRecetasAlDia')//boton que graba recetas al dia
 
 
@@ -59,6 +61,8 @@ function establecerFechaActual(){
 
 //* Comprueba si la fecha es mayor, menor o igual a la actual
 function comprobarFechaMasMenosIgual(){
+    ocultarTablasMisFav()//*oculta las tablas MIS  y FAV
+    col4.setAttribute('style','display:none')
     if(Date.parse(fecha.value) < Date.parse(fecha_actual)){
         console.log("Menor")       
         buscaIdOBjetivo()
@@ -99,10 +103,65 @@ function textoBotonGuardarEditar(){
         btnGuardarObjetivo.innerHTML = "Editar"        
         traeValoresAInputs(io)//* esta funcion carga los datos en los inputs 
         //TODO cargar tabla totales                   
-        cargaTablaTotales(io)
+        cargaTablaTotales(io)//* esta funcion carga los datos de la tabla totales 
+        setTimeout(() => {            
+            sumaTotalesTabla()//* cargar la suma total de la tabla totales
+        }, 500);
+        mostrarBotonesMisFav()
+
     }else if(io == "-1"){
         console.log("-1")
         btnGuardarObjetivo.innerHTML = "Guardar"
     }
     //Si NO hay ID OBJ pon el texto a GUARDAR
 }
+
+//* Mostrar botones Mis Y Fav
+function mostrarBotonesMisFav(){
+    mis.setAttribute("style", "display:block;");
+    fav.setAttribute("style", "display:block;"); 
+}
+
+//Oculta las tablas MIS Y FAV
+function ocultarTablasMisFav(){
+    $(".col2").hide();
+    $(".col3").hide();
+}
+
+async function borrarFila(pero, padre){
+    //capturar el id_obj_detalle
+    let id_obj_detalle= pero
+    let tr = padre.parentNode
+    //TODO eliminar fila de la BD pasando el id_obj_detalle
+    
+    await    borrarFilaDeTotalesBBDD(id_obj_detalle)        
+    
+    // setTimeout(() => {
+    //     cargaTablaTotales(id_obj_detalle)
+    // }, 2500);
+    
+    setTimeout(() => {
+        sumaTotalesTabla()
+    }, 7000);
+    
+    tr.remove()
+    comprobarHijosTbody()
+}
+
+function comprobarHijosTbody(){
+    if(myBody.childElementCount == 0){
+        col4.setAttribute('style','display:none')
+        cargaTablaTotales(-1)
+    }
+}
+
+//* Cuando se pulsa en MIS o FAV muestra u oculta la tabla correspondiente
+$(".btn-fav").click(function () {
+    $(".col2").fadeToggle("slow");
+    $(".col3").hide();
+    });
+    $(".btn-mis").click(function () {
+    $(".col3").fadeToggle("slow");
+    $(".col2").hide();
+});
+
