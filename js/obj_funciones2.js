@@ -104,8 +104,97 @@ function borrarFilaDeTotalesBBDD(id){
     })
 }
 
+
+/**
+ * *Almacena en base de datos cada fila de totales y la almacena
+ * @param {int} io 
+ * @param {int} iu 
+ * @param {int} r 
+ * @param {float} sc 
+ * @param {float} sg 
+ * @param {float} sh 
+ * @param {float} sp 
+ */
+function addFila_a_sumaObjetivo(io, iu, r, sc, sg, sh, sp){
+    //* agrega_edita_fila_nueva_totales.php
+    let url = "./controller/agrega_edita_fila_nueva_totales.php"
+    let body = `obj=${io}&usu=${iu}&r=${r}&c=${sc}&g=${sg}&h=${sh}&p=${sp}`
+
+    let configFetch = { 
+        method: "POST",
+        body: body,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion    
+     promesa
+        .then((res) => res.json())
+        .then((datos) => {  
+            console.log(datos)
+    })
+}
+
+/* Al dar al boton Guardar objetivo, 
+//* 1- lo guarde en BD
+//* 2- Almacenar el Id-del objetivo
+//* 3- Mostrar botones de las tablas*/
+function guardarObjetivoTraerIdObjetivo(){ 
+    
+    
+    //^ 1º   
+    let url = "./controller/guardar_objetivos.php";
+    // // //let d;
+    // // //configurar la peticion. AQUI CONFIGURO LA PETICION
+    let configFetch = {
+        method: "POST",
+        body: `id_u=${id_usu}&fecha=${fecha.value}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${this.innerHTML}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    //console.log(configFetch.body)
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion
+    let d = "";
+    promesa
+        .then((res) => res.json())
+        .then((datos) => {
+        d = datos;
+        console.log(datos);
+        //^ 2º
+        id_obj = datos.id_objetivo
+        console.log(id_obj)
+        
+        //^3º
+        //mostrarBotonesTablas()
+        //Si hay error o exito al guardar el objetivo
+        if (d.codigo == 1) {
+            Swal.fire({
+            icon: "success",
+            title: "",
+            text: "Objetivo Guardado!",
+            });
+            buscaIdOBjetivo()//Llama a buscar el objetivo                
+            setTimeout(() => {
+                textoBotonGuardarEditar()//Cambia el texto del boton                
+            }, 500);
+        } else {
+            Swal.fire({
+            icon: "error",
+            title: "",
+            text: "Error al guardar, ¿Datos duplicados? Puedes Editar",
+            });
+        }
+    })
+      
+    //cambiaTextoBotonGuardaEdita()
+}
+
+
 //* Suma el total de la tabla de totales
 function sumaTotalesTabla(){
+    
     var total_col1 = 0;
     var total_col2 = 0;
     var total_col3 = 0;
@@ -182,7 +271,8 @@ function sumaTotalesTabla(){
             </tr>`
     foot.innerHTML = h + d
         
-    
+   
 }
+
 
 

@@ -3,7 +3,7 @@
     //^ Devuelve una flia de tabla para añadir al listado
 
     require_once "../model/basedatos.php";
-
+    $id_obj_detalle= $_POST['id_obj_detalle'];
     $id_r= $_POST['id_r'];
     $id_u= $_POST['id_u'];
     
@@ -36,13 +36,14 @@
     $p= $filas['tproteinas'];
 
     echo "<tr>
+            <td hidden>$id_obj_detalle</td>
             <td hidden>$id</td>
             <td>$n</td>
             <td>$c</td>
             <td>$g</td>
             <td>$h</td>
             <td>$p</td>
-            <td>borrar</td> </tr>
+            <td><a href='#' class='btn btn-danger' onclick='borrarFila(0,this.parentNode)'>X</td>
     ";
     
         //$filas['codeError'] = "100";

@@ -48,7 +48,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
             <form id="form">
                 <div class="div-fecha">
                     <input type="date" name="fecha" id="fecha">
-                    <button id="guardar" class="btn btn-success">Guardar</button>
+                    <button id="guardar" class="btn btn-success" onclick="guardarObjetivoTraerIdObjetivo()">Guardar</button>
                     <a href="#" id="cancelar" class="btn btn-danger" hidden>Cancelar</a>
                 </div>
                 <div class="cantidades-objetivo mb-4">
@@ -110,7 +110,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                                     echo "<td class='id_rec' hidden>" . $fila['id_rec'] ."</td>";
                                     echo "<td class='id_usuarios' hidden>" . $fila['id_usuarios'] ."</td>";
                                     echo "<td>" . $fila['nombre_receta'] ."</td>";
-                                    echo "<td class='masverde'><a href='#'><img src='assets/plus.png'></a></td>";
+                                    echo "<td class='masverde'><a href='#' onclick='addRecetaListado(". $fila['id_rec'] .", ". $fila['id_usuarios'] .")'><img src='assets/plus.png'></a></td>";
                                     echo "</tr>";
                                  }
                             ?>
@@ -144,7 +144,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                                     echo "<td class='id_receta' hidden>" . $fila['id_recetas'] ."</td>";
                                     echo "<td class='id_usuario' hidden>" . $fila['id_usuario'] ."</td>";
                                     echo "<td>" . $fila['nombre_receta'] ."</td>";
-                                    echo "<td><a href='#'><img src='assets/plus.png'></a></td>";
+                                    echo "<td><a href='#' onclick='addRecetaListado(". $fila['id_recetas'] .", $id)'><img src='assets/plus.png'></a></td>";
                                     echo "</tr>";
                                  }
                             ?>
@@ -189,6 +189,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
         <button class="btn btn-primary" id="btnAgregarDia">Añadir recetas al día</button>
     </div>
     
+    <span id="usuario" hidden><?php echo $_SESSION['id_usuario'] ?></span>
     <span id="o" hidden></span>
     <span id="id_obj_oculto" hidden></span>
 
