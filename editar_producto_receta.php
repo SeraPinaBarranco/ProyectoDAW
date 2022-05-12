@@ -4,7 +4,7 @@
 
     require_once "model/basedatos.php";
     $conn = connDB();
-    // $id_receta = "";
+   
     
     if(isset($_GET['id_p']) && !empty($_GET['id_p'])){
         $id_producto = $_GET['id_p'];
