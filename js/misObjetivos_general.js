@@ -1,36 +1,29 @@
 //imports 
 
 //*Botones y variables globales
-let form = document.getElementById('form')
-form.addEventListener('submit',(e)=>{e.preventDefault })
 let fecha = document.getElementById('fecha')
 let fecha_actual = ""
 fecha.addEventListener('change',comprobarFechaMasMenosIgual)
 
 let btnGuardarObjetivo= document.getElementById('guardar')
-//btnGuardarObjetivo.addEventListener('click',guardarObjetivoTraerIdObjetivo)
+
 let inputC = document.getElementById("objCal");
-//inputC.addEventListener("change", sumaTotalesTabla); 
-//inputC.addEventListener("blur", mostrarBotones);
+
 let inputG = document.getElementById("objGra");
-//inputG.addEventListener("change", sumaTotalesTabla);
-//inputG.addEventListener("blur", mostrarBotones);
+
 let inputH = document.getElementById("objHid");
-//inputH.addEventListener("change", sumaTotalesTabla);
-//inputH.addEventListener("blur", mostrarBotones);
+
 let inputP = document.getElementById("objPro");
-//inputP.addEventListener("change", sumaTotalesTabla);
-//inputP.addEventListener("blur", mostrarBotones);
+
 var id_obj
 let id_obj_oculto = document.querySelector('#id_obj_oculto')//guardo el id del objetivo
 let mis = document.getElementById("mis")
-//mis.addEventListener('click', addRecetaListado)
+
 let fav = document.getElementById("fav")
 
 let tabla = document.getElementById('tabla')
-//tabla.addEventListener('click', addRecetaListado)
+
 let tablaADD = document.querySelector('#tablaADD')
-//tablaADD.addEventListener('change', sumarTablaADD)
 
 let col4 = document.querySelector('#col4')
 let myBody = document.querySelector('#myBody')
@@ -73,9 +66,9 @@ function comprobarFechaMasMenosIgual(){
         console.log("Menor")       
         buscaIdOBjetivo()
         setTimeout(() => {
-            textoBotonGuardarEditar()
-            ocultaGuardarEditar()
-            
+            textoBotonGuardarEditarDiasMenor()
+            //textoBotonGuardarEditar()
+            ocultaGuardarEditar()                       
         }, 300);
 
     }    
@@ -114,9 +107,9 @@ function borrarDatosTablaTotales(){
 function bloqueaInputs(){
        
     inputC.setAttribute('disabled','false') 
-    inputG.removeAttribute('disabled')   
-    inputH.removeAttribute('disabled')  
-    inputP.removeAttribute('disabled')
+    inputG.removeAttribute('disabled','false')   
+    inputH.removeAttribute('disabled','false')  
+    inputP.removeAttribute('disabled','false')
 }
 
 //* Pone los inputs en blanco
@@ -131,7 +124,36 @@ function ponInputsBlanco(){
     inputP.removeAttribute('disabled')
 }
 
-//* Si hay id_obj pone boton en Editar
+//* Si hay id_obj pone boton en Editar, para dias menor
+function textoBotonGuardarEditarDiasMenor(){
+    let io = id_obj_oculto.innerHTML
+    //Si hay ID OBJ oculta botones MIS Y FAV
+    if(io != "-1"){
+        console.log("> -1")       
+        // cargar tabla totales                   
+        setTimeout(() => {            
+            sumaTotalesTabla()//* cargar la suma total de la tabla totales
+        }, 500);
+        mostrarGuardarEditar()
+        traeValoresAInputs(io)
+        ocultarBotonesMisFav()
+        consultaTablaTotales(io)//* esta funcion carga los datos de la tabla totales sin boton eliminar        
+
+    }else if(io == "-1"){
+        console.log("-1")
+        btnGuardarObjetivo.innerHTML = "Guardar"
+        ocultarTablasMisFav()
+        ocultarBotonesMisFav()
+        ponInputsBlanco()
+        Swal.fire({
+            icon: 'warning',
+            title: 'Sin datos',
+            text: 'Este día no tiene datos!'
+          })
+    }
+}
+
+//* Si hay id_obj pone boton en Editar, para dias igual o superior
 function textoBotonGuardarEditar(){
     let io = id_obj_oculto.innerHTML
     
@@ -184,11 +206,7 @@ async function borrarFila(pero, padre){
     //TODO eliminar fila de la BD pasando el id_obj_detalle
     
     await    borrarFilaDeTotalesBBDD(id_obj_detalle)        
-    
-    // setTimeout(() => {
-    //     cargaTablaTotales(id_obj_detalle)
-    // }, 2500);
-    
+        
     setTimeout(() => {
         sumaTotalesTabla()
     }, 1000);
@@ -200,32 +218,29 @@ async function borrarFila(pero, padre){
 //* AÑADE LA RECETA PULSADA AL LISTADO
 function addRecetaListado(receta, usuarioCreacion){
     
-        // TODO Llama a la funcion que carga los datos de la receta
-        // TODO en el div col4        
-        let url = "./controller/listado_recetas_en_objetivo.php";
-        let configFetch = {
-            method: "POST",
-            body: `id_r=${receta}&id_u=${usuarioCreacion}&id_obj_detalle=${id_obj_oculto.innerHTML}`,
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        };
-        
-        //mandar la peticion
-        let promesa = fetch(url, configFetch);
-        //Ejecutar la promesa que devuelve la peticion    
-        promesa
-            .then((res) => res.text())
-            .then((datos) => {
-                //console.log(datos)
-                //^ meter la respuesta en el html
-                let tbody = document.getElementById('myBody')
-                tbody.innerHTML += datos 
-                col4.setAttribute('style','display:flex')
-                //TODO realizar los cálculos de los objetivos
-                sumaTotalesTabla()
-            }) 
-        //});
-        
-        
+    // TODO Llama a la funcion que carga los datos de la receta
+    // TODO en el div col4        
+    let url = "./controller/listado_recetas_en_objetivo.php";
+    let configFetch = {
+        method: "POST",
+        body: `id_r=${receta}&id_u=${usuarioCreacion}&id_obj_detalle=${id_obj_oculto.innerHTML}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion    
+    promesa
+        .then((res) => res.text())
+        .then((datos) => {
+            //console.log(datos)
+            //^ meter la respuesta en el html
+            let tbody = document.getElementById('myBody')
+            tbody.innerHTML += datos 
+            col4.setAttribute('style','display:flex')
+            //TODO realizar los cálculos de los objetivos
+            sumaTotalesTabla()
+        }) 
 }
 
 
@@ -243,7 +258,7 @@ function guarda_RecetasAlDia(){
             let g = tr[i].children[4].innerHTML
             let h = tr[i].children[5].innerHTML
             let p = tr[i].children[6].innerHTML
-            //console.log(r + "-" + c + "-" + g + "-" + h + "-" + p + "-" + idObj + "-" + id_usu)
+         
             addFila_a_sumaObjetivo(idObj, id_usu,r , c, g, h, p)
         }        
     }

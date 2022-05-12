@@ -11,14 +11,14 @@
         $id_r = $_GET['id_r'];
         $nombre = $_GET['nombre_p'];
         
-        echo $id_producto . " - " . $id_r . " - " . $nombre;
+        //echo $id_producto . " - " . $id_r . " - " . $nombre;
         
         //     echo $_SESSION['id_receta'];
         $query="select * from recetas_productos rp, recetas r, productos p 
         where rp.id_r = r.id_recetas and
         rp.id_p = p.id_producto 
         and p.id_producto= $id_producto and r.id_recetas = $id_r;";
-        echo $query;
+        //echo $query;
         $resultado= consulta($conn, $query);
         
         extract($resultado);
@@ -39,7 +39,7 @@
                         cantidad =" .  $_GET['cantidad'] .
                         " WHERE id_p =" .  $_SESSION['id_p'] . " and id_r =" . $_SESSION['id_r'] ;
 
-            echo $query;
+            //echo $query;
  
             $resultado= selectBBDD($conn, $query);
             
@@ -47,7 +47,7 @@
             unset($_SESSION['id_r']);
             unset($_SESSION['cantidad']);
             unset($_SESSION['nombre_p']);
-            session_destroy();
+            //session_destroy();
             
             cerrarBD($conn);
 

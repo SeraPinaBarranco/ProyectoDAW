@@ -45,7 +45,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
         <div class="col1" id="col1">
             <h5>Establecer objetivos</h5>
 
-            <form id="form">
+            <!-- <form id="form"> -->
                 <div class="div-fecha">
                     <input type="date" name="fecha" id="fecha">
                     <button id="guardar" class="btn btn-success" onclick="guardarObjetivoTraerIdObjetivo()">Guardar</button>
@@ -76,7 +76,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                     </ul>
     
                 </div>                
-            </form>
+            <!-- </form> -->
 
             <div class="botones mt-3">
                <a class="boton btn-mis btn btn-primary" id="mis">De mis recetas</a>

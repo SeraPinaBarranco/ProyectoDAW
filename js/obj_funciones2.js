@@ -84,6 +84,42 @@ function cargaTablaTotales(io){
     })
 }
 
+//*Carga la tabla totales en el html sin BORRAR
+function consultaTablaTotales(io){
+    let url = "./controller/lista_sumaobjs_tabla_sinborrar.php";
+     
+    let configFetch = { 
+        method: "POST",
+        body: `id_obj=${io}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion    
+    promesa
+        .then((res) => res.text())
+        .then((datos) => {  
+        if(datos){
+            //si la consulta trae datos los muestra
+            let mybody = document.querySelector('#myBody')
+            //mybody.innerHTML = ""    
+            mybody.innerHTML=datos
+            col4.setAttribute('style','dispaly:flex')
+            
+        }else{ //si la consulta no trae datos, pone un mensage en la tabla           
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sin datos',
+                text: 'Este día no tiene datos!'
+              })
+            //col4.setAttribute('style','display:none')
+        }  
+
+    })
+}
+
+
 //*Borrar la fila seleccionada de la tabla totales
 function borrarFilaDeTotalesBBDD(id){
     let url = "./controller/borra_fila_de_totales.php";
@@ -269,6 +305,17 @@ function sumaTotalesTabla(){
     let d = `<tr>
                 <td>Total</td><td>${tdC}</td><td>${tdG}</td><td>${tdH}</td><td>${tdP}</td><td></td>    
             </tr>`
+
+    let pC =(total_col1*100)/ parseFloat(inputC.value)
+    let pG =(total_col2*100)/ parseFloat(inputG.value)
+    let pH =(total_col3*100)/ parseFloat(inputH.value)
+    let pP =(total_col4*100)/ parseFloat(inputP.value)
+
+        d += `<tr>
+                <td>% Alcanzado</td><td>${pC}%</td><td>${pG}%</td><td>${pH}%</td><td>${pP}%</td><td></td>    
+            </tr>`
+
+
     foot.innerHTML = h + d
         
    
