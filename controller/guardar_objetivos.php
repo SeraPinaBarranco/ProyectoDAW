@@ -14,15 +14,17 @@
     $consulta= selectBBDD($con,$query);
     $num= obtener_num_filas($consulta); // * Obtengo si la consulta devuelve resultados 1*-SI, 0-NO
 
-  
+    //echo json_encode($query);
 
     mysqli_close($con);
+
+    
     
     // * Si el boton pulsado es guardar
     if($boton == "Guardar"){
         if($num == 0){
             $query = "INSERT INTO objetivos (id_usu, fecha, objCal, objGra, objHid, objPro) VALUES ($id_u,'$fecha',$calorias,$grasas,$hidratos,$proteinas)";
-             
+            // echo json_encode($query);
             $db = connDB();
            
             $resultado = guardar2($db, $query);  // * Array con el resultado de guardar
@@ -30,6 +32,7 @@
             // // //Traer el id del objetivo    
             $query = "select id_objetivo from objetivos where id_usu = $id_u and fecha='$fecha'";
             $id = consulta($db,$query);
+            //var_dump($id);
             extract($id);    
     
             $resultado['id_objetivo'] = $id_objetivo; // *Añadir al array de la consulta el resultado de la consulta

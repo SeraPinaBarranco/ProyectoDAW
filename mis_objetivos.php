@@ -48,7 +48,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
             <!-- <form id="form"> -->
                 <div class="div-fecha">
                     <input type="date" name="fecha" id="fecha">
-                    <button id="guardar" class="btn btn-success" onclick="guardarObjetivoTraerIdObjetivo()">Guardar</button>
+                    <button id="guardar" class="btn btn-success" onclick="guardarObjetivoTraerIdObjetivo(this.innerHTML)">Guardar</button>
                     <a href="#" id="cancelar" class="btn btn-danger" hidden>Cancelar</a>
                 </div>
                 <div class="cantidades-objetivo mb-4">

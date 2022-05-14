@@ -31,7 +31,7 @@ let aGrabaAlDia = document.querySelector('#guardaRecetasAlDia')//boton que graba
 
 
 window.addEventListener("load", function () {
-    btnGuardarObjetivo.addEventListener('click',guardarObjetivoTraerIdObjetivo)
+    //btnGuardarObjetivo.addEventListener('click',guardarObjetivoTraerIdObjetivo)
     inputC.addEventListener("change", sumaTotalesTabla); 
     inputG.addEventListener("change", sumaTotalesTabla);
     inputH.addEventListener("change", sumaTotalesTabla);

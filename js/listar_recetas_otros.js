@@ -43,7 +43,7 @@ function ver_receta(id, tgt) {
 
         let span = document.createElement('span');
         span.setAttribute('class','span_detalle');
-        span.innerHTML= d[i].nombre_p + " -Cantidad: " + d[i].cantidad;
+        span.innerHTML= d[i].nombre_p + " -Cantidad: " + d[i].cantidad + " g";
 
         li.appendChild(span) 
 
@@ -52,8 +52,8 @@ function ver_receta(id, tgt) {
 
 
 
-        subLi.innerHTML ="Total calorias: " + d[i].total_calorias + " -Total grasas: " + d[i].total_grasas;
-        subLi.innerHTML += " -Total hidratos: " + d[i].total_hidratos + " -Total proteinas: " + d[i].total_proteinas 
+        subLi.innerHTML ="Total calorias: " + d[i].total_calorias + "g -Total grasas: " + d[i].total_grasas;
+        subLi.innerHTML += "g -Total hidratos: " + d[i].total_hidratos + "g -Total proteinas: " + d[i].total_proteinas + "g"
 
         li.appendChild(subLi);
 

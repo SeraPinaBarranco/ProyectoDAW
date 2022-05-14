@@ -176,8 +176,7 @@ function addFila_a_sumaObjetivo(io, iu, r, sc, sg, sh, sp){
 //* 1- lo guarde en BD
 //* 2- Almacenar el Id-del objetivo
 //* 3- Mostrar botones de las tablas*/
-function guardarObjetivoTraerIdObjetivo(){ 
-    
+function guardarObjetivoTraerIdObjetivo(texto){ 
     
     //^ 1º   
     let url = "./controller/guardar_objetivos.php";
@@ -185,10 +184,10 @@ function guardarObjetivoTraerIdObjetivo(){
     // // //configurar la peticion. AQUI CONFIGURO LA PETICION
     let configFetch = {
         method: "POST",
-        body: `id_u=${id_usu}&fecha=${fecha.value}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${this.innerHTML}`,
+        body: `id_u=${id_usu}&fecha=${fecha.value}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${texto}`,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
     };
-    //console.log(configFetch.body)
+    console.log(configFetch.body)
     //mandar la peticion
     let promesa = fetch(url, configFetch);
     //Ejecutar la promesa que devuelve la peticion
@@ -201,7 +200,7 @@ function guardarObjetivoTraerIdObjetivo(){
         //^ 2º
         id_obj = datos.id_objetivo
         console.log(id_obj)
-        
+
         //^3º
         //mostrarBotonesTablas()
         //Si hay error o exito al guardar el objetivo
@@ -223,8 +222,10 @@ function guardarObjetivoTraerIdObjetivo(){
             });
         }
     })
-      
+
     //cambiaTextoBotonGuardaEdita()
+    
+   
 }
 
 
@@ -306,13 +307,13 @@ function sumaTotalesTabla(){
                 <td>Total</td><td>${tdC}</td><td>${tdG}</td><td>${tdH}</td><td>${tdP}</td><td></td>    
             </tr>`
 
-    let pC =(total_col1*100)/ parseFloat(inputC.value)
-    let pG =(total_col2*100)/ parseFloat(inputG.value)
-    let pH =(total_col3*100)/ parseFloat(inputH.value)
-    let pP =(total_col4*100)/ parseFloat(inputP.value)
+    let pC =(total_col1*100)/(parseFloat(inputC.value))  
+    let pG =(total_col2*100)/(parseFloat(inputG.value))
+    let pH =(total_col3*100)/(parseFloat(inputH.value))
+    let pP =(total_col4*100)/(parseFloat(inputP.value))
 
         d += `<tr>
-                <td>% Alcanzado</td><td>${pC}%</td><td>${pG}%</td><td>${pH}%</td><td>${pP}%</td><td></td>    
+                <td>% Alcanzado</td><td>${pC.toFixed(2)}%</td><td>${pG.toFixed(2)}%</td><td>${pH.toFixed(2)}%</td><td>${pP.toFixed(2)}%</td><td></td>    
             </tr>`
 
 
@@ -322,4 +323,108 @@ function sumaTotalesTabla(){
 }
 
 
+//*Version local
+/**
+  //^ 1º   
+    let url = "./controller/guardar_objetivos.php";
+    // // //let d;
+    // // //configurar la peticion. AQUI CONFIGURO LA PETICION
+    let configFetch = {
+        method: "POST",
+        body: `id_u=${id_usu}&fecha=${fecha.value}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${this.innerHTML}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    console.log(configFetch.body)
+    
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion
+    let d = "";
+    promesa
+        .then((res) => res.json())
+        .then((datos) => {
+        d = datos;
+        //console.log(datos);
+        //^ 2º
+        id_obj = datos.id_objetivo
+        //console.log(id_obj)
+        
+        //^3º
+        //mostrarBotonesTablas()
+        //Si hay error o exito al guardar el objetivo
+        if (d.codigo == 1) {
+            Swal.fire({
+            icon: "success",
+            title: "",
+            text: "Objetivo Guardado!",
+            });
+            buscaIdOBjetivo()//Llama a buscar el objetivo                
+            setTimeout(() => {
+                textoBotonGuardarEditar()//Cambia el texto del boton                
+            }, 500);
+        } else {
+            Swal.fire({
+            icon: "error",
+            title: "",
+            text: "Error al guardar, ¿Datos duplicados? Puedes Editar",
+            });
+        }
+    })
+  
+    //cambiaTextoBotonGuardaEdita()
 
+
+ */
+
+//*Version github
+/*
+ //^ 1º   
+    let url = "./controller/guardar_objetivos.php";
+    // // //let d;
+    // // //configurar la peticion. AQUI CONFIGURO LA PETICION
+    let configFetch = {
+        method: "POST",
+        body: `id_u=${id_usu}&fecha=${fecha.value}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${this.innerHTML}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    };
+    //console.log(configFetch.body)
+    //mandar la peticion
+    let promesa = fetch(url, configFetch);
+    //Ejecutar la promesa que devuelve la peticion
+    let d = "";
+    promesa
+        .then((res) => res.json())
+        .then((datos) => {
+        d = datos;
+        console.log(datos);
+        //^ 2º
+        id_obj = datos.id_objetivo
+        console.log(id_obj)
+
+        //^3º
+        //mostrarBotonesTablas()
+        //Si hay error o exito al guardar el objetivo
+        if (d.codigo == 1) {
+            Swal.fire({
+            icon: "success",
+            title: "",
+            text: "Objetivo Guardado!",
+            });
+            buscaIdOBjetivo()//Llama a buscar el objetivo                
+            setTimeout(() => {
+                textoBotonGuardarEditar()//Cambia el texto del boton                
+            }, 500);
+        } else {
+            Swal.fire({
+            icon: "error",
+            title: "",
+            text: "Error al guardar, ¿Datos duplicados? Puedes Editar",
+            });
+        }
+    })
+
+    //cambiaTextoBotonGuardaEdita()
+}
+
+
+*/
