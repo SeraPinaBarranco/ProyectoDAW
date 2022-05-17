@@ -2,12 +2,12 @@
     border: 1px solid red;
 } */
 body{
-    background-color: #d6f5b3;
+    background-color: #ffffff;
 }
 .contenedor{
     display: flex;
     flex-wrap: wrap;
-    background-color: #d6f5b3;
+    background-color: #ffffff;
 }
 
 .objetivo{
@@ -85,7 +85,7 @@ body{
 }
 
 .tabla thead tr{
-    background-color: #d6f5b3;
+    background-color: #ffffff;
 }
 
 .tabla tbody tr:nth-child(2n+0){

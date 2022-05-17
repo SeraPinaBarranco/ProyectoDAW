@@ -258,38 +258,38 @@ function sumaTotalesTabla(){
     //* compara el valor de los inputs con el de las tablas
     let tdC=""   
     if(parseFloat(inputC.value) < total_col1){       
-        tdC = `<span class='badge bg-danger'>${total_col1}</span>`
+        tdC = `<span class='badge bg-danger'>${total_col1.toFixed(2)}</span>`
     }else if(parseFloat(inputC.value) > total_col1){       
-        tdC = `<span class='badge bg-success'>${total_col1}</span>`
+        tdC = `<span class='badge bg-success'>${total_col1.toFixed(2)}</span>`
     }else{       
-        tdC = `<span class='badge bg-warning'>${total_col1}</span>`   
+        tdC = `<span class='badge bg-warning'>${total_col1.toFixed(2)}</span>`   
     }
 
     let tdG=""    
     if(parseFloat(inputG.value) < total_col2){       
-        tdG = `<span class='badge bg-danger'>${total_col2}</span>`
+        tdG = `<span class='badge bg-danger'>${total_col2.toFixed(2)}</span>`
     }else if(parseFloat(inputG.value) > total_col2){       
-        tdG = `<span class='badge bg-success'>${total_col2}</span>`
+        tdG = `<span class='badge bg-success'>${total_col2.toFixed(2)}</span>`
     }else{       
-        tdG = `<span class='badge bg-warning'>${total_col2}</span>`
+        tdG = `<span class='badge bg-warning'>${total_col2.toFixed(2)}</span>`
     }
 
     let tdH=""   
     if(parseFloat(inputH.value) < total_col3){       
-        tdH = `<span class='badge bg-danger'>${total_col3}</span>`
+        tdH = `<span class='badge bg-danger'>${total_col3.toFixed(2)}</span>`
     }else if(parseFloat(inputG.value) > total_col3){       
-        tdH = `<span class='badge bg-success'>${total_col3}</span>`
+        tdH = `<span class='badge bg-success'>${total_col3.toFixed(2)}</span>`
     }else{        
-        tdH =  `<span class='badge bg-warning'>${total_col3}</span>`
+        tdH =  `<span class='badge bg-warning'>${total_col3.toFixed(2)}</span>`
     }
     
     let tdP=""   
     if(parseFloat(inputP.value) < total_col4){       
-        tdP = `<span class='badge bg-danger'>${total_col4}</span>`
+        tdP = `<span class='badge bg-danger'>${total_col4.toFixed(2)}</span>`
     }else if(parseFloat(inputP.value) > total_col4){       
-        tdP = `<span class='badge bg-success'>${total_col4}</span>`
+        tdP = `<span class='badge bg-success'>${total_col4.toFixed(2)}</span>`
     }else{      
-        tdP = `<span class='badge bg-warning'>${total_col4}</span>`
+        tdP = `<span class='badge bg-warning'>${total_col4.toFixed(2)}</span>`
     }
 
     //*Crea la tabla con las operaciones anteriores
@@ -307,10 +307,10 @@ function sumaTotalesTabla(){
                 <td>Total</td><td>${tdC}</td><td>${tdG}</td><td>${tdH}</td><td>${tdP}</td><td></td>    
             </tr>`
 
-    let pC =(total_col1*100)/(parseFloat(inputC.value))  
-    let pG =(total_col2*100)/(parseFloat(inputG.value))
-    let pH =(total_col3*100)/(parseFloat(inputH.value))
-    let pP =(total_col4*100)/(parseFloat(inputP.value))
+    let pC =(total_col1*100)/(parseFloat(inputC.value)).toFixed(2) 
+    let pG =(total_col2*100)/(parseFloat(inputG.value)).toFixed(2)
+    let pH =(total_col3*100)/(parseFloat(inputH.value)).toFixed(2)
+    let pP =(total_col4*100)/(parseFloat(inputP.value)).toFixed(2)
 
         d += `<tr>
                 <td>% Alcanzado</td><td>${pC.toFixed(2)}%</td><td>${pG.toFixed(2)}%</td><td>${pH.toFixed(2)}%</td><td>${pP.toFixed(2)}%</td><td></td>    

@@ -100,7 +100,7 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
                                 <th hidden>id</th>
                                 <th hidden>id</th>
                                 <th>Receta</th>
-                                <th>Usuario</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>

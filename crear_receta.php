@@ -15,7 +15,7 @@
 
 <div class="div-form">
         <div class="fila">
-            <h2>Listado de alimentos</h2>
+            <h2>Crear receta</h2>
         </div>
 </div>
 

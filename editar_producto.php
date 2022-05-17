@@ -111,7 +111,7 @@ require_once "./model/basedatos.php";
         cerrarBD($conn);
         
         unset($_SESSION['id_producto']);
-        session_destroy();
+        //session_destroy();
     }
     ob_end_flush();
 ?>

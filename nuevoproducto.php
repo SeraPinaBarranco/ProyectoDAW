@@ -10,6 +10,7 @@
     <div class="div-form">
         <div class="fila">
             <h2>Añadir producto</h2>
+            <p>(las cantidades de nutrientes por cada 100 gramos)</p>
         </div>
     </div>
 

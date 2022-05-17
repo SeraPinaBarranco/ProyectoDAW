@@ -73,7 +73,7 @@ if (isset($_GET['p'])) {
                             while ($fila = mysqli_fetch_assoc($resultado)) {
                                 echo "<tr>";
                                 echo "<td>" . $fila['nombre_receta'] . "</td>";
-                                echo "<td><a href='editar_receta.php?id_receta=" . $fila['id_recetas'] . "'><img src='assets/pencil.png' alt=''></a> <button type='submit' name='id_recetas' value='" . $fila['id_recetas'] . "'><img src='assets/delete.png' alt=''></button></td>";
+                                echo "<td><a href='editar_receta.php?id_receta=" . $fila['id_recetas'] . "'><img src='assets/pencil.png' alt='editar receta'></a> <button type='submit' name='id_recetas' value='" . $fila['id_recetas'] . "'><img src='assets/delete.png' alt='eliminar receta'></button></td>";
                                 echo "</tr>";
                             }
                             ?>

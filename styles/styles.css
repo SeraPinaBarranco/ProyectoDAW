@@ -88,6 +88,7 @@ a:hover{
  
 .div1{
     margin-top: 10vh;
+    text-align: center;
     display: flex;
     justify-content: center;
     
@@ -100,7 +101,7 @@ a:hover{
     list-style: none;
 }
 .list-group-item{
-    width: 80%;
+    width: 100%;
     align-self: left;
     border-top: none;
     border-left: none;

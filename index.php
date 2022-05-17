@@ -33,13 +33,13 @@ session_start();
       
       </div> -->
     
+      <h2 style="text-align: center;">Menú de inicio</h2>
         <div class="div1">
-            
             <ul class="list-group">
-                <li class="list-group-item"><a href="nuevoproducto.php">Mis alimentos</a></li>
+                <li class="list-group-item"><a href="nuevoproducto.php">Añadir alimentos</a></li>
                 <li class="list-group-item"><a href="crear_receta.php">Crear recetas</a></li>
-                <li class="list-group-item"><a href="listar_recetas.php">Listado de recetas</a></li>
-                <li class="list-group-item"><a href="#">Mis estadisticas</a></li>                
+                <li class="list-group-item"><a href="listar_recetas.php">Mis recetas</a></li>
+                <li class="list-group-item"><a href="mis_objetivos.php">Mis objetivos</a></li>                
             </ul>
         
         </div>

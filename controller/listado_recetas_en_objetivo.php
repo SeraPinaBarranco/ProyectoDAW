@@ -29,11 +29,11 @@
     tproteinas: "2444"
     */
     $id= $filas['id_recetas'];
-    $n= $filas['nombre_receta'];
-    $c= $filas['tcalorias'];
-    $g= $filas['tgrasas'];
-    $h= $filas['thidratos'];
-    $p= $filas['tproteinas'];
+    $n= $filas['nombre_receta'] ; 
+    $c= round(floatval($filas['tcalorias']),2);
+    $g= round(floatval($filas['tgrasas']),2);
+    $h= round(floatval($filas['thidratos']),2);
+    $p= round(floatval($filas['tproteinas']),2);
 
     echo "<tr>
             <td hidden>$id_obj_detalle</td>

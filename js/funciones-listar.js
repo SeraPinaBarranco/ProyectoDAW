@@ -45,7 +45,7 @@ function crearLista(lista) {
   li1.innerHTML = "Calorias: " + lista.calorias;
   li2.innerHTML = "Grasas: " + lista.grasas;
   li3.innerHTML = "Hidratos" + lista.hidratos;
-  li3.innerHTML = "Proteinas: " + lista.proteinas;
+  li4.innerHTML = "Proteinas: " + lista.proteinas;
 
   div[0].appendChild(card);
   card.appendChild(h5);
@@ -135,6 +135,7 @@ function editaProducto(lista, elemento) {
   let calorias = lista.calorias;
   let grasas = lista.grasas;
   let hidratos = lista.hidratos;
+  let proteinas = lista.proteinas;
   
   console.log(id);
   window.location.href = `editar_producto.php?id=${id}`;
