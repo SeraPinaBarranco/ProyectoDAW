@@ -86,6 +86,7 @@ function comprobarFechaMasMenosIgual(){
         /setTimeout(() => {//^Uso settimeout para dar tiempo a la peticion a ser resuelta
             textoBotonGuardarEditar()                                       
         }, 500);
+        mostrarGuardarEditar()
     }
 }
 
@@ -177,6 +178,7 @@ function textoBotonGuardarEditar(){
         ocultarTablasMisFav()
         ocultarBotonesMisFav()
         ponInputsBlanco()
+        mostrarGuardarEditar()
     }
     //Si NO hay ID OBJ pon el texto a GUARDAR
 }
