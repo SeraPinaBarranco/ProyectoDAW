@@ -144,13 +144,6 @@ if (isset($_GET['p'])) {
 
                         $resultado = selectBBDD($con, $query);
 
-
-                        /* 
-                            ! Falta añadir las acciones a la receta
-                            !    como añadirla a favoritos de un usuario
-                            !    o a tu receta para consumir
-                            */
-
                         while ($fila = mysqli_fetch_assoc($resultado)) {
                             echo "<tr>";
                             echo "<td>" . $fila['nombre_receta'] . "</td>";
@@ -210,7 +203,7 @@ if (isset($_GET['p'])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <!-- <button type="button" class="btn"><img src='assets/anadir.png' alt='añadir a favoritas'></button> -->
+                    
                 </div>
             </div>
         </div>

@@ -1,18 +1,12 @@
 <?php 
     session_start();
-    // if(isset($_SESSION['id_usuario'])){
-    //     echo $_SESSION['id_usuario'];        
-    // }else{
-    //     login
-    // }
+   
 ?>
 <?php 
     if(isset($_POST['si']) && !empty($_POST['si'])){
         unset($_SESSION);
         session_destroy();
-    }elseif(isset($_POST['no']) && !empty($_POST['no'])){
-        //header('Location:' . getenv('HTTP_REFERER')); 
-               
+    }elseif(isset($_POST['no']) && !empty($_POST['no'])){                    
         
         echo ("<script>window.location.replace('https://localhost/ProyectoDAW/index.php')</script>");
 

@@ -180,8 +180,7 @@ function guardarObjetivoTraerIdObjetivo(texto){
     
     //^ 1º   
     let url = "./controller/guardar_objetivos.php";
-    // // //let d;
-    // // //configurar la peticion. AQUI CONFIGURO LA PETICION
+    
     let configFetch = {
         method: "POST",
         body: `id_u=${id_usu}&fecha=${fecha.value}&inputC=${inputC.value}&inputG=${inputG.value}&inputH=${inputH.value}&inputP=${inputP.value}&boton=${texto}`,
@@ -316,10 +315,7 @@ function sumaTotalesTabla(){
                 <td>% Alcanzado</td><td>${pC.toFixed(2)}%</td><td>${pG.toFixed(2)}%</td><td>${pH.toFixed(2)}%</td><td>${pP.toFixed(2)}%</td><td></td>    
             </tr>`
 
-
-    foot.innerHTML = h + d
-        
-   
+    foot.innerHTML = h + d    
 }
 
 

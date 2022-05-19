@@ -34,39 +34,7 @@
 
 
     function cargar_objetivos($listado){
-        //* Visto en formato lista
-        // $var= "";
-        // $var .= "<div class='row sumaObjetivos'>";
-
-        // //Variables de la receta
-        // $dia = $listado['objetivo'][0]['fecha'];
-        // $c= floatval($listado['objetivo'][0]['objCal']);
-        // $g= floatval($listado['objetivo'][0]['objGra']);
-        // $h= floatval($listado['objetivo'][0]['objHid']);
-        // $p= floatval($listado['objetivo'][0]['objPro']);
-       
-        // $var = "<h4 class='mb-4'>Ojetivos del dia: $dia, Calorias: $c, Grasas: $g, Hidratos: $h, Proteinas: $p </h4>";            
-       
-
-        // $var .= "<ul class='ulSO mt-3'>";
-        // for ($i=0; $i < count($listado['sumaobjetivos']); $i++) {
-        //     $nr= $listado['sumaobjetivos'][$i]['nombre_receta'];
-        //     $tc= floatval($listado['sumaobjetivos'][$i]['tcalorias']);
-        //     $tg= floatval($listado['sumaobjetivos'][$i]['tgrasas']);
-        //     $th= floatval($listado['sumaobjetivos'][$i]['thidratos']);
-        //     $tp= floatval($listado['sumaobjetivos'][$i]['tproteinas']);
-
-        //     //* Crear etiquetas segun el si el objetivo es mayor, menor o igual a la suma
-        //     $comparCal=  $c > $tc?"<span class='badge bg-success'>$tc</span>":($c < $tc? "<span class='badge bg-danger'>$tc</span>":"<span class='badge bg-warning'>$tc</span>");
-        //     $comparGra=  $c > $tc?"<span class='badge bg-success'>$tc</span>":($h < $th? "<span class='badge bg-danger'>$th</span>":"<span class='badge bg-warning'>$th</span>");
-        //     $comparHid=  $g > $tg?"<span class='badge bg-success'>$tg</span>":($g < $tg? "<span class='badge bg-danger'>$tg</span>":"<span class='badge bg-warning'>$tg</span>");
-        //     $comparPro=  $p > $tp?"<span class='badge bg-success'>$tp</span>":($p < $tp? "<span class='badge bg-danger'>$tp</span>":"<span class='badge bg-warning'>$tp</span>");
-
-        //     $var .= "<li>Receta: $nr, Cal.Totales: $comparCal, Gra.Totales: $comparGra, Hid.Totales: $comparHid, Pro.Totales: $comparPro  </li>";     
-        // }
-        // $var .= "</ul>";       
-        // $var.="</div>";
-
+      
         //* Visto en formato tabla
         $dia = $listado['objetivo'][0]['fecha'];
         $c= floatval($listado['objetivo'][0]['objCal']);
@@ -88,8 +56,7 @@
                             <th>Grasas</th>
                             <th>Hidratos</th>
                             <th>Proteinas</th>
-                        </tr>
-                
+                        </tr>                
             
                         <tr>
                             <td>$dia</td>
@@ -157,3 +124,36 @@
     }
 
 ?>
+
+//* Visto en formato lista
+        // $var= "";
+        // $var .= "<div class='row sumaObjetivos'>";
+
+        // //Variables de la receta
+        // $dia = $listado['objetivo'][0]['fecha'];
+        // $c= floatval($listado['objetivo'][0]['objCal']);
+        // $g= floatval($listado['objetivo'][0]['objGra']);
+        // $h= floatval($listado['objetivo'][0]['objHid']);
+        // $p= floatval($listado['objetivo'][0]['objPro']);
+       
+        // $var = "<h4 class='mb-4'>Ojetivos del dia: $dia, Calorias: $c, Grasas: $g, Hidratos: $h, Proteinas: $p </h4>";            
+       
+
+        // $var .= "<ul class='ulSO mt-3'>";
+        // for ($i=0; $i < count($listado['sumaobjetivos']); $i++) {
+        //     $nr= $listado['sumaobjetivos'][$i]['nombre_receta'];
+        //     $tc= floatval($listado['sumaobjetivos'][$i]['tcalorias']);
+        //     $tg= floatval($listado['sumaobjetivos'][$i]['tgrasas']);
+        //     $th= floatval($listado['sumaobjetivos'][$i]['thidratos']);
+        //     $tp= floatval($listado['sumaobjetivos'][$i]['tproteinas']);
+
+        //     //* Crear etiquetas segun el si el objetivo es mayor, menor o igual a la suma
+        //     $comparCal=  $c > $tc?"<span class='badge bg-success'>$tc</span>":($c < $tc? "<span class='badge bg-danger'>$tc</span>":"<span class='badge bg-warning'>$tc</span>");
+        //     $comparGra=  $c > $tc?"<span class='badge bg-success'>$tc</span>":($h < $th? "<span class='badge bg-danger'>$th</span>":"<span class='badge bg-warning'>$th</span>");
+        //     $comparHid=  $g > $tg?"<span class='badge bg-success'>$tg</span>":($g < $tg? "<span class='badge bg-danger'>$tg</span>":"<span class='badge bg-warning'>$tg</span>");
+        //     $comparPro=  $p > $tp?"<span class='badge bg-success'>$tp</span>":($p < $tp? "<span class='badge bg-danger'>$tp</span>":"<span class='badge bg-warning'>$tp</span>");
+
+        //     $var .= "<li>Receta: $nr, Cal.Totales: $comparCal, Gra.Totales: $comparGra, Hid.Totales: $comparHid, Pro.Totales: $comparPro  </li>";     
+        // }
+        // $var .= "</ul>";       
+        // $var.="</div>";
