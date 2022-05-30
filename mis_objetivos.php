@@ -29,8 +29,8 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
 
 
 
-<?php include_once "templates/title.html"; ?>
 <title>Mis objetivos</title>
+<?php include_once "templates/title.html"; ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="styles/objetivos.css">
 <link rel="stylesheet" href="styles/data-tables.css">
@@ -201,6 +201,8 @@ $res =selectBBDD($conn,$query); //^ aqui estan las RECETAS PROPIAS
     ?> 
 <script src="js/misObjetivos_general.js" defer></script>
 <script src="js/obj_funciones2.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <!-- <script src="js/funciones_del_objetivo.js" defer></script> -->
 <!-- <script src="js/objetivos.js" defer></script>
 <script src="js/objetivos2.js" defer></script> -->
