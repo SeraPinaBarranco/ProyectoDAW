@@ -1,7 +1,7 @@
 <?php 
     require_once "../model/basedatos.php";
 
-    $nombre= $_POST['nombre'];
+    $nombre= strtoupper($_POST['nombre']);
     $calorias= $_POST['calorias'];
     $grasas= $_POST['grasas'];
     $hidratos= $_POST['hidratos'];

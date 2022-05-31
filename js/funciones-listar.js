@@ -44,7 +44,7 @@ function crearLista(lista) {
 
   li1.innerHTML = "Calorias: " + lista.calorias;
   li2.innerHTML = "Grasas: " + lista.grasas;
-  li3.innerHTML = "Hidratos" + lista.hidratos;
+  li3.innerHTML = "Hidratos: " + lista.hidratos;
   li4.innerHTML = "Proteinas: " + lista.proteinas;
 
   div[0].appendChild(card);

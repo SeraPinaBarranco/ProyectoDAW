@@ -6,7 +6,7 @@ if(!empty($_POST['nombre'])){
     $query= "SELECT * FROM PRODUCTOS WHERE nombre_p LIKE '%$nombre%'";
 
 }else{
-    $query= "SELECT * FROM PRODUCTOS";
+    $query= "SELECT * FROM PRODUCTOS ORDER BY nombre_p";
 }
 
 $conn= connDB();
